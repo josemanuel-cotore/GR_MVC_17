@@ -78,6 +78,13 @@
             </select>
         </div>
     </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Observaciones</span>
+        <div class="col-md-10">
+            @*@Html.TextArea("Observaciones", "Introduce una descripción...")*@
+            <textarea name="Observaciones" id="Observaciones" rows="4" cols="50" placeholder="Describe las rutas" style="background-color: white;"></textarea>
+        </div>
+    </div>
     <div class="row">
         <div class="form-group">
             <div class="col-md-4">
@@ -100,8 +107,9 @@
                 var kmBiciParam = $("#kmBici").val();
                 var kmTiempoCorrerParam = $("#tiempoCorrer").val();
                 var kmTiempoBiciParam = $("#tiempoBici").val();
+                var obs = $("#Observaciones").val();
 
-                //debugger;
+                debugger;
 
                 if (fechaParam == "") {
                     $("#resRegistroErrorDuatlon").html("Debes informar una fecha");
@@ -116,12 +124,12 @@
                 }
 
                 else {
-                    //debugger;
+                    debugger;
                 $.ajax({
                     type: "POST",
-                    url: "/Home/_CrearRegistroDuatlon",
+                    url: "/Home/_CrearRegistroDuatlon_Carrera",
                     //data: '{fecha: "' + $("#fecha").val() + '", kmCorrer: "' + $("#kmCorrer").val() + '", rutaCorrer: "' + $("#rutasCorrer").val() + '", kmBici: "' + $("#kmBici").val() + '", rutaBici: "' + $("#rutasBici").val() + '", inconve: "' + $("#inconvenientes").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idPerfil: "' + @Model.idPerfil_S + '" }',
-                    data: '{fecha: "' + $("#fecha").val() + '", kmCorrer: "' + $("#kmCorrer").val() + '", rutaCorrer: "' + $("#rutasCorrer").val() + '", kmBici: "' + $("#kmBici").val() + '", rutaBici: "' + $("#rutasBici").val() + '", tiempoCorrer: "' + $("#tiempoCorrer").val() + '", tiempoBici: "' + $("#tiempoBici").val() + '", inconve: "' + $("#inconvenientes").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idPerfil: "' + @Model.idPerfil_S + '"}',
+                    data: '{fecha: "' + $("#fecha").val() + '", kmCorrer: "' + $("#kmCorrer").val() + '", rutaCorrer: "' + $("#rutasCorrer").val() + '", kmBici: "' + $("#kmBici").val() + '", rutaBici: "' + $("#rutasBici").val() + '", tiempoCorrer: "' + $("#tiempoCorrer").val() + '", tiempoBici: "' + $("#tiempoBici").val() + '", inconve: "' + $("#inconvenientes").val() + '", observa: "' + $("#Observaciones").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idPerfil: "' + @Model.idPerfil_S + '"}',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

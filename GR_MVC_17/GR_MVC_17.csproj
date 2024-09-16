@@ -261,7 +261,7 @@
     <Content Include="Views\RegistroRutas\Index.cshtml" />
     <Content Include="Views\Shared\_ConfirmarEliminar.cshtml" />
     <Content Include="Views\Home\Entrenos_Duatlon_Carreras.cshtml" />
-    <Content Include="Views\Shared\_CrearRegistroDuatlon.cshtml" />
+    <Content Include="Views\Shared\_CrearRegistroDuatlon_Carrera.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
