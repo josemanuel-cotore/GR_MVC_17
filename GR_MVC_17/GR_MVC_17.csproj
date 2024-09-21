@@ -178,16 +178,11 @@
     <Content Include="Imagenes\Herramientas\ColuerLimbo.jpg" />
     <Content Include="Imagenes\Herramientas\UltraRaptor.jpg" />
     <Content Include="Imagenes\Inconvenientes\24\img_alta1.png" />
-    <Content Include="Imagenes\Inconvenientes\24\img_alta2.png" />
-    <Content Include="Imagenes\Inconvenientes\24\img_alta3.png" />
     <Content Include="Imagenes\Inconvenientes\24\img_baja1.png" />
-    <Content Include="Imagenes\Inconvenientes\24\img_baja2.png" />
+    <Content Include="Imagenes\Inconvenientes\24\img_barro1.png" />
     <Content Include="Imagenes\Inconvenientes\24\img_lluvia1.png" />
-    <Content Include="Imagenes\Inconvenientes\24\img_lluvia2.png" />
-    <Content Include="Imagenes\Inconvenientes\24\img_nieve1.png" />
     <Content Include="Imagenes\Inconvenientes\24\img_nieve2.png" />
     <Content Include="Imagenes\Inconvenientes\24\img_viento1.png" />
-    <Content Include="Imagenes\Inconvenientes\24\img_viento2.png" />
     <Content Include="Imagenes\Perfiles\Bicicleta1.jpg" />
     <Content Include="Imagenes\Perfiles\Running1.jpg" />
     <Content Include="Imagenes\Perfiles\Senderismo1.jpg" />

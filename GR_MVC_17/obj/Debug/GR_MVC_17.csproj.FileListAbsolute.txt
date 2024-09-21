@@ -85,8 +85,6 @@ C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.csproj.Cop
 C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.dll
 C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.pdb
 C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.csprojAssemblyReference.cache
-C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.csprojAssemblyReference.cache
-C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.csproj.CoreCompileInputs.cache
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\bin\GR_MVC_17.dll.config
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\bin\GR_MVC_17.dll
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\bin\GR_MVC_17.pdb
@@ -169,6 +167,7 @@ C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\bin\es\System.Web.Razor.resource
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\bin\es\System.Web.WebPages.resources.dll
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.csproj.CoreCompileInputs.cache
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.csproj.CopyComplete
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.dll
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.pdb
