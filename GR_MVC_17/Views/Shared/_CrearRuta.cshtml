@@ -27,7 +27,7 @@
 <script type="text/javascript">
     $(function () {
         $("#btnCrearRuta").click(function () {
-            debugger;
+            //debugger;
             $.ajax({
                 type: "POST",
                 url: "/Home/_CrearRuta",
@@ -35,7 +35,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    debugger;
+                    //debugger;
                     if (response.ok == true) {
                         //alert("Ruta creada correctamente");
                         $("#Modal_Crear_Ruta").modal("hide");
