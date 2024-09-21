@@ -12,7 +12,7 @@ namespace GR_MVC_17
 
         public DateTime Fecha { get; set; }
 
-        public double Km { get; set; }
+        public double? Km { get; set; }
 
         public int IdUsuario { get; set; }
 
@@ -36,6 +36,13 @@ namespace GR_MVC_17
 
         [StringLength(250)]
         public string Observaciones { get; set; }
+
+        public int? IdRuta_Alternativa { get; set; }
+
+        public double? Km_Alternativa { get; set; }
+
+        [StringLength(150)]
+        public string TiempoRutaCorrer_Alternativa { get; set; }
 
         public virtual RutasUsuario RutasUsuario { get; set; }
 

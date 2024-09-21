@@ -1,0 +1,74 @@
+﻿@model GR_MVC_17.RegistroRutas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RegistroRutas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Herramienta.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Herramienta.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Perfil.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Perfil.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RutasUsuario.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RutasUsuario.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoInconveniente.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoInconveniente.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Km)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Km)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

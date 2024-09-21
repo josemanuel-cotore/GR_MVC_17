@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="form-group">
-        <span class="control-label col-md-2">Km Correr</span>
+        <span class="control-label col-md-2">1º Km Correr</span>
         <div class="col-md-10">
             <input type="text" class="form-control" id="kmCorrer">
         </div>
@@ -63,6 +63,31 @@
         <span class="control-label col-md-2">Tiempo Bici</span>
         <div class="col-md-10">
             <input type="text" class="form-control" id="tiempoBici">
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">2º Km Correr</span>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="kmCorrer_Alt">
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Rutas Correr</span>
+        <div class="col-md-10">
+            <select class="form-control small" id="rutasCorrer_Alt">
+                @{
+                    foreach (var item in ViewBag.RutasCorrer)
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Tiempo Correr</span>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="tiempoCorrer_Alt">
         </div>
     </div>
     <div class="form-group">
@@ -115,21 +140,23 @@
                     $("#resRegistroErrorDuatlon").html("Debes informar una fecha");
                 } else if (kmCorrerParam == "") {
                     $("#resRegistroErrorDuatlon").html("Debes informar los KM de correr");
-                } else if (kmBiciParam == "") {
-                    $("#resRegistroErrorDuatlon").html("Debes informar los KM de bici");
-                } else if (kmTiempoCorrerParam == "") {
-                    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo de correr");
-                } else if (kmTiempoBiciParam == "") {
-                    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo en bici");
                 }
+                //else if (kmBiciParam == "") {
+                //    $("#resRegistroErrorDuatlon").html("Debes informar los KM de bici");
+                //}
+                else if (kmTiempoCorrerParam == "") {
+                    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo de correr");
+                }
+                //else if (kmTiempoBiciParam == "") {
+                //    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo en bici");
+                //}
 
                 else {
                     debugger;
                 $.ajax({
                     type: "POST",
                     url: "/Home/_CrearRegistroDuatlon_Carrera",
-                    //data: '{fecha: "' + $("#fecha").val() + '", kmCorrer: "' + $("#kmCorrer").val() + '", rutaCorrer: "' + $("#rutasCorrer").val() + '", kmBici: "' + $("#kmBici").val() + '", rutaBici: "' + $("#rutasBici").val() + '", inconve: "' + $("#inconvenientes").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idPerfil: "' + @Model.idPerfil_S + '" }',
-                    data: '{fecha: "' + $("#fecha").val() + '", kmCorrer: "' + $("#kmCorrer").val() + '", rutaCorrer: "' + $("#rutasCorrer").val() + '", kmBici: "' + $("#kmBici").val() + '", rutaBici: "' + $("#rutasBici").val() + '", tiempoCorrer: "' + $("#tiempoCorrer").val() + '", tiempoBici: "' + $("#tiempoBici").val() + '", inconve: "' + $("#inconvenientes").val() + '", observa: "' + $("#Observaciones").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idPerfil: "' + @Model.idPerfil_S + '"}',
+                    data: '{fecha: "' + $("#fecha").val() + '", kmCorrer: "' + $("#kmCorrer").val() + '", rutaCorrer: "' + $("#rutasCorrer").val() + '", kmBici: "' + $("#kmBici").val() + '", rutaBici: "' + $("#rutasBici").val() + '", kmCorrerAlt: "' + $("#kmCorrer_Alt").val() + '", rutaCorrerAlt: "' + $("#rutasCorrer_Alt").val() + '", tiempoCorrer: "' + $("#tiempoCorrer").val() + '", tiempoBici: "' + $("#tiempoBici").val() + '", tiempoCorrerAlt: "' + $("#tiempoCorrer_Alt").val() + '",  inconve: "' + $("#inconvenientes").val() + '", observa: "' + $("#Observaciones").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idPerfil: "' + @Model.idPerfil_S + '"}',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

@@ -24,9 +24,79 @@ namespace GR_MVC_17.DAL
         {
             try
             {
-                db.RegistroRutas.Add(registro);
-                db.SaveChanges();
+                if (registro.IdPerfil == 4)
+                {
+                    // Añadimos en primer lugar el registro del Perfil (4) Duatlón
+
+                    List<RegistroRutas> listaRegs = new List<RegistroRutas>();
+                    listaRegs.Add(registro);
+
+                    //Insertar registro en Perfil Running (1)
+
+                    RegistroRutas primerRegistroCorrer = new RegistroRutas()
+                    {
+                        Fecha = registro.Fecha,
+                        IdUsuario = registro.IdUsuario,
+                        IdPerfil = 1, // Running
+                        IdHerramienta = 2, // La Sportiva Bushido III
+                        IdInconveniente = registro.IdInconveniente,
+
+                        Km = registro.Km,
+                        IdRuta = registro.IdRuta,
+                    };
+
+                    listaRegs.Add(primerRegistroCorrer);
+                    //Insertar registro en Perfil Ciclismo (3)
+
+                    RegistroRutas segundoRegistroBici = new RegistroRutas()
+                    {
+                        Fecha = registro.Fecha,
+                        IdUsuario = registro.IdUsuario,
+                        IdPerfil = 3, // Ciclismo
+                        IdHerramienta = 6, // Coluer Limbo 292 2021
+                        IdInconveniente = registro.IdInconveniente,
+
+                        Km = registro.Km_Bici,
+                        IdRuta = registro.IdRutaBici,
+                    };
+
+                    listaRegs.Add(segundoRegistroBici);
+                    //Insertar registro en Perfil Running (1)
+
+                    if (registro.Km_Alternativa > 0 && registro.IdRuta_Alternativa > 0)
+                    {
+                        RegistroRutas tercerRegistroCorrer = new RegistroRutas()
+                        {
+                            Fecha = registro.Fecha,
+                            IdUsuario = registro.IdUsuario,
+                            IdPerfil = 1, // Running
+                            IdHerramienta = 2, // La Sportiva Bushido III
+                            IdInconveniente = registro.IdInconveniente,
+
+                            Km = registro.Km_Alternativa,
+                            IdRuta = registro.IdRuta_Alternativa,
+
+                        };
+
+                        listaRegs.Add(tercerRegistroCorrer);
+                    }
+
+
+
+                    foreach (var reg in listaRegs)
+                    {
+                        db.RegistroRutas.Add(reg);
+                        db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    db.RegistroRutas.Add(registro);
+                    db.SaveChanges();
+                }
+
                 
+
             }
             catch (Exception ex)
             {
@@ -43,7 +113,7 @@ namespace GR_MVC_17.DAL
         {
             if (db.RegistroRutas.Where(x => x.IdUsuario == idUsuario && x.IdHerramienta == idHerramienta).Select(y => y.Km).FirstOrDefault() > 0)
             {
-                return db.RegistroRutas.Where(x => x.IdUsuario == idUsuario && x.IdHerramienta == idHerramienta).Sum(x => x.Km);
+                return db.RegistroRutas.Where(x => x.IdUsuario == idUsuario && x.IdHerramienta == idHerramienta).Sum(x => x.Km).Value;
             }
             else
             {
@@ -110,6 +180,10 @@ namespace GR_MVC_17.DAL
                 r.IdRutaBici = registro.IdRutaBici;
                 r.TiempoRutaCorrer = registro.TiempoRutaCorrer;
                 r.TiempoRutaBici = registro.TiempoRutaBici;
+                //Alternativa
+                r.IdRuta_Alt = registro.IdRuta_Alternativa;
+                r.Km_Correr_Alt = registro.Km_Alternativa;
+                r.TiempoRutaCorrer_Alt = registro.TiempoRutaCorrer_Alternativa;
                 if (registro.Observaciones != null)
                 {
                     r.Observaciones = registro.Observaciones.Replace("\n", "<br />"); ;
@@ -122,6 +196,7 @@ namespace GR_MVC_17.DAL
 
                 r.nombreRutaCorrer = rutasRepo.dameNombreRuta(registro.IdRuta);
                 r.nombreRutaBici = rutasRepo.dameNombreRuta(registro.IdRutaBici);
+                r.nombreRutaCorrer_Alt = rutasRepo.dameNombreRuta(registro.IdRuta_Alternativa);
 
                 listaPartial.Add(r);
             }

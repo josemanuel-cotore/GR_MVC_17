@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "3.1 - Crear nueva ruta del Usuario";
+}
+
+@using (Html.BeginForm())
+{
+<div class="form-horizontal">
+    <div class="form-group">
+        <span class="control-label col-md-2">Nombre Ruta</span>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="nombreRuta">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+                <input type="button" id="btnCrearRuta" value="Crear Ruta" class="btn btn-success" />
+                <input type="button" id="btnVolver" value="Volver" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnCrearRuta").click(function () {
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "/Home/_CrearRuta",
+                data: '{nombreRuta: "' + $("#nombreRuta").val() + '", idPerfil: "' + @ViewBag.IdPerfil + '", idUsuario: "' + @ViewBag.IdUsuario + '", idTipoRuta: "' + @ViewBag.IdTipoRuta + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    debugger;
+                    if (response.ok == true) {
+                        //alert("Ruta creada correctamente");
+                        $("#Modal_Crear_Ruta").modal("hide");
+                        window.location.reload();
+                    } else {
+                        $("#resRutaError").html(response.mensaje);
+                    }
+                    
+
+                },
+                failure: function (response) {
+                    $("#resRutaError").html(response.mensaje);
+                },
+                error: function (response) {
+                    $("#resRutaError").html(response.mensaje);
+                }
+            });
+        });
+
+        $("#btnVolver").click(function () {
+            $("#Modal_Crear_Ruta").modal("hide");
+        });
+    });
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

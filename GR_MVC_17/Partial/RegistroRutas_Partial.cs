@@ -11,7 +11,7 @@ namespace GR_MVC_17.Partial
 
         public DateTime Fecha { get; set; }
 
-        public double Km_Correr { get; set; }
+        public double? Km_Correr { get; set; }
 
         public int IdUsuario { get; set; }
 
@@ -29,6 +29,16 @@ namespace GR_MVC_17.Partial
 
         public string TiempoRutaBici { get; set; }
 
+        // ALTERNATIVA
+
+        public int? IdRuta_Alt { get; set; }
+
+        public double? Km_Correr_Alt { get; set; }
+
+        public string TiempoRutaCorrer_Alt { get; set; }
+
+        //
+
         public string Observaciones { get; set; }
 
         public virtual RutasUsuario RutasUsuario { get; set; }
@@ -38,6 +48,7 @@ namespace GR_MVC_17.Partial
         public virtual Usuario Usuario { get; set; }
         public string nombreRutaCorrer { get; set; }
         public string nombreRutaBici { get; set; }
+        public string nombreRutaCorrer_Alt { get; set; }
 
         public double? Km_Bici { get; set; }
     }

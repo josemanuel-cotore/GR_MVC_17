@@ -1,0 +1,69 @@
+﻿@model IEnumerable<GR_MVC_17.RegistroRutas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Herramienta.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perfil.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RutasUsuario.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoInconveniente.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.NombreUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Km)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Herramienta.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Perfil.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RutasUsuario.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoInconveniente.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.NombreUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Km)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

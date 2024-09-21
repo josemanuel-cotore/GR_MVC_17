@@ -1,0 +1,195 @@
+﻿@model List<GR_MVC_17.Partial.RegistroRutas_Partial>
+@{
+    ViewBag.Title = "Entrenos_Duatlon_Carrera";
+
+    int _idPerfil = @ViewBag.IdPerfil;
+    int _idUsuario = @ViewBag.IdUsuario;
+}
+
+@{ 
+    string valorBotón = "";
+    if (_idPerfil == 4)
+    {
+        valorBotón = "Registrar Entreno Duatlón";
+    }
+    else if (_idPerfil == 5)
+    {
+        valorBotón = "Registrar Carrera";
+    }
+}
+
+<h2>@ViewBag.TemaPerfil</h2>
+
+<div class="row" style="margin-top: 5%">
+    <div class="col-md-12">
+        <div class="col-md-6" style="text-align:center">
+            <button type="button" class="btn btn-primary" onclick="crearRegistroDuatlon_Carrera()" data-toggle="modal" data-target="#Modal_Crear_Registro_Duatlon_Carrera">@valorBotón</button>
+        </div>
+        <div class="col-md-6" style="text-align:center">
+            <p style="margin-left: 50%;"><a class="btn btn-danger" href="@Url.Action("Perfiles_Usuario", "Home", new { Id = _idUsuario })">Volver a Perfiles del Usuario</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row" style="margin-top:5%">
+    <div class="col-md-12">
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Fecha")
+                </th>
+                <th>
+                    @Html.Label("Ruta Correr")
+                </th>
+                <th>
+                    @Html.Label("Km")
+                </th>
+                <th>
+                    @Html.Label("Tiempo")
+                </th>
+                <th>
+                    @Html.Label("Ruta Bicicleta")
+                </th>
+                <th>
+                    @Html.Label("Km")
+                </th>
+                <th>
+                    @Html.Label("Tiempo")
+                </th>
+                <th>
+                    @Html.Label("Inconveniente")
+                </th>
+                <th>
+                    @Html.Label("Observaciones")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreRutaCorrer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Km_Correr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TiempoRutaCorrer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreRutaBici)
+                    </td>
+                    <td>
+                        @if (item.IdRutaBici != 30)
+                        {
+                            @Html.DisplayFor(modelItem => item.Km_Bici)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TiempoRutaBici)
+                    </td>
+                    <td>
+                        <img src="@item.TipoInconveniente.Imagen" />
+                    </td>
+                    <td>
+                        @Html.Raw(item.Observaciones)
+                    </td>
+                    <td>
+                        @*<button type="button" class="btn btn-warning" onclick="abrirModalEliminar(@item.Id)" data-toggle="modal" data-target="#ModalEliminarRegistro" />Eliminar*@
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal_Crear_Registro_Duatlon_Carrera" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Crear Nuevo Registro</h4>
+            </div>
+            <div class="modal-body">
+                <div id="resRegistroDuatlon_Carrera"></div>
+            </div>
+            <div class="modal-footer">
+                <div id="resRegistroErrorDuatlon_Carrera" style="text-align:center; color:red"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function crearRegistroDuatlon_Carrera() {
+    debugger;
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "POST",
+        data: { idUsuario: @_idUsuario, idPerfil: @_idPerfil},
+        dataType: 'html', //el tipo de dato que nos regresara el servidor en este caso regresa html
+        url: '@Url.Action("_PasoParaCrearRegistroDuatlon_Carrera", "Home")',
+        success: function (response) {
+            $('#resRegistroDuatlon_Carrera').html('');
+            $('#resRegistroDuatlon_Carrera').html(response);
+        },
+
+        error: function (error) {
+            // si hay un error lanzara el mensaje de error
+            alert('Fail');
+        }
+    });
+    }
+
+    @*function abrirModalEliminar(idRegistro) {
+
+        //debugger;
+
+        var miTabla = "RegistroRutas";
+
+        $.ajax({
+            cache: false,
+            async: true,
+            type: "POST",
+            dataType: "html",
+            data: { id: idRegistro, tabla: miTabla},
+            url: "@Url.Action("procesoParaEliminar", "Home")",
+            success: function (response) {
+                $('#resConfirmarEliminar').html('');
+                $('#resConfirmarEliminar').html(response);
+            },
+
+            error: function (response) {
+
+                if (response.ok == false) {
+                    $("#resErrorConfirmarEliminar").html(response.mensaje);
+                }
+            }
+
+
+        });
+
+
+    }*@
+
+
+
+</script>
+
+
+
+

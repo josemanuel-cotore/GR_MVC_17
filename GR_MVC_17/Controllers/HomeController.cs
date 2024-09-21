@@ -446,7 +446,7 @@ namespace GR_MVC_17.Controllers
 
         [HttpPost]
         //public JsonResult _CrearRegistroDuatlon(DateTime fecha, double kmCorrer, int rutaCorrer, double kmBici, int rutaBici, int inconve, int idUsuario, int idPerfil)
-        public JsonResult _CrearRegistroDuatlon_Carrera(DateTime fecha, double kmCorrer, int rutaCorrer, double kmBici, int rutaBici, string tiempoCorrer, string tiempoBici, int inconve, string observa, int idUsuario, int idPerfil)
+        public JsonResult _CrearRegistroDuatlon_Carrera(DateTime fecha, double kmCorrer, int rutaCorrer, double kmBici, int rutaBici, double kmCorrerAlt, int rutaCorrerAlt, string tiempoCorrer, string tiempoBici, string tiempoCorrerAlt, int inconve, string observa, int idUsuario, int idPerfil)
         {
             Respuesta_DTO respuesta = new Respuesta_DTO();
 
@@ -467,6 +467,9 @@ namespace GR_MVC_17.Controllers
                     Km_Bici = kmBici,
                     TiempoRutaCorrer = tiempoCorrer,
                     TiempoRutaBici = tiempoBici,
+                    Km_Alternativa = kmCorrerAlt,
+                    IdRuta_Alternativa = rutaCorrerAlt,
+                    TiempoRutaCorrer_Alternativa = tiempoCorrerAlt,
                     Observaciones = observa
                     
 

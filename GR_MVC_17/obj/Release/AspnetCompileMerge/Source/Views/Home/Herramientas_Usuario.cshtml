@@ -1,0 +1,179 @@
+﻿@model List<Herramienta>
+@{
+                ViewBag.Title = "3.- Herramientas del Usuario";
+
+                int _idusuario = 0;
+                _idusuario = ViewBag.IdUsuario;
+
+                int _tipoRuta = 1;
+
+                if (ViewBag.NumHerramientas > 0)
+                {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-md-6">
+                    <h2 style="text-align:left">@ViewBag.TemaPerfil</h2>
+                </div>
+                <div class="col-md-6">
+                    <p style="margin-top: 5%; margin-left: 75%;"><a class="btn btn-danger" href="@Url.Action("Perfiles_Usuario", "Home", new { Id = _idusuario })">Volver a Perfiles del Usuario</a></p>
+                </div>
+            </div>
+
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 5%">
+                @foreach (var herramienta in Model)
+            {
+
+
+                    <div class="col-md-4" style="text-align:center">
+                        <p><img src="@herramienta.Imagen" /><a href="@Url.Action("Registro_Herramienta", "Home", new { idHerramienta = herramienta.Id, idUsuario = ViewBag.IdUsuario, idPerfil = ViewBag.IdPerfil })" class="btn btn-primary btn-lg">@herramienta.Nombre</a></p>
+                    </div>
+
+
+                }
+            </div>
+        </div>
+
+            if (ViewBag.NumRutas > 0)
+            {
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <h2>Rutas Disponibles</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <p style="margin-left: 75%"><button type="button" class="btn btn-success" onclick="funcionCrearRuta()" data-toggle="modal" data-target="#Modal_Crear_Ruta">Crear Nueva Ruta</button></p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+           
+            @Html.Partial("_RutasDisponibles", (List<RutasUsuario>)ViewBag.ListadoRutas)
+
+            <br />
+
+            }
+            else
+            {
+            <br />
+            <div>
+                <h2>No existen rutas registradas</h2>
+                <br />
+                <button type="button" class="btn btn-danger" onclick="funcionCrearRuta()" data-toggle="modal" data-target="#Modal_Crear_Ruta">Crear Nueva Ruta</button>
+            </div>
+            }
+
+            }
+            else
+            {
+            <br />
+            <div>
+                <h2>No dispones de herramientas registradas</h2>
+                <br />
+                <button type="button" class="btn btn-danger" onclick="funcionCrearHerramienta()" data-toggle="modal" data-target="#Modal_Crear_Herramienta">Crear Nueva Herramienta</button>
+            </div>
+            }
+
+
+
+            }
+
+
+            <!-- Modal Crear Nueva Herramienta -->
+            <div class="modal fade" id="Modal_Crear_Herramienta" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Crear Nueva Herramienta</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="resHerramienta"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Volver</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Modal Crear Nueva Ruta -->
+            <div class="modal fade" id="Modal_Crear_Ruta" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Crear Nueva Ruta</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="resRuta"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <div id="resRutaError" style="text-align:center; color:red"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+<script>
+    function funcionCrearRuta() {
+    debugger;
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "POST",
+        dataType: 'html', //el tipo de dato que nos regresara el servidor en este caso regresa html
+        data: { idPerfil: @ViewBag.IdPerfil, idUsuario: @ViewBag.IdUsuario, idTipoRuta: @_tipoRuta},
+        url: '@Url.Action("_PasoParaCrearRuta", "Home")',
+        success: function (response) {
+            //debugger;
+            $('#resRuta').html('');
+            $('#resRuta').html(response);
+        },
+
+        error: function (error) {
+            //debugger;
+            // si hay un error lanzara el mensaje de error
+            alert('fallo en modal crear ruta');
+        }
+    });
+    }
+
+
+    function funcionCrearHerramienta() {
+        //debugger;
+        $.ajax({
+            type: "POST",
+            dataType: "html",
+            data: { idUsuario: @ViewBag.IdUsuario, idPerfil: @ViewBag.IdPerfil},
+            url: '@Url.Action("_PasoParaCrearHerramienta", "Home")',
+            success: function(response) {
+                $("#resHerramienta").html("");
+                $("#resHerramienta").html(response);
+            },
+            error: function (response) {
+                alert("fallo en modal crear herramienta")
+            }
+
+
+
+        });
+
+    }
+
+
+            </script>
+
+
+
