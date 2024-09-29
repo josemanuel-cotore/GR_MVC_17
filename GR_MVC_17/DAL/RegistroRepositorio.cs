@@ -24,20 +24,19 @@ namespace GR_MVC_17.DAL
         {
             try
             {
-                if (registro.IdPerfil == 4)
+                if (registro.IdPerfil == (int) Enums.Enum.Perfil.Duatlón || registro.IdPerfil == (int)Enums.Enum.Perfil.Carreras)
                 {
-                    // Añadimos en primer lugar el registro del Perfil (4) Duatlón
+                    // Añadimos en primer lugar el registro del Perfil (4) Duatlón o (5) Carrera
 
                     List<RegistroRutas> listaRegs = new List<RegistroRutas>();
                     listaRegs.Add(registro);
 
                     //Insertar registro en Perfil Running (1)
-
                     RegistroRutas primerRegistroCorrer = new RegistroRutas()
                     {
                         Fecha = registro.Fecha,
                         IdUsuario = registro.IdUsuario,
-                        IdPerfil = 1, // Running
+                        IdPerfil = (int)Enums.Enum.Perfil.Running, // Running
                         IdHerramienta = 2, // La Sportiva Bushido III
                         IdInconveniente = registro.IdInconveniente,
 
@@ -46,30 +45,32 @@ namespace GR_MVC_17.DAL
                     };
 
                     listaRegs.Add(primerRegistroCorrer);
-                    //Insertar registro en Perfil Ciclismo (3)
 
-                    RegistroRutas segundoRegistroBici = new RegistroRutas()
+                    // Si es Duatlón o Carrera Duatlón
+                    if (registro.EsDuatlon.Value == true)
                     {
+                        //Insertar registro en Perfil Ciclismo (3)
+                        RegistroRutas segundoRegistroBici = new RegistroRutas()
+                        {
                         Fecha = registro.Fecha,
                         IdUsuario = registro.IdUsuario,
-                        IdPerfil = 3, // Ciclismo
+                        IdPerfil = (int)Enums.Enum.Perfil.Ciclismo, // Ciclismo
                         IdHerramienta = 6, // Coluer Limbo 292 2021
                         IdInconveniente = registro.IdInconveniente,
 
                         Km = registro.Km_Bici,
                         IdRuta = registro.IdRutaBici,
-                    };
+                        };
 
-                    listaRegs.Add(segundoRegistroBici);
-                    //Insertar registro en Perfil Running (1)
+                        listaRegs.Add(segundoRegistroBici);
 
-                    if (registro.Km_Alternativa > 0 && registro.IdRuta_Alternativa > 0)
-                    {
+
+                        //Insertar registro en Perfil Running (1)
                         RegistroRutas tercerRegistroCorrer = new RegistroRutas()
                         {
                             Fecha = registro.Fecha,
                             IdUsuario = registro.IdUsuario,
-                            IdPerfil = 1, // Running
+                            IdPerfil = (int)Enums.Enum.Perfil.Running, // Running
                             IdHerramienta = 2, // La Sportiva Bushido III
                             IdInconveniente = registro.IdInconveniente,
 
@@ -80,8 +81,6 @@ namespace GR_MVC_17.DAL
 
                         listaRegs.Add(tercerRegistroCorrer);
                     }
-
-
 
                     foreach (var reg in listaRegs)
                     {
@@ -94,19 +93,13 @@ namespace GR_MVC_17.DAL
                     db.RegistroRutas.Add(registro);
                     db.SaveChanges();
                 }
-
-                
-
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
 
             return true;
-          
-            
         }
 
         public double dameCalculoPorHerramienta(int idUsuario, int idHerramienta)
@@ -202,6 +195,11 @@ namespace GR_MVC_17.DAL
             }
 
             return listaPartial;
+        }
+
+        public RegistroRutas dameRegistroPorId(int idRegistro)
+        {
+            return db.RegistroRutas.Where(x => x.Id == idRegistro).FirstOrDefault();
         }
     }
 }

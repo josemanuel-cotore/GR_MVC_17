@@ -171,3 +171,4 @@ C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.csproj.CoreC
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.csproj.CopyComplete
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.dll
 C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.pdb
+C:\Users\cotor\source\repos\GR_MVC_17\GR_MVC_17\obj\Debug\GR_MVC_17.csprojAssemblyReference.cache

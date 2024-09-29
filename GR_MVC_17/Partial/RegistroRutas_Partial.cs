@@ -51,5 +51,7 @@ namespace GR_MVC_17.Partial
         public string nombreRutaCorrer_Alt { get; set; }
 
         public double? Km_Bici { get; set; }
+
+        public bool? esDuatlon { get; set; }
     }
 }

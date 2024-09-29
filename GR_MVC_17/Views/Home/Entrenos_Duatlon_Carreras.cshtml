@@ -6,7 +6,7 @@
     int _idUsuario = @ViewBag.IdUsuario;
 }
 
-@{ 
+@{
     string valorBotón = "";
     if (_idPerfil == 4)
     {
@@ -78,50 +78,50 @@
 
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombreRutaCorrer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Km_Correr)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TiempoRutaCorrer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombreRutaBici)
-                </td>
-                <td>
-                    @if (item.IdRutaBici != 30)
-                    {
-                        @Html.DisplayFor(modelItem => item.Km_Bici)
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TiempoRutaBici)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombreRutaCorrer_Alt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Km_Correr_Alt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TiempoRutaCorrer_Alt)
-                </td>
-                <td>
-                    <img src="@item.TipoInconveniente.Imagen" />
-                </td>
-                <td>
-                    @Html.Raw(item.Observaciones)
-                </td>
-                <td>
-                    @*<button type="button" class="btn btn-warning" onclick="abrirModalEliminar(@item.Id)" data-toggle="modal" data-target="#ModalEliminarRegistro" />Eliminar*@
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreRutaCorrer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Km_Correr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TiempoRutaCorrer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreRutaBici)
+                    </td>
+                    <td>
+                        @if (item.IdRutaBici != 30)
+                        {
+                            @Html.DisplayFor(modelItem => item.Km_Bici)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TiempoRutaBici)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreRutaCorrer_Alt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Km_Correr_Alt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TiempoRutaCorrer_Alt)
+                    </td>
+                    <td>
+                        <img src="@item.TipoInconveniente.Imagen" />
+                    </td>
+                    <td>
+                        @Html.Raw(item.Observaciones)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-toggle="modal" data-target="#Modal_Modificar_Registro_Duatlon_Carrera" />Modificar
+                    </td>
+                </tr>
             }
 
         </table>
@@ -130,7 +130,7 @@
 
 </div>
 
-<!-- Modal -->
+<!-- Modal Crear Registro -->
 <div class="modal fade" id="Modal_Crear_Registro_Duatlon_Carrera" role="dialog">
     <div class="modal-dialog">
         Modal content
@@ -144,6 +144,26 @@
             </div>
             <div class="modal-footer">
                 <div id="resRegistroErrorDuatlon_Carrera" style="text-align:center; color:red"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Modificar Registro -->
+<div class="modal fade" id="Modal_Modificar_Registro_Duatlon_Carrera" role="dialog">
+    <div class="modal-dialog" style="width:70%">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="text-align:center">Modificar Registro</h4>
+            </div>
+            <div class="modal-body" style="text-align:right">
+                <div id="resModificarDuatlon_Carrera"></div>
+            </div>
+            <div class="modal-footer">
+                <div id="resModificarErrorDuatlon_Carrera" style="text-align:center; color:red"></div>
             </div>
         </div>
     </div>
@@ -172,6 +192,36 @@
         }
     });
     }
+
+    function abrirModalModificar(idRegistro) {
+
+        //debugger;
+
+        $.ajax({
+            cache: false,
+            async: true,
+            type: "POST",
+            dataType: "html",
+            data: { idUsuario: @_idUsuario, idPerfil: @_idPerfil, idRegistro: idRegistro},
+            url: "@Url.Action("_PasoParaModificarRegistroDuatlon_Carrera", "Home")",
+            success: function (response) {
+                $('#resModificarDuatlon_Carrera').html('');
+                $('#resModificarDuatlon_Carrera').html(response);
+            },
+
+            error: function (response) {
+
+                if (response.ok == false) {
+                    $("#resModificarErrorDuatlon_Carrera").html(response.mensaje);
+                }
+            }
+
+
+        });
+
+
+    }
+
 
     @*function abrirModalEliminar(idRegistro) {
 

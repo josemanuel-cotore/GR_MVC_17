@@ -17,8 +17,7 @@ namespace GR_MVC_17.Controllers
         // GET: RegistroRutas
         public ActionResult Index()
         {
-            //var registroRutas = db.RegistroRutas.Include(r => r.Herramienta).Include(r => r.Perfil).Include(r => r.RutasUsuario).Include(r => r.TipoInconveniente).Include(r => r.Usuario);
-            var registroRutas = db.RegistroRutas.ToList();
+            var registroRutas = db.RegistroRutas.Include(r => r.RutasUsuario).Include(r => r.TipoInconveniente).Include(r => r.Usuario);
             return View(registroRutas.ToList());
         }
 
@@ -40,8 +39,6 @@ namespace GR_MVC_17.Controllers
         // GET: RegistroRutas/Create
         public ActionResult Create()
         {
-            ViewBag.IdHerramienta = new SelectList(db.Herramienta, "Id", "Nombre");
-            ViewBag.IdPerfil = new SelectList(db.Perfil, "Id", "Nombre");
             ViewBag.IdRuta = new SelectList(db.RutasUsuario, "id", "Nombre");
             ViewBag.IdInconveniente = new SelectList(db.TipoInconveniente, "Id", "Nombre");
             ViewBag.IdUsuario = new SelectList(db.Usuario, "Id", "NombreUsuario");
@@ -53,7 +50,7 @@ namespace GR_MVC_17.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Fecha,Km,IdUsuario,IdPerfil,IdRuta,IdHerramienta,IdInconveniente")] RegistroRutas registroRutas)
+        public ActionResult Create([Bind(Include = "Id,Fecha,Km,IdUsuario,IdPerfil,IdRuta,IdHerramienta,IdInconveniente,IdRutaBici,TiempoRutaCorrer,TiempoRutaBici,Km_Bici,IdRuta_Alternativa,Km_Alternativa,TiempoRutaCorrer_Alternativa,Observaciones,EsDuatlon")] RegistroRutas registroRutas)
         {
             if (ModelState.IsValid)
             {
@@ -62,8 +59,6 @@ namespace GR_MVC_17.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdHerramienta = new SelectList(db.Herramienta, "Id", "Nombre", registroRutas.IdHerramienta);
-            ViewBag.IdPerfil = new SelectList(db.Perfil, "Id", "Nombre", registroRutas.IdPerfil);
             ViewBag.IdRuta = new SelectList(db.RutasUsuario, "id", "Nombre", registroRutas.IdRuta);
             ViewBag.IdInconveniente = new SelectList(db.TipoInconveniente, "Id", "Nombre", registroRutas.IdInconveniente);
             ViewBag.IdUsuario = new SelectList(db.Usuario, "Id", "NombreUsuario", registroRutas.IdUsuario);
@@ -82,8 +77,6 @@ namespace GR_MVC_17.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdHerramienta = new SelectList(db.Herramienta, "Id", "Nombre", registroRutas.IdHerramienta);
-            ViewBag.IdPerfil = new SelectList(db.Perfil, "Id", "Nombre", registroRutas.IdPerfil);
             ViewBag.IdRuta = new SelectList(db.RutasUsuario, "id", "Nombre", registroRutas.IdRuta);
             ViewBag.IdInconveniente = new SelectList(db.TipoInconveniente, "Id", "Nombre", registroRutas.IdInconveniente);
             ViewBag.IdUsuario = new SelectList(db.Usuario, "Id", "NombreUsuario", registroRutas.IdUsuario);
@@ -95,7 +88,7 @@ namespace GR_MVC_17.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Fecha,Km,IdUsuario,IdPerfil,IdRuta,IdHerramienta,IdInconveniente")] RegistroRutas registroRutas)
+        public ActionResult Edit([Bind(Include = "Id,Fecha,Km,IdUsuario,IdPerfil,IdRuta,IdHerramienta,IdInconveniente,IdRutaBici,TiempoRutaCorrer,TiempoRutaBici,Km_Bici,IdRuta_Alternativa,Km_Alternativa,TiempoRutaCorrer_Alternativa,Observaciones,EsDuatlon")] RegistroRutas registroRutas)
         {
             if (ModelState.IsValid)
             {
@@ -103,8 +96,6 @@ namespace GR_MVC_17.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdHerramienta = new SelectList(db.Herramienta, "Id", "Nombre", registroRutas.IdHerramienta);
-            ViewBag.IdPerfil = new SelectList(db.Perfil, "Id", "Nombre", registroRutas.IdPerfil);
             ViewBag.IdRuta = new SelectList(db.RutasUsuario, "id", "Nombre", registroRutas.IdRuta);
             ViewBag.IdInconveniente = new SelectList(db.TipoInconveniente, "Id", "Nombre", registroRutas.IdInconveniente);
             ViewBag.IdUsuario = new SelectList(db.Usuario, "Id", "NombreUsuario", registroRutas.IdUsuario);
@@ -112,12 +103,12 @@ namespace GR_MVC_17.Controllers
         }
 
         // GET: RegistroRutas/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            //if (idRegistro == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             RegistroRutas registroRutas = db.RegistroRutas.Find(id);
             if (registroRutas == null)
             {
@@ -132,17 +123,9 @@ namespace GR_MVC_17.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             RegistroRutas registroRutas = db.RegistroRutas.Find(id);
-
-            int idU = registroRutas.IdUsuario;
-            //int idH = registroRutas.IdHerramienta;
-            int idP = registroRutas.IdPerfil;
-
-
-
             db.RegistroRutas.Remove(registroRutas);
             db.SaveChanges();
-            //return RedirectToAction("Registro_Herramienta", "Home", new { idHerramienta = idH, idUsuario = idU, idPerfil = idP });
-            return RedirectToAction("Registro_Herramienta", "Home", new { idUsuario = idU, idPerfil = idP });
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

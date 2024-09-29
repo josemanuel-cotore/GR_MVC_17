@@ -59,8 +59,6 @@ namespace GR_MVC_17.DAL
         public RutasUsuario DameRutaPorNombrePerfilUsuario(string nombreRuta, int idPerfil, int idUsuario)
         {
             return db.RutasUsuario.Where(x => x.idPerfil == idPerfil && x.idUsuario == idUsuario && x.Nombre == nombreRuta).FirstOrDefault();
-
-            //return db.Ruta.Where(x => x.Nombre == nombreRuta).FirstOrDefault();
         }
 
         public int DameOrdenMaximo(int idPerfil, int idUsuario)

@@ -125,8 +125,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="Controllers\RegistroRutasController.cs" />
+    <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="Controllers\Pruebas2Controller.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RolController.cs" />
@@ -183,12 +183,11 @@
     <Content Include="Imagenes\Inconvenientes\24\img_lluvia1.png" />
     <Content Include="Imagenes\Inconvenientes\24\img_nieve2.png" />
     <Content Include="Imagenes\Inconvenientes\24\img_viento1.png" />
-    <Content Include="Imagenes\Perfiles\Bicicleta1.jpg" />
-    <Content Include="Imagenes\Perfiles\Running1.jpg" />
-    <Content Include="Imagenes\Perfiles\Senderismo1.jpg" />
-    <Content Include="Imagenes\Perfiles\Senderismo2.jpg" />
-    <Content Include="Imagenes\Perfiles\Senderismo5.png" />
-    <Content Include="Imagenes\Perfiles\Senderismo6.png" />
+    <Content Include="Imagenes\Perfiles\Bicicleta.jpg" />
+    <Content Include="Imagenes\Perfiles\Carreras.jpg" />
+    <Content Include="Imagenes\Perfiles\Duatlon.jpg" />
+    <Content Include="Imagenes\Perfiles\Running.jpg" />
+    <Content Include="Imagenes\Perfiles\Senderismo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
@@ -250,14 +249,16 @@
     <Content Include="Views\Shared\_CrearHerramienta.cshtml" />
     <Content Include="Views\Home\DisplayTemplates\Datetime.cshtml" />
     <Content Include="Views\Home\DisplayTemplates\IdInconveniente.cshtml" />
+    <Content Include="Views\Shared\_ConfirmarEliminar.cshtml" />
+    <Content Include="Views\Home\Entrenos_Duatlon_Carreras.cshtml" />
+    <Content Include="Views\Shared\_CrearRegistroDuatlon_Carrera.cshtml" />
+    <Content Include="Views\Home\Acceso_Admin.cshtml" />
+    <Content Include="Views\Shared\_ModificarRegistroDuatlon_Carrera.cshtml" />
     <Content Include="Views\RegistroRutas\Create.cshtml" />
     <Content Include="Views\RegistroRutas\Delete.cshtml" />
     <Content Include="Views\RegistroRutas\Details.cshtml" />
     <Content Include="Views\RegistroRutas\Edit.cshtml" />
     <Content Include="Views\RegistroRutas\Index.cshtml" />
-    <Content Include="Views\Shared\_ConfirmarEliminar.cshtml" />
-    <Content Include="Views\Home\Entrenos_Duatlon_Carreras.cshtml" />
-    <Content Include="Views\Shared\_CrearRegistroDuatlon_Carrera.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

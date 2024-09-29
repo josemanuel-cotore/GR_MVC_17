@@ -57,11 +57,10 @@
                 @Html.DisplayFor(modelItem => item.RutasUsuario.Nombre)
             </td>
             <td>
-                @if (item.RutasUsuario.Nombre != "Bici Estática Casa")
+                @if (item.Km > 0)
                 {
                     @Html.DisplayFor(modelItem => item.Km)
                 }
-
             </td>
             <td>
                 <img src="@item.TipoInconveniente.Imagen" />

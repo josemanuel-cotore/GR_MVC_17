@@ -17,10 +17,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>07/23/2024 11:11:30</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>09/16/2024 18:41:27</publishTime>
+      <publishTime>09/21/2024 21:03:42</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>09/16/2024 18:41:27</publishTime>
+      <publishTime>09/21/2024 21:03:42</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>07/23/2024 11:11:42</publishTime>
@@ -50,10 +50,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/01/2018 12:21:06</publishTime>
     </File>
     <File Include="bin/GR_MVC_17.dll">
-      <publishTime>09/16/2024 18:41:17</publishTime>
+      <publishTime>09/21/2024 21:03:33</publishTime>
     </File>
     <File Include="bin/GR_MVC_17.pdb">
-      <publishTime>09/16/2024 18:41:17</publishTime>
+      <publishTime>09/21/2024 21:03:33</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>07/23/2024 11:12:04</publishTime>
@@ -295,6 +295,9 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <File Include="Imagenes/Inconvenientes/24/img_baja2.png">
       <publishTime>08/10/2024 19:56:24</publishTime>
     </File>
+    <File Include="Imagenes/Inconvenientes/24/img_barro1.png">
+      <publishTime>09/21/2024 12:26:44</publishTime>
+    </File>
     <File Include="Imagenes/Inconvenientes/24/img_lluvia1.png">
       <publishTime>08/10/2024 19:56:24</publishTime>
     </File>
@@ -332,7 +335,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>08/16/2024 11:18:17</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>09/16/2024 18:41:23</publishTime>
+      <publishTime>09/21/2024 21:03:38</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>07/23/2024 11:11:16</publishTime>
@@ -389,19 +392,19 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>08/10/2024 20:11:26</publishTime>
     </File>
     <File Include="Views/Home/Entrenos_Duatlon_Carreras.cshtml">
-      <publishTime>09/16/2024 12:22:43</publishTime>
+      <publishTime>09/21/2024 20:59:21</publishTime>
     </File>
     <File Include="Views/Home/Herramientas_Usuario.cshtml">
-      <publishTime>08/20/2024 14:20:55</publishTime>
+      <publishTime>09/21/2024 20:48:22</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>09/16/2024 18:21:22</publishTime>
+      <publishTime>09/21/2024 20:48:21</publishTime>
     </File>
     <File Include="Views/Home/Perfiles_Usuario.cshtml">
       <publishTime>08/19/2024 19:19:54</publishTime>
     </File>
     <File Include="Views/Home/Registro_Herramienta.cshtml">
-      <publishTime>09/05/2024 12:20:59</publishTime>
+      <publishTime>09/21/2024 12:12:51</publishTime>
     </File>
     <File Include="Views/Pruebas/Asincrono.cshtml">
       <publishTime>08/19/2024 19:19:54</publishTime>
@@ -470,10 +473,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>08/19/2024 20:34:13</publishTime>
     </File>
     <File Include="Views/Shared/_CrearRegistroDuatlon_Carrera.cshtml">
-      <publishTime>09/16/2024 18:19:41</publishTime>
+      <publishTime>09/21/2024 20:48:22</publishTime>
     </File>
     <File Include="Views/Shared/_CrearRuta.cshtml">
-      <publishTime>08/29/2024 20:38:28</publishTime>
+      <publishTime>09/21/2024 20:48:21</publishTime>
     </File>
     <File Include="Views/Shared/_DesplegableRutas.cshtml">
       <publishTime>07/23/2024 11:11:26</publishTime>
@@ -500,7 +503,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>07/23/2024 11:11:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/16/2024 18:41:22</publishTime>
+      <publishTime>09/21/2024 21:01:11</publishTime>
     </File>
   </ItemGroup>
 </Project>

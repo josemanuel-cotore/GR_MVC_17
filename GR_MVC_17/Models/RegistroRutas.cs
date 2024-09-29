@@ -34,15 +34,17 @@ namespace GR_MVC_17
 
         public double? Km_Bici { get; set; }
 
-        [StringLength(250)]
-        public string Observaciones { get; set; }
-
         public int? IdRuta_Alternativa { get; set; }
 
         public double? Km_Alternativa { get; set; }
 
         [StringLength(150)]
         public string TiempoRutaCorrer_Alternativa { get; set; }
+
+        [StringLength(250)]
+        public string Observaciones { get; set; }
+
+        public bool? EsDuatlon { get; set; }
 
         public virtual RutasUsuario RutasUsuario { get; set; }
 

@@ -16,5 +16,20 @@ namespace GR_MVC_17.Enums
             Ninguno = 5
 
         }
+
+        public enum Rol
+        {
+            Administrador = 1,
+            Usuario = 2
+        }
+
+        public enum Perfil
+        {
+            Running = 1,
+            Senderismo = 2,
+            Ciclismo = 3,
+            Duatlón = 4,
+            Carreras = 5
+        }
     }
 }

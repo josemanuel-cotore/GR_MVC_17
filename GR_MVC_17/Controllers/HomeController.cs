@@ -1,10 +1,8 @@
 ﻿using GR_MVC_17.DAL;
 using GR_MVC_17.DTO;
-using GR_MVC_17.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace GR_MVC_17.Controllers
@@ -32,8 +30,16 @@ namespace GR_MVC_17.Controllers
                 usuario = repoUsuario.ExisteUsuario(usuario);
                 if (usuario != null)
                 {
-                    //return Content("ok");
-                    return RedirectToAction("Perfiles_Usuario", "Home", usuario);
+                    if (usuario.IdRol == (int)Enums.Enum.Rol.Administrador)
+                    {
+                        return RedirectToAction("Acceso_Admin", "Home", usuario);
+                    }
+                    else
+                    {
+                        //return Content("ok");
+                        return RedirectToAction("Perfiles_Usuario", "Home", usuario);
+                    }
+
                 }
                 else
                 {
@@ -45,6 +51,23 @@ namespace GR_MVC_17.Controllers
 
             }
             return PartialView();
+        }
+
+        public ActionResult Acceso_Admin(Usuario usuario)
+        {
+            List<Usuario> listaUsuarios = new List<Usuario>();
+            listaUsuarios = repoUsuario.DameTodosUsuarios();
+            ViewBag.Usuarios = listaUsuarios;
+
+            // Le daremos a un boton al lado del usuario y mostrará su lista a la derecha
+            // Crear una clase partial DTO concreto que tenga los diferentes perfiles de cada usuario
+
+            // Por ejemplo: Usuario 1 --> Ciclismo Senderismo TrailRunning
+            //              Usuario 2 --> TrailRunning Carreras
+            //              Usuario 3 --> ....
+
+
+            return View(listaUsuarios);
         }
 
         [HttpGet]
@@ -79,7 +102,7 @@ namespace GR_MVC_17.Controllers
             ViewBag.IdUsuario = idUsuario;
             ViewBag.IdPerfil = idPerfil;
 
-            if (idPerfil == 4 || idPerfil == 5)
+            if (idPerfil == (int) Enums.Enum.Perfil.Duatlón || idPerfil == (int) Enums.Enum.Perfil.Carreras)
             {
                 return RedirectToAction("Entrenos_Duatlon_Carreras", new { idUsuario = idUsuario, idPerfil = idPerfil});
             }
@@ -101,14 +124,12 @@ namespace GR_MVC_17.Controllers
         {
             var listaRegistro = repoRegistro.dameRegistroHerramienta(idHerramienta, idPerfil);
 
-            //var listaRutas = repoRutas.DameRutasUsuarioPerfil(idUsuario, idPerfil);
-            //ViewBag.Rutas = listaRutas.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
-
             ViewBag.Usuario = idUsuario;
             ViewBag.Herramienta = idHerramienta;
             ViewBag.Perfil = idPerfil;
             ViewBag.NombreHerramienta = repoHerramienta.DameNombreHerramientaPorId(idHerramienta).Nombre;
             ViewBag.CalculoKm = repoRegistro.dameCalculoPorHerramienta(idUsuario, idHerramienta);
+
             return View(listaRegistro);
         }
 
@@ -144,7 +165,6 @@ namespace GR_MVC_17.Controllers
 
                 RegistroRutas registro = new RegistroRutas
                 {
-
                     Fecha = fecha,
                     Km = km,
                     IdRuta = ruta,
@@ -152,9 +172,6 @@ namespace GR_MVC_17.Controllers
                     IdHerramienta = idHerramienta,
                     IdPerfil = idPerfil,
                     IdInconveniente = inconve
-                    
-                    //Enums.Enum.Inconveniente.Ninguno;
-
                 };
 
                 // Insertar registro ruta
@@ -249,18 +266,6 @@ namespace GR_MVC_17.Controllers
             {
                 ViewBag.DesplegablePerfilesGeneral = listaPerfilesGeneral.Select(p => new SelectListItem() { Value = p.Id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
             }
-            else
-            {
-                Perfil vacio = new Perfil()
-                {
-                    Id = 999,
-                    Nombre = "No existen más perfiles"
-                };
-
-                listaPerfilesGeneral.Add(vacio);
-
-                ViewBag.DesplegablePerfilesGeneral = listaPerfilesGeneral.Select(p => new SelectListItem() { Value = p.Id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
-            }
 
             return PartialView("_CrearPerfil");
 
@@ -272,10 +277,6 @@ namespace GR_MVC_17.Controllers
             Respuesta_DTO respuesta = new Respuesta_DTO();
             try
             {
-                if (idPerfil == 999)
-                {
-                    throw new Exception("Ya dispones de todos los perfiles");
-                }
                 Perfil existe = repoPerfil.DamePerfilPorId(idPerfil);
 
                 if (existe != null)
@@ -341,7 +342,7 @@ namespace GR_MVC_17.Controllers
 
                     if (repoUsuario.InsertaUsuarioHerramientaPerfil(insertada.Id, idUsuario, idPerfil))
                     {
-                        respuesta.ok = false;
+                        respuesta.ok = true;
                         respuesta.mensaje = "Herramienta creada correctamente";
                     }
                     else
@@ -427,10 +428,10 @@ namespace GR_MVC_17.Controllers
         [HttpPost]
         public ActionResult _PasoParaCrearRegistroDuatlon_Carrera(int idUsuario, int idPerfil)
         {
-            var listaRutasCorrer = repoRutas.DameRutasUsuarioPerfil(idUsuario, 1);
+            var listaRutasCorrer = repoRutas.DameRutasUsuarioPerfil(idUsuario, (int) Enums.Enum.Perfil.Running);
             ViewBag.RutasCorrer = listaRutasCorrer.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
-            var listaRutasBici = repoRutas.DameRutasUsuarioPerfil(idUsuario, 3);
+            var listaRutasBici = repoRutas.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Ciclismo);
             ViewBag.RutasBici = listaRutasBici.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
 
@@ -445,8 +446,7 @@ namespace GR_MVC_17.Controllers
         }
 
         [HttpPost]
-        //public JsonResult _CrearRegistroDuatlon(DateTime fecha, double kmCorrer, int rutaCorrer, double kmBici, int rutaBici, int inconve, int idUsuario, int idPerfil)
-        public JsonResult _CrearRegistroDuatlon_Carrera(DateTime fecha, double kmCorrer, int rutaCorrer, double kmBici, int rutaBici, double kmCorrerAlt, int rutaCorrerAlt, string tiempoCorrer, string tiempoBici, string tiempoCorrerAlt, int inconve, string observa, int idUsuario, int idPerfil)
+       public JsonResult _CrearRegistroDuatlon_Carrera(DateTime fecha, double kmCorrer, int rutaCorrer, double kmBici, int rutaBici, double kmCorrerAlt, int rutaCorrerAlt, string tiempoCorrer, string tiempoBici, string tiempoCorrerAlt, int inconve, bool esDuatlon, string observa, int idUsuario, int idPerfil)
         {
             Respuesta_DTO respuesta = new Respuesta_DTO();
 
@@ -455,7 +455,6 @@ namespace GR_MVC_17.Controllers
 
                 RegistroRutas registro = new RegistroRutas
                 {
-
                     Fecha = fecha,
                     Km = kmCorrer,
                     IdUsuario = idUsuario,
@@ -470,12 +469,8 @@ namespace GR_MVC_17.Controllers
                     Km_Alternativa = kmCorrerAlt,
                     IdRuta_Alternativa = rutaCorrerAlt,
                     TiempoRutaCorrer_Alternativa = tiempoCorrerAlt,
-                    Observaciones = observa
-                    
-
-
-                    //Enums.Enum.Inconveniente.Ninguno;
-
+                    Observaciones = observa,
+                    EsDuatlon = esDuatlon
                 };
 
                 // Insertar registro ruta
@@ -497,15 +492,81 @@ namespace GR_MVC_17.Controllers
 
         public ActionResult Entrenos_Duatlon_Carreras(int idUsuario, int idPerfil)
         {
-            //Registros Carreras IdPerfil = 5
             ViewBag.IdPerfil = idPerfil;
             ViewBag.IdUsuario = idUsuario;
             ViewBag.TemaPerfil = repoPerfil.dameTemaPerfil(idPerfil);
             var LRegistroCarreras = repoRegistro.dameRegistroPorPerfil(idPerfil);
 
-
-
             return View(LRegistroCarreras);
+        }
+
+
+        [HttpPost]
+        public ActionResult _PasoParaModificarRegistroDuatlon_Carrera(int idUsuario, int idPerfil, int idRegistro)
+        {
+            var listaRutasCorrer = repoRutas.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Running);
+            ViewBag.RutasCorrer = listaRutasCorrer.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
+
+            var listaRutasBici = repoRutas.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Ciclismo);
+            ViewBag.RutasBici = listaRutasBici.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
+
+
+            var listaInconvenientes = repoInconveniente.dameInconvenientes();
+            ViewBag.Inconvenientes = listaInconvenientes.Select(p => new SelectListItem() { Value = p.Id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
+
+            SeguimientoRegistro_DTO seguimiento = new SeguimientoRegistro_DTO();
+            seguimiento.idUsuario_S = idUsuario;
+            seguimiento.idPerfil_S = idPerfil;
+
+            RegistroRutas registro = new RegistroRutas();
+            registro = repoRegistro.dameRegistroPorId(idRegistro);
+
+            return PartialView("_ModificarRegistroDuatlon_Carrera", registro);
+        }
+
+        [HttpPost]
+        public JsonResult _ModificarRegistroDuatlon_Carrera(DateTime fecha, double kmCorrer, int rutaCorrer, double kmBici, int rutaBici, double kmCorrerAlt, int rutaCorrerAlt, string tiempoCorrer, string tiempoBici, string tiempoCorrerAlt, int inconve, bool esDuatlon, string observa, int idUsuario, int idPerfil)
+        {
+            Respuesta_DTO respuesta = new Respuesta_DTO();
+
+            try
+            {
+
+                RegistroRutas registro = new RegistroRutas
+                {
+                    Fecha = fecha,
+                    Km = kmCorrer,
+                    IdUsuario = idUsuario,
+                    IdPerfil = idPerfil,
+                    IdRuta = rutaCorrer,
+                    IdHerramienta = null,
+                    IdInconveniente = inconve,
+                    IdRutaBici = rutaBici,
+                    Km_Bici = kmBici,
+                    TiempoRutaCorrer = tiempoCorrer,
+                    TiempoRutaBici = tiempoBici,
+                    Km_Alternativa = kmCorrerAlt,
+                    IdRuta_Alternativa = rutaCorrerAlt,
+                    TiempoRutaCorrer_Alternativa = tiempoCorrerAlt,
+                    Observaciones = observa,
+                    EsDuatlon = esDuatlon
+                };
+
+                // Insertar registro ruta
+                if (repoRegistro.AñadirRegistroRuta(registro))
+                {
+                    respuesta.ok = true;
+                    respuesta.mensaje = "Registro Correcto";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                respuesta.ok = false;
+                respuesta.mensaje = ex.Message;
+            }
+
+            return Json(respuesta);
         }
 
     }

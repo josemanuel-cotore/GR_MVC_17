@@ -11,7 +11,7 @@ namespace GR_MVC_17.DAL
 
         public List<Usuario> DameTodosUsuarios()
         {
-            return db.Usuario.ToList();
+            return db.Usuario.Where(x => x.IdRol != 1).ToList();
         }
 
         public Usuario ExisteUsuario(Usuario usuario)
@@ -56,10 +56,8 @@ namespace GR_MVC_17.DAL
             }
             catch (Exception)
             {
-
                 return false;
             }
-
 
             return true;
         }
