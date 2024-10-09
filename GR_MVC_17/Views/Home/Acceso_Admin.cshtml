@@ -54,10 +54,10 @@
                         @Html.DisplayFor(modelItem => item.Rol.Nombre)
                     </td>
                     <td>
-                        <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-toggle="modal" data-target="#ModalModificarRegistro">Modificar</button>
+                        <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalModificarRegistro">Modificar</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-toggle="modal" data-target="#ModalEliminarRegistro">Eliminar</button>
+                        <button type="button" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro">Eliminar</button>
                     </td>
                 </tr>
             }

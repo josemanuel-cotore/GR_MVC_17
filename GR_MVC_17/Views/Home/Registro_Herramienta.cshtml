@@ -20,7 +20,7 @@
         <div class="col-md-4" style="margin-top:2%">
             <div class="row">
                 <div class="col-md-6">
-                    <button type="button" class="btn btn-success" onclick="funcionCrearRegistro();" data-toggle="modal" data-target="#ModalRegistro">Crear Nuevo Registro</button>
+                    <button type="button" class="btn btn-success" onclick="funcionCrearRegistro();" data-bs-toggle="modal" data-bs-target="#ModalRegistro">Crear Nuevo Registro</button>
                 </div>
                 <div class="col-md-6">
                     <p><a class="btn btn-danger" href="@Url.Action("Herramientas_Usuario", "Home", new { idPerfil = _idPerfil, idUsuario = _idUsuario})"> Volver a Rutas y Herramientas</a></p>
@@ -66,7 +66,7 @@
                 <img src="@item.TipoInconveniente.Imagen" />
             </td>
             <td>
-                <button type="button" class="btn btn-warning" onclick="abrirModalEliminar(@item.Id)" data-toggle="modal" data-target="#ModalEliminarRegistro" />Eliminar
+                <button type="button" class="btn btn-warning" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />Eliminar
             </td>
         </tr>
     }

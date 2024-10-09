@@ -4,15 +4,21 @@
 
     <br />
     <br />
-
-    if (ViewBag.NumPerfiles > 0)
-    {
+    <div class="container-sm">
+        @if (ViewBag.NumPerfiles > 0)
+        {
         <h2 style="text-align:center; margin-bottom:5%">Elige una de tus modalidades</h2>
+
         <div class="row">
             @{foreach (var perfil in Model)
                 {
-                    <div class="col-md-6" style="text-align:center">
-                        <p><img src="@perfil.Imagen" /><a href="@Url.Action("Herramientas_Usuario", "Home", new { idPerfil = perfil.Id, idUsuario = ViewBag.IdUsuario })" class="btn btn-info" style="font-size:50px;margin:10%">@perfil.Nombre</a></p>
+                    <div class="col-md-3" style="text-align:center; display:block; border: solid 1px black; height:100%">
+                        <div style="height:70%">
+                            <img src="@perfil.Imagen" class="img-fluid" />
+                        </div>
+                        <div style="height:30%">
+                            <a href="@Url.Action("Herramientas_Usuario", "Home", new { idPerfil = perfil.Id, idUsuario = ViewBag.IdUsuario })" class="btn btn-dark" style="font-size:40px;margin:10%">@perfil.Nombre</a>
+                        </div>             
                     </div>
                 }
             }
@@ -30,14 +36,23 @@
 
         }
 
-    }
-    else
-    {
+        }
+        else
+        {
         <h2>No dispones de ningún perfil para tu usuario</h2>
         <br />
 
-        <input type="button" class="btn btn-success" value="Añadir Nuevo Perfil" id="btnCrearPerfil" onclick="fnCrearPerfil()" data-toggle="modal" data-target="#ModalPerfil" />
-    }
+        @*<input type="button" class="btn btn-success" value="Añadir Nuevo Perfil" id="btnCrearPerfil" onclick="fnCrearPerfil()" data-bs-toggle="modal" data-bs-target="#ModalPerfil" />*@
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalPerfil" onclick="fnCrearPerfil()">
+            Añadir Nuevo Perfil
+        </button>
+        }
+
+
+    </div>
+
+    
+
 
 }
 
