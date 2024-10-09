@@ -203,6 +203,15 @@ namespace GR_MVC_17.Controllers
             return PartialView();
         }
 
+        [HttpPost]
+        public ActionResult _PasoParaVerRutasDisponibles(int idUsuario, int idPerfil)
+        {
+            var listadoRutasUsuario = repoRutas.DameRutasUsuarioPerfil(idUsuario, idPerfil);
+            //ViewBag.ListadoRutas = listadoRutasUsuario;
+
+            return PartialView("_RutasDisponibles", listadoRutasUsuario);
+        }
+
         // Hago un POST _pasoParaCrear para poder pasarle un parametro y utilizarlo luego en la partial _CrearRuta
         // si es un GET no puedo pasarle ese parametro
         [HttpPost]

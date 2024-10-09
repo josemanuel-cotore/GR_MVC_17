@@ -12,12 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Herramienta.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Perfil.Nombre)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.RutasUsuario.Nombre)
         </th>
         <th>
@@ -32,17 +26,44 @@
         <th>
             @Html.DisplayNameFor(model => model.Km)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPerfil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdHerramienta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdRutaBici)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TiempoRutaCorrer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TiempoRutaBici)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Km_Bici)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdRuta_Alternativa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Km_Alternativa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TiempoRutaCorrer_Alternativa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EsDuatlon)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Herramienta.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Perfil.Nombre)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.RutasUsuario.Nombre)
         </td>
@@ -57,6 +78,39 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Km)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdPerfil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdHerramienta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdRutaBici)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TiempoRutaCorrer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TiempoRutaBici)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Km_Bici)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdRuta_Alternativa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Km_Alternativa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TiempoRutaCorrer_Alternativa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Observaciones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EsDuatlon)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

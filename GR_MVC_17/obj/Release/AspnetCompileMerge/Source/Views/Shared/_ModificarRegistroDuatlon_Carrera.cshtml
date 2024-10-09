@@ -1,0 +1,339 @@
+﻿@model RegistroRutas
+
+@{
+    ViewBag.Title = "4.3- Modificar Registro Duatlón";
+    var fechaActual = DateTime.Now.ToShortDateString();
+
+
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="row">
+        <div class="col-md-12">
+            @*1º PARTE*@
+            <div class="col-md-4" style="margin-top: 2%">
+                @Html.EditorFor(model => model.IdRuta, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group">
+                    <span class="control-label col-md-4">Rutas Correr</span>
+                    <div class="col-md-8">
+                        <select class="form-control small" id="rutasCorrer">
+                            @{
+                                foreach (var item in ViewBag.RutasCorrer)
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Km, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Km, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Km, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.Label("Tiempo Correr", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.TiempoRutaCorrer, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TiempoRutaCorrer, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+            @*2º PARTE*@
+            <div class="col-md-4"  style="margin-top: 2%">
+                <div class="form-group">
+                    <span class="control-label col-md-4">Rutas Bici</span>
+                    <div class="col-md-8">
+                        <select class="form-control small" id="rutasBici">
+                            @{
+                                foreach (var item in ViewBag.RutasBici)
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Km Bici", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Km_Bici, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Km_Bici, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.IdRutaBici, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IdRutaBici, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.IdRutaBici, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+
+                <div class="form-group">
+                    @Html.Label("Tiempo Bici", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.TiempoRutaBici, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TiempoRutaBici, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @*3º PARTE*@
+            <div class="col-md-4"  style="margin-top: 2%">
+                <div class="form-group">
+                    <span class="control-label col-md-4">Rutas Correr</span>
+                    <div class="col-md-8">
+                        <select class="form-control small" id="rutasCorrer_Alt">
+                            @{
+                                foreach (var item in ViewBag.RutasCorrer)
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Km Alt", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Km_Alternativa, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Km_Alternativa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.IdRuta_Alternativa, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IdRuta_Alternativa, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.IdRuta_Alternativa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+
+                <div class="form-group">
+                    @Html.Label("Tiempo Correr", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.TiempoRutaCorrer_Alternativa, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TiempoRutaCorrer_Alternativa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.IdUsuario, "IdUsuario", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdUsuario", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.IdPerfil, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IdPerfil, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdPerfil, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.IdRuta, "IdRuta", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdRuta", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdRuta, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.IdHerramienta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IdHerramienta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdHerramienta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdInconveniente, "IdInconveniente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdInconveniente", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdInconveniente, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <hr />
+
+    <div class="row" style="text-align:center">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.Label("Observaciones", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        <textarea name="Observaciones" id="Observaciones" rows="4" cols="40" placeholder="Describe las rutas" style="background-color: white;">@Model.Observaciones</textarea>
+
+                        @*@Html.TextAreaFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control", rows = "4", cols = "50" } })*@
+                        @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.Label("¿Es Duatlón?", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.EsDuatlon)
+                                @Html.ValidationMessageFor(model => model.EsDuatlon, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <hr />
+
+        <div class="row">
+            <div class="form-group" style="text-align:right">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-10">
+                    <input type="button" id="btnModificar" value="Modificar Registro" class="btn btn-success" />
+                    <input type="button" id="btnVolver" value="Volver" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+        <div id="resRegistroError" style="text-align:left; color:red"></div>
+    </div>
+}
+
+@*<div class="form-horizontal">
+        @Html.EditorForModel(Model.IdHerramienta)
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8">
+                    <input type="button" id="btnModificar" value="Modificar Registro" class="btn btn-success" />
+                    <input type="button" id="btnVolver" value="Volver" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+        <div id="resRegistroError" style="text-align:left; color:red"></div>
+    </div>*@
+
+@*<script type="text/javascript">
+        $(function () {
+            $("#btnModificar").click(function () {
+
+                var miCheckbox = document.getElementById('miCheck');
+                var esDuatlon = miCheckbox.checked;
+
+                debugger;
+                var fechaParam = $("#fecha").val();
+                var kmCorrerParam = $("#kmCorrer").val();
+                var kmBiciParam = $("#kmBici").val();
+                var kmTiempoCorrerParam = $("#tiempoCorrer").val();
+                var kmTiempoBiciParam = $("#tiempoBici").val();
+                var obs = $("#Observaciones").val();
+                //var esD = $("#esDuatlon").checked;
+
+
+                debugger;
+
+                if (fechaParam == "") {
+                    $("#resRegistroErrorDuatlon").html("Debes informar una fecha");
+                } else if (kmCorrerParam == "") {
+                    $("#resRegistroErrorDuatlon").html("Debes informar los KM de correr");
+                }
+                //else if (kmBiciParam == "") {
+                //    $("#resRegistroErrorDuatlon").html("Debes informar los KM de bici");
+                //}
+                else if (kmTiempoCorrerParam == "") {
+                    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo de correr");
+                }
+                //else if (kmTiempoBiciParam == "") {
+                //    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo en bici");
+                //}
+
+                else {
+                    debugger;
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/_CrearRegistroDuatlon_Carrera",
+                    data: '{fecha: "' + $("#fecha").val() + '", kmCorrer: "' + $("#kmCorrer").val() + '", rutaCorrer: "' + $("#rutasCorrer").val() + '", kmBici: "' + $("#kmBici").val() + '", rutaBici: "' + $("#rutasBici").val() + '", kmCorrerAlt: "' + $("#kmCorrer_Alt").val() + '", rutaCorrerAlt: "' + $("#rutasCorrer_Alt").val() + '", tiempoCorrer: "' + $("#tiempoCorrer").val() + '", tiempoBici: "' + $("#tiempoBici").val() + '", tiempoCorrerAlt: "' + $("#tiempoCorrer_Alt").val() + '",  inconve: "' + $("#inconvenientes").val() + '", esDuatlon: "' + esDuatlon + '", observa: "' + $("#Observaciones").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idPerfil: "' + @Model.idPerfil_S + '"}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.ok == true) {
+                            $("#Modal_Crear_Registro_Duatlon").modal("hide");
+                            window.location.reload();
+                        }
+                        else {
+                            $("#resRegistroErrorDuatlon").html(response.mensaje);
+                        }
+
+                    },
+                    failure: function (response) {
+                        $("#resRegistroErrorDuatlon").html(response.mensaje);
+                    },
+                    error: function (response) {
+                        //debugger;
+                        $("#resRegistroErrorDuatlon").html(response.mensaje);
+                    }
+                });
+                }
+
+
+            });
+
+            $("#btnVolver").click(function () {
+                $("#Modal_Crear_Registro_Duatlon").modal("hide");
+            });
+        });
+</script>*@
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,256 @@
+﻿@model List<Usuario>
+@{
+    ViewBag.Title = "Acceso_Admin";
+}
+
+<h2 style="margin-bottom: 5%; margin-top: 3%; text-align:center">Gestión de Usuarios</h2>
+
+<div class="row">
+    <div class="col-md-5">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Usuario")
+                </th>
+                <th>
+                    @Html.Label("Password")
+                </th>
+                <th>
+                    @Html.Label("Nombre")
+                </th>
+                <th>
+                    @Html.Label("Apellidos")
+                </th>
+                <th>
+                    @Html.Label("Edad")
+                </th>
+                <th>
+                    @Html.Label("Rol")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contraseña)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @if (item.Edad != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Edad)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rol.Nombre)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalModificarRegistro">Modificar</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro">Eliminar</button>
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-5">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Usuario")
+                </th>
+                <th>
+                    @Html.Label("Password")
+                </th>
+                <th>
+                    @Html.Label("Nombre")
+                </th>
+                <th>
+                    @Html.Label("Apellidos")
+                </th>
+                <th>
+                    @Html.Label("Edad")
+                </th>
+                <th>
+                    @Html.Label("Rol")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contraseña)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @if (item.Edad != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Edad)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rol.Nombre)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-toggle="modal" data-target="#ModalModificarRegistro">Modificar</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-toggle="modal" data-target="#ModalEliminarRegistro">Eliminar</button>
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 5%">
+    <div class="col-md-5">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Usuario")
+                </th>
+                <th>
+                    @Html.Label("Password")
+                </th>
+                <th>
+                    @Html.Label("Nombre")
+                </th>
+                <th>
+                    @Html.Label("Apellidos")
+                </th>
+                <th>
+                    @Html.Label("Edad")
+                </th>
+                <th>
+                    @Html.Label("Rol")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contraseña)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @if (item.Edad != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Edad)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rol.Nombre)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-toggle="modal" data-target="#ModalModificarRegistro">Modificar</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-toggle="modal" data-target="#ModalEliminarRegistro">Eliminar</button>
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-5">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Usuario")
+                </th>
+                <th>
+                    @Html.Label("Password")
+                </th>
+                <th>
+                    @Html.Label("Nombre")
+                </th>
+                <th>
+                    @Html.Label("Apellidos")
+                </th>
+                <th>
+                    @Html.Label("Edad")
+                </th>
+                <th>
+                    @Html.Label("Rol")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contraseña)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @if (item.Edad != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Edad)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rol.Nombre)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-toggle="modal" data-target="#ModalModificarRegistro">Modificar</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-toggle="modal" data-target="#ModalEliminarRegistro">Eliminar</button>
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+</div>
+
+
