@@ -17,10 +17,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/07/2024 17:52:38</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/09/2024 16:12:12</publishTime>
+      <publishTime>10/09/2024 19:01:54</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/09/2024 16:12:12</publishTime>
+      <publishTime>10/09/2024 19:01:54</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/07/2024 17:52:39</publishTime>
@@ -50,10 +50,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/01/2018 12:21:06</publishTime>
     </File>
     <File Include="bin/GR_MVC_17.dll">
-      <publishTime>10/09/2024 16:11:28</publishTime>
+      <publishTime>10/09/2024 19:01:39</publishTime>
     </File>
     <File Include="bin/GR_MVC_17.pdb">
-      <publishTime>10/09/2024 16:11:28</publishTime>
+      <publishTime>10/09/2024 19:01:39</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>10/07/2024 17:52:39</publishTime>
@@ -434,7 +434,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>08/16/2024 11:18:17</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/09/2024 16:12:06</publishTime>
+      <publishTime>10/09/2024 19:01:48</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>10/07/2024 18:36:40</publishTime>
@@ -527,16 +527,16 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/07/2024 19:10:26</publishTime>
     </File>
     <File Include="Views/Home/Herramientas_Usuario.cshtml">
-      <publishTime>10/07/2024 19:12:18</publishTime>
+      <publishTime>10/09/2024 18:46:16</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>10/09/2024 15:12:42</publishTime>
     </File>
     <File Include="Views/Home/Perfiles_Usuario.cshtml">
-      <publishTime>10/09/2024 15:37:57</publishTime>
+      <publishTime>10/09/2024 18:02:01</publishTime>
     </File>
     <File Include="Views/Home/Registro_Herramienta.cshtml">
-      <publishTime>10/07/2024 19:09:56</publishTime>
+      <publishTime>10/09/2024 18:59:25</publishTime>
     </File>
     <File Include="Views/Pruebas/Asincrono.cshtml">
       <publishTime>10/07/2024 17:52:37</publishTime>
@@ -614,7 +614,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/07/2024 17:52:37</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>10/07/2024 18:38:53</publishTime>
+      <publishTime>10/09/2024 16:48:29</publishTime>
     </File>
     <File Include="Views/Shared/_ListadoPerfiles.cshtml">
       <publishTime>10/07/2024 17:52:37</publishTime>
