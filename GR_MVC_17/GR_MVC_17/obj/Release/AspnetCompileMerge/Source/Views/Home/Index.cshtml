@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "0.- Página Principal";
+}
+
+
+<!-- Modal -->
+<div class="modal show" id="ModalLogin" role="dialog">
+    <div class="modal-dialog" style="width:350px; position:relative">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align:center">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <h4 class="modal-title">Acceso a usuarios</h4>
+            </div>
+            <div class="modal-body" style="width:100%">
+                <form action="@Url.Action("_Login","Home")" method="post">
+
+                @*@using (Ajax.BeginForm("_Login", "Home",
+                        new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "resLogin",
+                            OnComplete = "confirmar()"
+
+                        }))
+                    {*@
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" id="nombre" name="NombreUsuario" placeholder="Usuario" required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" id="pass" name="Contraseña" placeholder="Contraseña" required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+                </div>
+                @*<div id="resLogin"></div>*@
+               @* }*@
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div id="resLogin" style="text-align:center; color:red">@ViewBag.Error</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    @section scripts{
+        <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+        <script>
+
+            
+     $(document).ready(function () {
+        //alert("Entra por aqui");
+        $("#ModalLogin").modal("show");
+            });
+
+
+            function confirmar() {
+                //$("#ModalLogin").modal("hide");
+                alert("Sale por aqui");
+            }
+
+
+    @*function comprobarLogin() {
+        
+
+        var nom = document.getElementById("nombre").value;
+        var pas = document.getElementById("pass").value;
+
+        //debugger;
+        $.ajax({
+            cache: false,
+            async: true,
+            type: "POST",
+            dataType: "html",
+            data: { NombreUsuario: nom, Contraseña: pas },
+            url: '@Url.Action("_Login", "Home")',
+            success: function (response) {
+                alert("Todo OK");
+            },
+            error: function (response) {
+                $('#resLogin').html(response.error);
+            }
+
+        });
+    }*@
+
+
+
+
+
+        </script>
+    
+
+
+}
+
+
+
+
+
+
+

@@ -97,6 +97,16 @@ namespace GR_MVC_17.Controllers
             return View(listaPerfiles);
         }
 
+        [HttpPost]
+        public ActionResult Actualizar_Perfiles_Usuario(int idUsuario)
+        {
+            ViewBag.IdUsuario = idUsuario;
+
+            var listaPerfiles = repoPerfil.ActualizarPerfilesOcultos(idUsuario);
+
+             return RedirectToAction("Perfiles_Usuario", new Usuario { Id = idUsuario });
+        }
+
         public ActionResult Herramientas_Usuario(int idPerfil, int idUsuario)
         {
             ViewBag.IdUsuario = idUsuario;
@@ -305,6 +315,7 @@ namespace GR_MVC_17.Controllers
                     {
                         IdPerfil = existe.Id,
                         IdUsuario = idUsuario,
+                        MostrarPerfil = true,
                         FechaInserta = DateTime.Now
                     };
                     repoPerfil.InsertarPerfil(nuevoPerfil);
@@ -375,7 +386,7 @@ namespace GR_MVC_17.Controllers
         }
 
         [HttpPost]
-        public ActionResult procesoParaEliminar(int? id, string tabla, int? idUsuario)
+        public ActionResult procesoParaEliminarOcultar(int? id, string tabla, int? idUsuario)
         {
             Respuesta_DTO respuesta = new Respuesta_DTO();
 
@@ -397,7 +408,7 @@ namespace GR_MVC_17.Controllers
                             return PartialView("_ConfirmarEliminar");
 
                         case "PerfilUsuario":
-                            return PartialView("_ConfirmarEliminarPerfil");
+                            return PartialView("_ConfirmarOcultarPerfil");
                             
                     }
                 }
@@ -415,7 +426,7 @@ namespace GR_MVC_17.Controllers
         }
 
         [HttpPost]
-        public ActionResult EliminarRegistro(int? id, string tabla, int idUsuario)
+        public ActionResult EliminarOcultarRegistro(int? id, string tabla, int idUsuario)
         {
             Respuesta_DTO respuesta = new Respuesta_DTO();
 
@@ -436,16 +447,13 @@ namespace GR_MVC_17.Controllers
                             break;
 
                         case "PerfilUsuario":
-                            if (repoPerfil.eliminarPerfilUsuario(id, idUsuario) == false)
+                            if (repoPerfil.ocultarMostrarPerfilUsuario(id, idUsuario, false) == false)
                             {
-                                throw new Exception("Error al eliminar registro de la tabla: " + tabla);
+                                throw new Exception("Error al ocultar perfil del usuario: " + idUsuario);
                             }
-
-
-                            //6576567567567567'Enviarte a la url de Perfiles de Usuario con el usuario y recargar la pagina'
-
                             respuesta.ok = true;
-                            respuesta.mensaje = "Registro eliminado correctamente";
+                            respuesta.mensaje = "Registro ocultado correctamente";
+                            //return RedirectToAction("Perfiles_Usuario", new Usuario { Id = idUsuario });
                             break;
                     }
                 }
@@ -459,6 +467,7 @@ namespace GR_MVC_17.Controllers
                 respuesta.ok = false;
                 respuesta.mensaje = ex.Message;
             }
+
             return Json(respuesta);
         }
 

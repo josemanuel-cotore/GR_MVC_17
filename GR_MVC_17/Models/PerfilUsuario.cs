@@ -19,6 +19,8 @@ namespace GR_MVC_17
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdUsuario { get; set; }
 
+        public bool MostrarPerfil { get; set; }
+
         public DateTime? FechaInserta { get; set; }
 
         public virtual Perfil Perfil { get; set; }

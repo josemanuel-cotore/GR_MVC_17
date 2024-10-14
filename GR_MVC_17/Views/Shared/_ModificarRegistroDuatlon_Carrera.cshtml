@@ -80,15 +80,6 @@
                 </div>
 
 
-                @*<div class="form-group">
-                        @Html.LabelFor(model => model.IdRutaBici, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.IdRutaBici, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.IdRutaBici, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
-
-
                 <div class="form-group">
                     @Html.Label("Tiempo Bici", htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
@@ -123,15 +114,6 @@
                 </div>
 
 
-                @*<div class="form-group">
-                        @Html.LabelFor(model => model.IdRuta_Alternativa, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.IdRuta_Alternativa, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.IdRuta_Alternativa, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
-
-
                 <div class="form-group">
                     @Html.Label("Tiempo Correr", htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
@@ -144,48 +126,6 @@
 
     </div>
 
-
-
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.IdUsuario, "IdUsuario", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdUsuario", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.IdPerfil, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdPerfil, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdPerfil, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.IdRuta, "IdRuta", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdRuta", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdRuta, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.IdHerramienta, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdHerramienta, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdHerramienta, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdInconveniente, "IdInconveniente", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdInconveniente", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdInconveniente, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
     <hr />
 
     <div class="row" style="text-align:center">
@@ -244,92 +184,6 @@
         <div id="resRegistroError" style="text-align:left; color:red"></div>
     </div>
 }
-
-@*<div class="form-horizontal">
-        @Html.EditorForModel(Model.IdHerramienta)
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-8">
-                    <input type="button" id="btnModificar" value="Modificar Registro" class="btn btn-success" />
-                    <input type="button" id="btnVolver" value="Volver" class="btn btn-info" />
-                </div>
-            </div>
-        </div>
-        <div id="resRegistroError" style="text-align:left; color:red"></div>
-    </div>*@
-
-@*<script type="text/javascript">
-        $(function () {
-            $("#btnModificar").click(function () {
-
-                var miCheckbox = document.getElementById('miCheck');
-                var esDuatlon = miCheckbox.checked;
-
-                debugger;
-                var fechaParam = $("#fecha").val();
-                var kmCorrerParam = $("#kmCorrer").val();
-                var kmBiciParam = $("#kmBici").val();
-                var kmTiempoCorrerParam = $("#tiempoCorrer").val();
-                var kmTiempoBiciParam = $("#tiempoBici").val();
-                var obs = $("#Observaciones").val();
-                //var esD = $("#esDuatlon").checked;
-
-
-                debugger;
-
-                if (fechaParam == "") {
-                    $("#resRegistroErrorDuatlon").html("Debes informar una fecha");
-                } else if (kmCorrerParam == "") {
-                    $("#resRegistroErrorDuatlon").html("Debes informar los KM de correr");
-                }
-                //else if (kmBiciParam == "") {
-                //    $("#resRegistroErrorDuatlon").html("Debes informar los KM de bici");
-                //}
-                else if (kmTiempoCorrerParam == "") {
-                    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo de correr");
-                }
-                //else if (kmTiempoBiciParam == "") {
-                //    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo en bici");
-                //}
-
-                else {
-                    debugger;
-                $.ajax({
-                    type: "POST",
-                    url: "/Home/_CrearRegistroDuatlon_Carrera",
-                    data: '{fecha: "' + $("#fecha").val() + '", kmCorrer: "' + $("#kmCorrer").val() + '", rutaCorrer: "' + $("#rutasCorrer").val() + '", kmBici: "' + $("#kmBici").val() + '", rutaBici: "' + $("#rutasBici").val() + '", kmCorrerAlt: "' + $("#kmCorrer_Alt").val() + '", rutaCorrerAlt: "' + $("#rutasCorrer_Alt").val() + '", tiempoCorrer: "' + $("#tiempoCorrer").val() + '", tiempoBici: "' + $("#tiempoBici").val() + '", tiempoCorrerAlt: "' + $("#tiempoCorrer_Alt").val() + '",  inconve: "' + $("#inconvenientes").val() + '", esDuatlon: "' + esDuatlon + '", observa: "' + $("#Observaciones").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idPerfil: "' + @Model.idPerfil_S + '"}',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.ok == true) {
-                            $("#Modal_Crear_Registro_Duatlon").modal("hide");
-                            window.location.reload();
-                        }
-                        else {
-                            $("#resRegistroErrorDuatlon").html(response.mensaje);
-                        }
-
-                    },
-                    failure: function (response) {
-                        $("#resRegistroErrorDuatlon").html(response.mensaje);
-                    },
-                    error: function (response) {
-                        //debugger;
-                        $("#resRegistroErrorDuatlon").html(response.mensaje);
-                    }
-                });
-                }
-
-
-            });
-
-            $("#btnVolver").click(function () {
-                $("#Modal_Crear_Registro_Duatlon").modal("hide");
-            });
-        });
-</script>*@
 
 
 

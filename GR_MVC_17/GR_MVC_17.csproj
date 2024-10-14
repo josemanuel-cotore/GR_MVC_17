@@ -116,8 +116,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\RegistroRutasController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
+    <Compile Include="Controllers\RegistroRutasController.cs" />
     <Compile Include="Controllers\Pruebas2Controller.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RolController.cs" />
@@ -289,7 +289,7 @@
     <Content Include="Views\RegistroRutas\Index.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Views\Shared\_ConfirmarEliminarPerfil.cshtml" />
+    <Content Include="Views\Shared\_ConfirmarOcultarPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

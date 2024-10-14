@@ -1,0 +1,215 @@
+﻿@model GR_MVC_17.DTO.SeguimientoRegistro_DTO
+
+@{
+    ViewBag.Title = "4.2- Crear Registro Duatlón";
+    var fechaActual = DateTime.Now.ToShortDateString();
+
+
+}
+
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <span class="control-label col-md-2">Fecha</span>
+        <div class="col-md-10">
+            @Html.Editor("Fecha", new { htmlAttributes = new { @class = "datepicker", @type = "date", id = "fecha" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">1º Km Correr</span>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="kmCorrer">
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Rutas Correr</span>
+        <div class="col-md-10">
+            <select class="form-control small" id="rutasCorrer">
+                @{
+                    foreach (var item in ViewBag.RutasCorrer)
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Tiempo Correr</span>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="tiempoCorrer">
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Km Bici</span>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="kmBici">
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Rutas Bici</span>
+        <div class="col-md-10">
+            <select class="form-control small" id="rutasBici">
+                @{
+                    foreach (var item in ViewBag.RutasBici)
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Tiempo Bici</span>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="tiempoBici">
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">2º Km Correr</span>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="kmCorrer_Alt">
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Rutas Correr</span>
+        <div class="col-md-10">
+            <select class="form-control small" id="rutasCorrer_Alt">
+                @{
+                    foreach (var item in ViewBag.RutasCorrer)
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Tiempo Correr</span>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="tiempoCorrer_Alt">
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Inconveniente</span>
+        <div class="col-md-10">
+            <select class="form-control small" id="inconvenientes">
+                @{
+                    foreach (var item in ViewBag.Inconvenientes)
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">¿Duatlón?</span>
+        <div class="col-md-10">
+            @if (Model.idPerfil_S == 5)
+            {
+                <input id="miCheck" type="checkbox" />
+            }
+            else
+            {
+                <input id="miCheck" type="checkbox" checked />
+            }
+
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label col-md-2">Observaciones</span>
+        <div class="col-md-10">
+            @*@Html.TextArea("Observaciones", "Introduce una descripción...")*@
+            <textarea name="Observaciones" id="Observaciones" rows="4" cols="50" placeholder="Describe las rutas" style="background-color: white;"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+                <input type="button" id="btnCrear" value="Crear Registro" class="btn btn-success" />
+                <input type="button" id="btnVolver" value="Volver" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+    <div id="resRegistroError" style="text-align:left; color:red"></div>
+</div>
+
+<script type="text/javascript">
+        $(function () {
+            $("#btnCrear").click(function () {
+
+                var miCheckbox = document.getElementById('miCheck');
+                var esDuatlon = miCheckbox.checked;
+
+                debugger;
+                var fechaParam = $("#fecha").val();
+                var kmCorrerParam = $("#kmCorrer").val();
+                var kmBiciParam = $("#kmBici").val();
+                var kmTiempoCorrerParam = $("#tiempoCorrer").val();
+                var kmTiempoBiciParam = $("#tiempoBici").val();
+                var obs = $("#Observaciones").val();
+                //var esD = $("#esDuatlon").checked;
+                
+
+                debugger;
+
+                if (fechaParam == "") {
+                    $("#resRegistroErrorDuatlon").html("Debes informar una fecha");
+                } else if (kmCorrerParam == "") {
+                    $("#resRegistroErrorDuatlon").html("Debes informar los KM de correr");
+                }
+                //else if (kmBiciParam == "") {
+                //    $("#resRegistroErrorDuatlon").html("Debes informar los KM de bici");
+                //}
+                else if (kmTiempoCorrerParam == "") {
+                    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo de correr");
+                }
+                //else if (kmTiempoBiciParam == "") {
+                //    $("#resRegistroErrorDuatlon").html("Debes informar el tiempo en bici");
+                //}
+
+                else {
+                    debugger;
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/_CrearRegistroDuatlon_Carrera",
+                    data: '{fecha: "' + $("#fecha").val() + '", kmCorrer: "' + $("#kmCorrer").val() + '", rutaCorrer: "' + $("#rutasCorrer").val() + '", kmBici: "' + $("#kmBici").val() + '", rutaBici: "' + $("#rutasBici").val() + '", kmCorrerAlt: "' + $("#kmCorrer_Alt").val() + '", rutaCorrerAlt: "' + $("#rutasCorrer_Alt").val() + '", tiempoCorrer: "' + $("#tiempoCorrer").val() + '", tiempoBici: "' + $("#tiempoBici").val() + '", tiempoCorrerAlt: "' + $("#tiempoCorrer_Alt").val() + '",  inconve: "' + $("#inconvenientes").val() + '", esDuatlon: "' + esDuatlon + '", observa: "' + $("#Observaciones").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idPerfil: "' + @Model.idPerfil_S + '"}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.ok == true) {
+                            $("#Modal_Crear_Registro_Duatlon").modal("hide");
+                            window.location.reload();
+                        }
+                        else {
+                            $("#resRegistroErrorDuatlon").html(response.mensaje);
+                        }
+
+                    },
+                    failure: function (response) {
+                        $("#resRegistroErrorDuatlon").html(response.mensaje);
+                    },
+                    error: function (response) {
+                        //debugger;
+                        $("#resRegistroErrorDuatlon").html(response.mensaje);
+                    }
+                });
+                }
+
+
+            });
+
+            $("#btnVolver").click(function () {
+                $("#Modal_Crear_Registro_Duatlon").modal("hide");
+            });
+        });
+</script>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

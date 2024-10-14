@@ -24,14 +24,14 @@ namespace GR_MVC_17.DAL
         {
 
             List<Perfil> listaPerfiles = new List<Perfil>();
-            listaPerfiles = (from p in db.PerfilUsuario where p.IdUsuario == usuario.Id select p.Perfil).OrderBy(x=>x.Orden).ToList();
+            listaPerfiles = (from p in db.PerfilUsuario where p.IdUsuario == usuario.Id && p.MostrarPerfil == true select p.Perfil).OrderBy(x=>x.Orden).ToList();
             return listaPerfiles;
         }
 
         public List<Perfil> DameListaPerfilesIdUsuario(int idUsuario)
         {
             List<Perfil> listaPerfiles = new List<Perfil>();
-            listaPerfiles = (from p in db.PerfilUsuario where p.IdUsuario == idUsuario select p.Perfil).ToList();
+            listaPerfiles = (from p in db.PerfilUsuario where p.IdUsuario == idUsuario && p.MostrarPerfil == true select p.Perfil).ToList();
             return listaPerfiles;
         }
 
@@ -56,7 +56,7 @@ namespace GR_MVC_17.DAL
             return db.Perfil.Where(x => x.Id == idPerfil).Select(x => x.Tema).FirstOrDefault();
         }
 
-        public bool eliminarPerfilUsuario(int? idPerfil, int? idUsuario)
+        public bool ocultarMostrarPerfilUsuario(int? idPerfil, int? idUsuario, bool accion)
         {
             if (idPerfil == null || idUsuario == null)
             {
@@ -71,7 +71,7 @@ namespace GR_MVC_17.DAL
 
                 // Actualizar mostrar perfil a false
 
-
+                existe.MostrarPerfil = accion;
                 //db.PerfilUsuario.Remove(existe);
                 db.SaveChanges();
 
@@ -81,6 +81,28 @@ namespace GR_MVC_17.DAL
 
             return false;
 
+        }
+
+        public List<Perfil> ActualizarPerfilesOcultos(int idUsuario)
+        {
+            List<Perfil> listaPerfiles = new List<Perfil>();
+            listaPerfiles = (from p in db.PerfilUsuario where p.IdUsuario == idUsuario && p.MostrarPerfil == false select p.Perfil).OrderBy(x => x.Orden).ToList();
+
+            foreach (var item in listaPerfiles)
+            {
+
+                PerfilUsuario existe = new PerfilUsuario();
+                existe = db.PerfilUsuario.Where(x => x.IdPerfil == item.Id && x.IdUsuario == idUsuario).FirstOrDefault();
+
+                if (existe != null)
+                {
+                    existe.MostrarPerfil = true;
+                    db.SaveChanges();
+                }
+                //ocultarMostrarPerfilUsuario(item.Id, idUsuario, true);
+            }
+
+            return listaPerfiles;
         }
     }
 }
