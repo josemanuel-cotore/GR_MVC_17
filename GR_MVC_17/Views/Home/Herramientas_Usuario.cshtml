@@ -13,15 +13,23 @@
     if (ViewBag.NumHerramientas > 0)
     {
         <div class="container" style="padding:5%">
-            <div class="row" style="margin-bottom:5%">
 
+            <div class="row">
                 <div class="col">
-                    <h2 style="text-align:center; color:white">@ViewBag.TemaPerfil</h2>
+                    <h2 style="color:white">@ViewBag.TemaPerfil</h2>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom:5%">
+                <div class="col-md-8">
+
+                </div>
+                <div class="col" style="text-align:left">
+                    <button type="button" class="btn btn-primary" onclick="crearRegistroDuatlon_Carrera()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Registro_Duatlon_Carrera">Eliminar Perfil</button>
                 </div>
                 <div class="col" style="text-align:right">
-                    <a class="btn btn-danger" href="@Url.Action("Perfiles_Usuario", "Home", new { Id = _idusuario })">Volver a Perfiles Usuario</a>
+                    <a class="btn btn-danger" href="@Url.Action("Perfiles_Usuario", "Home", new { Id = _idusuario })">Volver a Perfiles</a>
                 </div>
-
 
             </div>
 
@@ -71,9 +79,19 @@
     else
     {
         <div>
-            <h2>No dispones de herramientas registradas</h2>
-            <br />
-            <button type="button" class="btn btn-danger" onclick="funcionCrearHerramienta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Herramienta">Crear Nueva Herramienta</button>
+            <h2 style="color:white; margin-top:5%">No dispones de herramientas registradas</h2>
+            <div class="row" style="margin-bottom:5%; padding:3%">
+                <div class="col">
+
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-danger" onclick="funcionCrearHerramienta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Herramienta">Crear Nueva Herramienta</button>
+                </div>
+                <div class="col" style="text-align:left">
+                    <button type="button" class="btn btn-primary" onclick="abrirModalEliminarPerfil()" data-bs-toggle="modal" data-bs-target="#Modal_Eliminar_Perfil">Eliminar Perfil</button>
+                </div>
+            </div>
+
         </div>
     }
 
@@ -131,7 +149,24 @@
             <div class="modal-body">
                 <div id="resVerRutas"></div>
             </div>
-            <div class="modal-footer">           
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Eliminar Perfil -->
+<div class="modal fade" id="Modal_Eliminar_Perfil" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color:black; border:3px solid grey">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:white">Eliminar Perfil</h4>
+            </div>
+            <div class="modal-body">
+                <div id="resEliminarPerfil"></div>
+            </div>
+            <div class="modal-footer">
             </div>
         </div>
     </div>
@@ -206,6 +241,37 @@
 
 
         });
+
+        }
+
+        function abrirModalEliminarPerfil() {
+
+        //debugger;
+
+        var miTabla = "PerfilUsuario";
+
+        $.ajax({
+            cache: false,
+            async: true,
+            type: "POST",
+            dataType: "html",
+            data: { id: @ViewBag.IdPerfil, tabla: miTabla, idUsuario: @ViewBag.IdUsuario},
+            url: "@Url.Action("procesoParaEliminar", "Home")",
+            success: function (response) {
+                $('#resEliminarPerfil').html('');
+                $('#resEliminarPerfil').html(response);
+            },
+
+            error: function (response) {
+
+                if (response.ok == false) {
+                    $("#resErrorEliminarPerfil").html(response.mensaje);
+                }
+            }
+
+
+        });
+
 
     }
 

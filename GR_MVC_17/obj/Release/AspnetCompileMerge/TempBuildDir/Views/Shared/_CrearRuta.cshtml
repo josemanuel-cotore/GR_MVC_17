@@ -4,24 +4,42 @@
 
 @using (Html.BeginForm())
 {
-<div class="form-horizontal">
-    <div class="form-group">
-        <span class="control-label col-md-2">Nombre Ruta</span>
-        <div class="col-md-10">
+
+<div class="container-fluid" style="background-color:black">
+
+    <div class="row" style="margin: 1rem">
+        <span class="control-label col-sm-4" style="color:white">Nombre Ruta</span>
+        <div class="col-sm-8">
             <input type="text" class="form-control" id="nombreRuta">
         </div>
     </div>
-    <div class="row">
-        <div class="form-group">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-8">
-                <input type="button" id="btnCrearRuta" value="Crear Ruta" class="btn btn-success" />
-                <input type="button" id="btnVolver" value="Volver" class="btn btn-info" />
-            </div>
+
+    <div class="row" style="text-align:center; margin-top:10%">
+        <div class="col">
+            <input type="button" id="btnCrearRuta" value="Crear Nueva Ruta" class="btn btn-success" />
         </div>
     </div>
+    <div id="resRutaError" style="text-align:left; color:red; margin-top: 5%"></div>
+
 </div>
+
+    @*<div class="form-horizontal">
+        <div class="form-group">
+            <span class="control-label col-md-2">Nombre Ruta</span>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="nombreRuta">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8">
+                    <input type="button" id="btnCrearRuta" value="Crear Ruta" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>*@
 }
 
 <script type="text/javascript">
@@ -43,7 +61,7 @@
                     } else {
                         $("#resRutaError").html(response.mensaje);
                     }
-                    
+
 
                 },
                 failure: function (response) {

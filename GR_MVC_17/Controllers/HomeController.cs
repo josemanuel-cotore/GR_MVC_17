@@ -375,17 +375,32 @@ namespace GR_MVC_17.Controllers
         }
 
         [HttpPost]
-        public ActionResult procesoParaEliminar(int? id, string tabla)
+        public ActionResult procesoParaEliminar(int? id, string tabla, int? idUsuario)
         {
             Respuesta_DTO respuesta = new Respuesta_DTO();
 
-            if (id!= null)
+            if (id!= null && idUsuario!=null)
             {
                 ViewBag.Identificador = id;
                 ViewBag.Tabla = tabla;
+                // PASAMOS TMB EL USUARIO
+                ViewBag.IdUsuario = idUsuario;
 
                 respuesta.ok = true;
                 respuesta.mensaje = "Todo correcto para eliminar";
+
+                if (tabla != "")
+                {
+                    switch (tabla)
+                    {
+                        case "RegistroRutas":
+                            return PartialView("_ConfirmarEliminar");
+
+                        case "PerfilUsuario":
+                            return PartialView("_ConfirmarEliminarPerfil");
+                            
+                    }
+                }
 
                 return PartialView("_ConfirmarEliminar");
             }
@@ -400,7 +415,7 @@ namespace GR_MVC_17.Controllers
         }
 
         [HttpPost]
-        public ActionResult EliminarRegistro(int? id, string tabla)
+        public ActionResult EliminarRegistro(int? id, string tabla, int idUsuario)
         {
             Respuesta_DTO respuesta = new Respuesta_DTO();
 
@@ -415,6 +430,19 @@ namespace GR_MVC_17.Controllers
                             {
                                 throw new Exception("Error al eliminar registro de la tabla: " + tabla);
                             }
+
+                            respuesta.ok = true;
+                            respuesta.mensaje = "Registro eliminado correctamente";
+                            break;
+
+                        case "PerfilUsuario":
+                            if (repoPerfil.eliminarPerfilUsuario(id, idUsuario) == false)
+                            {
+                                throw new Exception("Error al eliminar registro de la tabla: " + tabla);
+                            }
+
+
+                            //6576567567567567'Enviarte a la url de Perfiles de Usuario con el usuario y recargar la pagina'
 
                             respuesta.ok = true;
                             respuesta.mensaje = "Registro eliminado correctamente";

@@ -55,5 +55,32 @@ namespace GR_MVC_17.DAL
         {
             return db.Perfil.Where(x => x.Id == idPerfil).Select(x => x.Tema).FirstOrDefault();
         }
+
+        public bool eliminarPerfilUsuario(int? idPerfil, int? idUsuario)
+        {
+            if (idPerfil == null || idUsuario == null)
+            {
+                return false;
+            }
+
+            PerfilUsuario existe = new PerfilUsuario();
+            existe = db.PerfilUsuario.Where(x => x.IdPerfil == idPerfil && x.IdUsuario == idUsuario).FirstOrDefault();
+
+            if (existe != null)
+            {
+
+                // Actualizar mostrar perfil a false
+
+
+                //db.PerfilUsuario.Remove(existe);
+                db.SaveChanges();
+
+
+                return true;
+            }
+
+            return false;
+
+        }
     }
 }

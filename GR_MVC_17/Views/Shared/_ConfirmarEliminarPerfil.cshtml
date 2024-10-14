@@ -10,25 +10,25 @@
 <div class="container-fluid" style="background-color:black">
     <div class="row" style="margin: 1rem">
         <div class="col" style="color:white; margin-top:3%; margin-bottom:3%; text-align:left">
-            ¿Estás seguro de eliminar el registro?
+            ¿Estás seguro de eliminar el perfil?
         </div>
     </div>
     <div class="row" style="margin: 1rem; margin-top:3%; margin-bottom:3%; text-align:center">
         <div class="col">
-            <input type="submit" class="btn btn-danger" value="Eliminar" id="btnEliminar" onclick="eliminarRegistro()" />
+            <input type="submit" class="btn btn-danger" value="Eliminar" id="btnEliminar" onclick="eliminarPerfil()" />
         </div>
         <div class="col">
             <input type="submit" class="btn btn-warning" value="Volver" id="btnVolver" onclick="volverAtras()" />
         </div>
 
     </div>
-    <div id="resRegistroError" style="text-align:center; color:red"></div>
+    <div id="resErrorEliminarPerfil" style="text-align:center; color:red"></div>
 </div>
 
 
 <script>
 
-    function eliminarRegistro() {
+    function eliminarPerfil() {
 
         debugger;
 
@@ -36,15 +36,22 @@
             cache: false,
             dataType: "html",
             type: "POST",
-            data: { id: @identificador, tabla: "RegistroRutas", idUsuario: @ViewBag.IdUsuario},
+            data: { id: @identificador, tabla: "PerfilUsuario", idUsuario: @ViewBag.IdUsuario},
             url: "@Url.Action("EliminarRegistro", "Home")",
             success: function (response) {
                 if (response.ok == true) {
-                    $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");
+                    $("#resEliminarPerfil").modal("hide");
                     window.location.reload();
+
+
+
+                    //-------'Enviarte a la url de Perfiles de Usuario con el usuario y recargar la pagina'
                 } else {
-                    $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");
+                    $("#resEliminarPerfil").modal("hide");
                     window.location.reload();
+
+
+                    //------- 'Enviarte a la url de Perfiles de Usuario con el usuario y recargar la pagina'
                     //$("#resRegistroError").html(response.mensaje);
                     //alert("Mi error en el else");
                 }
@@ -54,7 +61,7 @@
 
             error: function (response) {
                 alert("Error en metodo eliminar de tabla");
-                $("#resRegistroError").html(response.mensaje);
+                $("#resErrorEliminarPerfil").html(response.mensaje);
             }
 
 
@@ -64,7 +71,8 @@
 
 
         function volverAtras() {
-            $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");
+            $("#resEliminarPerfil").modal("hide");
         }
 
-        </script>
+</script>
+

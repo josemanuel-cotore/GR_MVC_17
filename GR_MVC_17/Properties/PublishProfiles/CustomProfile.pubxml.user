@@ -17,10 +17,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/07/2024 17:52:38</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/09/2024 19:01:54</publishTime>
+      <publishTime>10/10/2024 20:21:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/09/2024 19:01:54</publishTime>
+      <publishTime>10/10/2024 20:21:08</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/07/2024 17:52:39</publishTime>
@@ -50,10 +50,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/01/2018 12:21:06</publishTime>
     </File>
     <File Include="bin/GR_MVC_17.dll">
-      <publishTime>10/09/2024 19:01:39</publishTime>
+      <publishTime>10/10/2024 20:20:53</publishTime>
     </File>
     <File Include="bin/GR_MVC_17.pdb">
-      <publishTime>10/09/2024 19:01:39</publishTime>
+      <publishTime>10/10/2024 20:20:53</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>10/07/2024 17:52:39</publishTime>
@@ -359,7 +359,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/07/2024 17:52:37</publishTime>
     </File>
     <File Include="Imagenes/Herramientas/ColuerLimbo.jpg">
-      <publishTime>10/07/2024 17:52:37</publishTime>
+      <publishTime>10/10/2024 19:27:41</publishTime>
     </File>
     <File Include="Imagenes/Herramientas/UltraRaptor.jpg">
       <publishTime>10/07/2024 17:52:37</publishTime>
@@ -434,7 +434,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>08/16/2024 11:18:17</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/09/2024 19:01:48</publishTime>
+      <publishTime>10/10/2024 20:21:02</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>10/07/2024 18:36:40</publishTime>
@@ -524,10 +524,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/07/2024 17:52:37</publishTime>
     </File>
     <File Include="Views/Home/Entrenos_Duatlon_Carreras.cshtml">
-      <publishTime>10/07/2024 19:10:26</publishTime>
+      <publishTime>10/10/2024 20:16:01</publishTime>
     </File>
     <File Include="Views/Home/Herramientas_Usuario.cshtml">
-      <publishTime>10/09/2024 18:46:16</publishTime>
+      <publishTime>10/10/2024 19:18:52</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>10/09/2024 15:12:42</publishTime>
@@ -536,7 +536,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/09/2024 18:02:01</publishTime>
     </File>
     <File Include="Views/Home/Registro_Herramienta.cshtml">
-      <publishTime>10/09/2024 18:59:25</publishTime>
+      <publishTime>10/10/2024 19:15:02</publishTime>
     </File>
     <File Include="Views/Pruebas/Asincrono.cshtml">
       <publishTime>10/07/2024 17:52:37</publishTime>
@@ -602,13 +602,13 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/07/2024 17:52:37</publishTime>
     </File>
     <File Include="Views/Shared/_CrearRegistro.cshtml">
-      <publishTime>10/07/2024 17:52:37</publishTime>
+      <publishTime>10/10/2024 19:15:50</publishTime>
     </File>
     <File Include="Views/Shared/_CrearRegistroDuatlon_Carrera.cshtml">
-      <publishTime>10/07/2024 17:52:37</publishTime>
+      <publishTime>10/10/2024 20:18:34</publishTime>
     </File>
     <File Include="Views/Shared/_CrearRuta.cshtml">
-      <publishTime>10/07/2024 17:52:37</publishTime>
+      <publishTime>10/10/2024 19:18:52</publishTime>
     </File>
     <File Include="Views/Shared/_DesplegableRutas.cshtml">
       <publishTime>10/07/2024 17:52:37</publishTime>
