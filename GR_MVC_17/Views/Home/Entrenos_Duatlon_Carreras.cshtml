@@ -54,105 +54,108 @@
         </ul>
     </nav>
 
-    <div class="table-responsive">
-        <table class="table">
-            <tr style="font-size:small">
-                <th>
-                    @Html.Label("Fecha")
-                </th>
-                <th>
-                    @Html.Label("Ruta Correr")
-                </th>
-                <th>
-                    @Html.Label("Km")
-                </th>
-                <th>
-                    @Html.Label("Tiempo")
-                </th>
-                <th>
-                    @Html.Label("Ruta Bicicleta")
-                </th>
-                <th>
-                    @Html.Label("Km")
-                </th>
-                <th>
-                    @Html.Label("Tiempo")
-                </th>
-                <th>
-                    @Html.Label("Ruta Correr Alt")
-                </th>
-                <th>
-                    @Html.Label("Km")
-                </th>
-                <th>
-                    @Html.Label("Tiempo")
-                </th>
-                @*<th>
+    <div class="ratio-16x9">
+        <div class="table-responsive">
+            <table class="table">
+                <tr style="font-size:small">
+                    <th>
+                        @Html.Label("Fecha")
+                    </th>
+                    <th>
+                        @Html.Label("Ruta Correr")
+                    </th>
+                    <th>
+                        @Html.Label("Km")
+                    </th>
+                    <th>
+                        @Html.Label("Tiempo")
+                    </th>
+                    <th>
+                        @Html.Label("Ruta Bicicleta")
+                    </th>
+                    <th>
+                        @Html.Label("Km")
+                    </th>
+                    <th>
+                        @Html.Label("Tiempo")
+                    </th>
+                    <th>
+                        @Html.Label("Ruta Correr Alt")
+                    </th>
+                    <th>
+                        @Html.Label("Km")
+                    </th>
+                    <th>
+                        @Html.Label("Tiempo")
+                    </th>
+                    @*<th>
                        @Html.Label("Inconveniente")
                     </th>*@
-                <th>
-                    @Html.Label("Observaciones")
-                </th>
-                <th>
-                    @Html.Label(" ")
-                </th>
-                <th>
-                    @Html.Label(" ")
-                </th>
-            </tr>
+                    <th>
+                        @Html.Label("Observaciones")
+                    </th>
+                    <th>
+                        @Html.Label(" ")
+                    </th>
+                    <th>
+                        @Html.Label(" ")
+                    </th>
+                </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr style="font-size:small">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fecha)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nombreRutaCorrer)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Km_Correr)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TiempoRutaCorrer)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nombreRutaBici)
-                    </td>
-                    <td>
-                        @if (item.IdRutaBici != 30)
-                        {
-                            @Html.DisplayFor(modelItem => item.Km_Bici)
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TiempoRutaBici)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nombreRutaCorrer_Alt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Km_Correr_Alt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TiempoRutaCorrer_Alt)
-                    </td>
-                    @*<td>
+                @foreach (var item in Model)
+                {
+                    <tr style="font-size:small">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreRutaCorrer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Km_Correr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TiempoRutaCorrer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreRutaBici)
+                        </td>
+                        <td>
+                            @if (item.IdRutaBici != 30)
+                            {
+                                @Html.DisplayFor(modelItem => item.Km_Bici)
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TiempoRutaBici)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreRutaCorrer_Alt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Km_Correr_Alt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TiempoRutaCorrer_Alt)
+                        </td>
+                        @*<td>
                             <img src="@item.TipoInconveniente.Imagen" />
                         </td>*@
-                    <td>
-                        @Html.Raw(item.Observaciones)
-                    </td>
-                    <td>
-                        <button type="button" style="font-size:small" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Modificar_Registro_Duatlon_Carrera" />Modificar
-                    </td>
-                    <td>
-                        <button type="button" style="font-size:small" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Eliminar_Registro_Duatlon_Carrera" />Eliminar
-                    </td>
-                </tr>
-            }
-        </table>
+                        <td>
+                            @Html.Raw(item.Observaciones)
+                        </td>
+                        <td>
+                            <button type="button" style="font-size:small" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Modificar_Registro_Duatlon_Carrera" />Modificar
+                        </td>
+                        <td>
+                            <button type="button" style="font-size:small" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Eliminar_Registro_Duatlon_Carrera" />Eliminar
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
     </div>
+    
 
 
     <!-- Modal Crear Registro -->

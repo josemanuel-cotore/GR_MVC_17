@@ -258,3 +258,10 @@ C:\Users\cotor\source\repos\GR_MVC_17\obj\Debug\GR_MVC_17.csproj.CoreCompileInpu
 C:\Users\cotor\source\repos\GR_MVC_17\obj\Debug\GR_MVC_17.csproj.CopyComplete
 C:\Users\cotor\source\repos\GR_MVC_17\obj\Debug\GR_MVC_17.dll
 C:\Users\cotor\source\repos\GR_MVC_17\obj\Debug\GR_MVC_17.pdb
+C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\bin\SimpleInjector.dll
+C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\bin\SimpleInjector.Integration.Web.dll
+C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\bin\SimpleInjector.Integration.Web.Mvc.dll
+C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\bin\WebActivator.dll
+C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\bin\SimpleInjector.xml
+C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\bin\SimpleInjector.Integration.Web.xml
+C:\Users\USUARIO\source\repos\GR_MVC_17\GR_MVC_17\bin\SimpleInjector.Integration.Web.Mvc.xml

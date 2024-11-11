@@ -27,17 +27,23 @@
                 if (ViewBag.PerfilCompleto == false)
                 {
                 <div class="row" style="padding:5%">
-                    <div class="col-md-4">
+                    <div class="col">
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalPerfil" onclick="fnCrearPerfil()">
                             Añadir Nuevo Perfil
                         </button>
                     </div>
-                    <div class="col-md-8"></div>
+                    <div class="col">
+                        <button type="button" class="btn btn-success" id="btnOcultarMostrar" onclick="fnMostrarPerfilesOcultos()">
+                            Perfiles Ocultos
+                        </button>
+                    </div>
 
                  </div>
 
 
                  }
+
+                
 
          }else
          {
@@ -78,26 +84,54 @@
 @section scripts{
     <script>
 
+        //$("#btnAlert").click(function () {
+
+        //    console.log("Alert alerttt");
+            
+        //});
+
         function fnCrearPerfil() {
 
             //debugger;
-        $.ajax({
+            $.ajax({
 
-            type: "POST",
-            url: "@Url.Action("_PasoParaCrearPerfil", "Home")",
-            data: { idUsuario: @ViewBag.IdUsuario},
-            dataType: "html",
-            success: function (response) {
-              $('#resPerfil').html(response);
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            },
-            error: function (response) {
-                alert("Introduce una fecha correcta y Km de la ruta");
-            }
-        })
-        }
+                type: "POST",
+                url: "@Url.Action("_PasoParaCrearPerfil", "Home")",
+                data: { idUsuario: @ViewBag.IdUsuario},
+                dataType: "html",
+                success: function (response) {
+                  $('#resPerfil').html(response);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert("Introduce una fecha correcta y Km de la ruta");
+                }
+            })
+        };
+
+        $("#btnOcultarMostrar").click(function () {
+
+            $.ajax({
+
+                type: "POST",
+                url: "@Url.Action("Actualizar_Perfiles_Usuario", "Home")",
+                data: { idUsuario: @ViewBag.IdUsuario},
+                dataType: "html",
+                success: function (response) {
+                    window.location.reload();
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert("Error al ocultar o mostrar perfiles del usuario");
+                }
+
+
+            });
+        });
 
     </script>
 }

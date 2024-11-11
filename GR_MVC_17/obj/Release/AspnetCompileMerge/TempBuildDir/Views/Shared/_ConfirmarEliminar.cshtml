@@ -7,21 +7,26 @@
 
 }
 
-<div class="row">
-    <div class="form-group">
-        <div class="col-md-8">
+<div class="container-fluid" style="background-color:black">
+    <div class="row" style="margin: 1rem">
+        <div class="col" style="color:white; margin-top:3%; margin-bottom:3%; text-align:left">
             ¿Estás seguro de eliminar el registro?
         </div>
-        <div class="col-md-4">
-            <input type="submit" class="btn btn-warning" value="Eliminar" id="btnEliminar" onclick="eliminarRegistro()" />
-            <input type="submit" class="btn btn-danger" value="Volver" id="btnVolver" onclick="volverAtras()" />
-        </div>
-        <div id="resRegistroError" style="text-align:center; color:red">ERROR POR SALIR</div>
     </div>
+    <div class="row" style="margin: 1rem; margin-top:3%; margin-bottom:3%; text-align:center">
+        <div class="col">
+            <input type="submit" class="btn btn-danger" value="Eliminar" id="btnEliminar" onclick="eliminarRegistro()" />
+        </div>
+        <div class="col">
+            <input type="submit" class="btn btn-warning" value="Volver" id="btnVolver" onclick="volverAtras()" />
+        </div>
+
+    </div>
+    <div id="resRegistroError" style="text-align:center; color:red"></div>
 </div>
 
 
-    <script>
+<script>
 
     function eliminarRegistro() {
 
@@ -31,16 +36,17 @@
             cache: false,
             dataType: "html",
             type: "POST",
-            data: { id: @identificador, tabla: "RegistroRutas"},
+            data: { id: @identificador, tabla: "RegistroRutas", idUsuario: @ViewBag.IdUsuario},
             url: "@Url.Action("EliminarRegistro", "Home")",
             success: function (response) {
                 if (response.ok == true) {
-                    $("#ModalEliminarRegistro").modal("hide");
+                    $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");
                     window.location.reload();
                 } else {
-                    
-                    $("#resErrorConfirmarEliminar").html(response.mensaje);
-                    alert("Mi error en el else");
+                    $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");
+                    window.location.reload();
+                    //$("#resRegistroError").html(response.mensaje);
+                    //alert("Mi error en el else");
                 }
                 //alert("Registro eliminado correctamente");
 
@@ -48,7 +54,7 @@
 
             error: function (response) {
                 alert("Error en metodo eliminar de tabla");
-                $("#resErrorConfirmarEliminar").html(response.mensaje);
+                $("#resRegistroError").html(response.mensaje);
             }
 
 
@@ -58,7 +64,7 @@
 
 
         function volverAtras() {
-            $("#ModalEliminarRegistro").modal("hide");
+            $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");
         }
 
-    </script>
+        </script>

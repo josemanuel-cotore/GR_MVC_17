@@ -1,11 +1,12 @@
-﻿using System;
+﻿using GR_MVC_17.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace GR_MVC_17.DAL
 {
-    public class UsuarioRepositiorio
+    public class UsuarioRepositiorio : IUsuarioRepositiorio
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

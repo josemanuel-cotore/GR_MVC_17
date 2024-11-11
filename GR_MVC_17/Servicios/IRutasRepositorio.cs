@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GR_MVC_17.Servicios
+{
+    public interface IRutasRepositorio
+    {
+        List<RutasUsuario> DameRutasUsuarioPerfil(int idUsuario, int idPerfil);
+        string dameNombreRuta(int? idRuta);
+        Boolean AñadirNuevaRuta(RutasUsuario ruta);
+        RutasUsuario DameRutaPorNombrePerfilUsuario(string nombreRuta, int idPerfil, int idUsuario);
+        int DameOrdenMaximo(int idPerfil, int idUsuario);
+    }
+}

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using GR_MVC_17.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace GR_MVC_17.DAL
 {
-    public class PerfilRepositorio
+    public class PerfilRepositorio : IPerfilRepositorio
     {
         public ApplicationDbContext db = new ApplicationDbContext();
 
@@ -24,14 +25,22 @@ namespace GR_MVC_17.DAL
         {
 
             List<Perfil> listaPerfiles = new List<Perfil>();
-            listaPerfiles = (from p in db.PerfilUsuario where p.IdUsuario == usuario.Id && p.MostrarPerfil == true select p.Perfil).OrderBy(x=>x.Orden).ToList();
+            listaPerfiles = (from p in db.PerfilUsuario where p.IdUsuario == usuario.Id select p.Perfil).OrderBy(x=>x.Orden).ToList();
             return listaPerfiles;
+        }
+
+        public int DameListaPerfilesOcultos(Usuario usuario)
+        {
+
+            List<PerfilUsuario> listaOcultos = new List<PerfilUsuario>();
+            listaOcultos = (from p in db.PerfilUsuario where p.IdUsuario == usuario.Id && p.MostrarPerfil == false select p).ToList();
+            return listaOcultos.Count;
         }
 
         public List<Perfil> DameListaPerfilesIdUsuario(int idUsuario)
         {
             List<Perfil> listaPerfiles = new List<Perfil>();
-            listaPerfiles = (from p in db.PerfilUsuario where p.IdUsuario == idUsuario && p.MostrarPerfil == true select p.Perfil).ToList();
+            listaPerfiles = (from p in db.PerfilUsuario where p.IdUsuario == idUsuario select p.Perfil).ToList();
             return listaPerfiles;
         }
 
@@ -41,9 +50,9 @@ namespace GR_MVC_17.DAL
             db.SaveChanges();
         }
 
-        public Perfil DamePerfilPorId(int idPerfil)
+        public PerfilUsuario ComprobarUsuarioTienePerfil(int idPerfil, int idUsuario)
         {
-            return db.Perfil.Where(x => x.Id == idPerfil).FirstOrDefault();
+            return db.PerfilUsuario.Where(x => x.IdPerfil == idPerfil && x.IdUsuario == idUsuario).FirstOrDefault();
         }
 
         public int DameMaxPerfiles()
@@ -103,6 +112,12 @@ namespace GR_MVC_17.DAL
             }
 
             return listaPerfiles;
+        }
+
+        public List<Perfil> DameListaPerfilesParaMostrar(Usuario usuario)
+        {
+            var l = db.PerfilUsuario.Where(j => j.MostrarPerfil == true && j.IdUsuario == usuario.Id).Select(x=>x.Perfil).ToList();
+            return l;
         }
     }
 }

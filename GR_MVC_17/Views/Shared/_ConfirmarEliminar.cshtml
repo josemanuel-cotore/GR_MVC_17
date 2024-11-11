@@ -37,7 +37,7 @@
             dataType: "html",
             type: "POST",
             data: { id: @identificador, tabla: "RegistroRutas", idUsuario: @ViewBag.IdUsuario},
-            url: "@Url.Action("EliminarRegistro", "Home")",
+            url: "@Url.Action("EliminarOcultarRegistro", "Home")",
             success: function (response) {
                 if (response.ok == true) {
                     $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");

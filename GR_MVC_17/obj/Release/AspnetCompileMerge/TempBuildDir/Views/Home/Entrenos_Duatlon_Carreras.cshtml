@@ -88,10 +88,13 @@
                     @Html.Label("Tiempo")
                 </th>
                 @*<th>
-                    @Html.Label("Inconveniente")
-                </th>*@
+                       @Html.Label("Inconveniente")
+                    </th>*@
                 <th>
                     @Html.Label("Observaciones")
+                </th>
+                <th>
+                    @Html.Label(" ")
                 </th>
                 <th>
                     @Html.Label(" ")
@@ -135,23 +138,21 @@
                         @Html.DisplayFor(modelItem => item.TiempoRutaCorrer_Alt)
                     </td>
                     @*<td>
-                        <img src="@item.TipoInconveniente.Imagen" />
-                    </td>*@
+                            <img src="@item.TipoInconveniente.Imagen" />
+                        </td>*@
                     <td>
                         @Html.Raw(item.Observaciones)
                     </td>
                     <td>
                         <button type="button" style="font-size:small" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Modificar_Registro_Duatlon_Carrera" />Modificar
                     </td>
+                    <td>
+                        <button type="button" style="font-size:small" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Eliminar_Registro_Duatlon_Carrera" />Eliminar
+                    </td>
                 </tr>
             }
         </table>
     </div>
-    @*<table class="table-responsive-sm">
-        
-
-    </table>*@
-
 
 
     <!-- Modal Crear Registro -->
@@ -184,171 +185,28 @@
                 <div class="modal-body" style="text-align:right">
                     <div id="resModificarDuatlon_Carrera"></div>
                 </div>
-                <div class="modal-footer">
-                    <div id="resModificarErrorDuatlon_Carrera" style="text-align:center; color:red"></div>
-                </div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
 
-
-
-</div>
-
-
-
-    @*<h2>@ViewBag.TemaPerfil</h2>
-
-    <div class="row" style="margin-top: 5%">
-        <div class="col-md-12">
-            <div class="col-md-6" style="text-align:center">
-                <button type="button" class="btn btn-primary" onclick="crearRegistroDuatlon_Carrera()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Registro_Duatlon_Carrera">@valorBotón</button>
-            </div>
-            <div class="col-md-6" style="text-align:center">
-                <p style="margin-left: 50%;"><a class="btn btn-danger" href="@Url.Action("Perfiles_Usuario", "Home", new { Id = _idUsuario })">Volver a Perfiles del Usuario</a></p>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="row" style="margin-top:5%">
-        <div class="col-md-12">
-
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.Label("Fecha")
-                    </th>
-                    <th>
-                        @Html.Label("Ruta Correr")
-                    </th>
-                    <th>
-                        @Html.Label("Km")
-                    </th>
-                    <th>
-                        @Html.Label("Tiempo")
-                    </th>
-                    <th>
-                        @Html.Label("Ruta Bicicleta")
-                    </th>
-                    <th>
-                        @Html.Label("Km")
-                    </th>
-                    <th>
-                        @Html.Label("Tiempo")
-                    </th>
-                    <th>
-                        @Html.Label("Ruta Correr Alt")
-                    </th>
-                    <th>
-                        @Html.Label("Km")
-                    </th>
-                    <th>
-                        @Html.Label("Tiempo")
-                    </th>
-                    <th>
-                        @Html.Label("Inconveniente")
-                    </th>
-                    <th>
-                        @Html.Label("Observaciones")
-                    </th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Fecha)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombreRutaCorrer)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Km_Correr)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TiempoRutaCorrer)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombreRutaBici)
-                        </td>
-                        <td>
-                            @if (item.IdRutaBici != 30)
-                            {
-                                @Html.DisplayFor(modelItem => item.Km_Bici)
-                            }
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TiempoRutaBici)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombreRutaCorrer_Alt)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Km_Correr_Alt)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TiempoRutaCorrer_Alt)
-                        </td>
-                        <td>
-                            <img src="@item.TipoInconveniente.Imagen" />
-                        </td>
-                        <td>
-                            @Html.Raw(item.Observaciones)
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Modificar_Registro_Duatlon_Carrera" />Modificar
-                        </td>
-                    </tr>
-                }
-
-            </table>
-
-        </div>
-
-    </div>
-
-    <!-- Modal Crear Registro -->
-    <div class="modal fade" id="Modal_Crear_Registro_Duatlon_Carrera" role="dialog">
+    <!-- Modal Eliminar Registro -->
+    <div class="modal fade" id="Modal_Eliminar_Registro_Duatlon_Carrera" role="dialog">
         <div class="modal-dialog">
-            Modal content
-            <div class="modal-content">
+            <div class="modal-content" style="background-color:black; border:3px solid grey">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Crear Nuevo Registro</h4>
+                    <h4 class="modal-title" style="color:white">Eliminar Registro</h4>
                 </div>
                 <div class="modal-body">
-                    <div id="resRegistroDuatlon_Carrera"></div>
+                    <div id="resConfirmarEliminar"></div>
                 </div>
                 <div class="modal-footer">
-                    <div id="resRegistroErrorDuatlon_Carrera" style="text-align:center; color:red"></div>
+                    @*<div id="resRegistroErrorDuatlon_Carrera" style="text-align:center; color:red"></div>*@
                 </div>
             </div>
         </div>
     </div>
-
-
-    <!-- Modal Modificar Registro -->
-    <div class="modal fade" id="Modal_Modificar_Registro_Duatlon_Carrera" role="dialog">
-        <div class="modal-dialog" style="width:70%">
-            Modal content
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" style="text-align:center">Modificar Registro</h4>
-                </div>
-                <div class="modal-body" style="text-align:right">
-                    <div id="resModificarDuatlon_Carrera"></div>
-                </div>
-                <div class="modal-footer">
-                    <div id="resModificarErrorDuatlon_Carrera" style="text-align:center; color:red"></div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-
+</div>
 
     <script>
     function crearRegistroDuatlon_Carrera() {
@@ -402,7 +260,7 @@
     }
 
 
-    @*function abrirModalEliminar(idRegistro) {
+    function abrirModalEliminar(idRegistro) {
 
         //debugger;
 
@@ -413,7 +271,7 @@
             async: true,
             type: "POST",
             dataType: "html",
-            data: { id: idRegistro, tabla: miTabla},
+            data: { id: idRegistro, tabla: miTabla, idUsuario: @_idUsuario},
             url: "@Url.Action("procesoParaEliminar", "Home")",
             success: function (response) {
                 $('#resConfirmarEliminar').html('');
@@ -431,7 +289,7 @@
         });
 
 
-    }*@
+    }
 
 
 

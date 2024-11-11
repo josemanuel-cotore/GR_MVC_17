@@ -42,67 +42,65 @@
         </ul>
     </nav>
 
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.Label("Fecha")
-            </th>
-            <th>
-                @Html.Label("Ruta")
-            </th>
-            <th>
-                @Html.Label("Km")
-            </th>
-            <th>
-                @Html.Label("Inconveniente")
-            </th>
-            <th>
-                @Html.Label(" ")
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <div class="table-responsive">
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RutasUsuario.Nombre)
-                </td>
-                <td>
-                    @if (item.Km > 0)
-                    {
-                        @Html.DisplayFor(modelItem => item.Km)
-                    }
-                </td>
-                <td>
-                    <img src="@item.TipoInconveniente.Imagen" />
-                </td>
-                <td>
-                    <button type="button" class="btn btn-warning" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />Eliminar
-                </td>
+                <th>
+                    @Html.Label("Fecha")
+                </th>
+                <th>
+                    @Html.Label("Ruta")
+                </th>
+                <th>
+                    @Html.Label("Km")
+                </th>
+                <th>
+                    @Html.Label("Inconveniente")
+                </th>
+                <th>
+                    @Html.Label(" ")
+                </th>
             </tr>
-        }
 
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RutasUsuario.Nombre)
+                    </td>
+                    <td>
+                        @if (item.Km > 0)
+                        {
+                            @Html.DisplayFor(modelItem => item.Km)
+                        }
+                    </td>
+                    <td>
+                        <img src="@item.TipoInconveniente.Imagen" />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />Eliminar
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
 
 
-    <!-- Modal -->
+    <!-- Modal Eliminar Registro -->
     <div class="modal fade" id="ModalEliminarRegistro" role="dialog">
         <div class="modal-dialog">
-            Modal content
-            <div class="modal-content">
+            <div class="modal-content" style="background-color:black; border:3px solid grey">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Confirmar Eliminar Registro</h4>
+                    <h4 class="modal-title" style="color:white">Eliminar Registro</h4>
                 </div>
                 <div class="modal-body">
                     <div id="resConfirmarEliminar"></div>
                 </div>
                 <div class="modal-footer">
-                    <div id="resErrorConfirmarEliminar"></div>
                 </div>
             </div>
         </div>
@@ -164,7 +162,7 @@
             async: true,
             type: "POST",
             dataType: "html",
-            data: { id: idRegistro, tabla: miTabla},
+            data: { id: idRegistro, tabla: miTabla, idUsuario: @_idUsuario},
             url: "@Url.Action("procesoParaEliminar", "Home")",
             success: function (response) {
                 $('#resConfirmarEliminar').html('');

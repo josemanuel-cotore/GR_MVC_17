@@ -1,0 +1,67 @@
+﻿@{
+    var identificador = 0;
+    identificador = ViewBag.Identificador;
+
+    var tabla = "";
+    tabla = ViewBag.Tabla;
+
+}
+
+<div class="container-fluid" style="background-color:black">
+    <div class="row" style="margin: 1rem">
+        <div class="col" style="color:white; margin-top:3%; margin-bottom:3%; text-align:left">
+            ¿Estás seguro de ocultar el perfil?
+        </div>
+    </div>
+    <div class="row" style="margin: 1rem; margin-top:3%; margin-bottom:3%; text-align:center">
+        <div class="col">
+            <input type="submit" class="btn btn-danger" value="Ocultar" id="btnOcultar" onclick="ocultarPerfil()" />
+        </div>
+        <div class="col">
+            <input type="submit" class="btn btn-warning" value="Volver" id="btnVolver" onclick="volverAtras()" />
+        </div>
+
+    </div>
+    <div id="resErrorOcultarPerfil" style="text-align:center; color:red"></div>
+</div>
+
+
+<script>
+
+    function ocultarPerfil() {
+
+        //debugger;
+
+        $.ajax({
+            cache: false,
+            dataType: "html",
+            type: "POST",
+            data: { id: @identificador, tabla: "PerfilUsuario", idUsuario: @ViewBag.IdUsuario},
+            url: "@Url.Action("EliminarOcultarRegistro", "Home")",
+            success: function (response) {
+                if (response.ok == true) {
+                    $("#resOcultarPerfil").modal("hide");
+                    location.href = "Perfiles_Usuario/1";
+                } else {
+                    $("#resOcultarPerfil").modal("hide");
+                    location.href = "Perfiles_Usuario/1";
+                }
+
+            },
+
+            error: function (response) {
+                alert("Error en metodo eliminar de tabla");
+                $("#resErrorOcultarPerfil").html(response.mensaje);
+            }
+
+        });
+
+        };
+
+
+        function volverAtras() {
+            $("#resOcultarPerfil").modal("hide");
+        }
+
+</script>
+

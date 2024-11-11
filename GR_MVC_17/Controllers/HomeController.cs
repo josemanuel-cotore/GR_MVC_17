@@ -1,5 +1,6 @@
 ﻿using GR_MVC_17.DAL;
 using GR_MVC_17.DTO;
+using GR_MVC_17.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,31 @@ namespace GR_MVC_17.Controllers
 {
     public class HomeController : Controller
     {
-        public UsuarioRepositiorio repoUsuario = new UsuarioRepositiorio();
-        public HerramientaRepositorio repoHerramienta = new HerramientaRepositorio();
-        public RutasRepositorio repoRutas = new RutasRepositorio();
-        public RegistroRepositorio repoRegistro = new RegistroRepositorio();
-        public PerfilRepositorio repoPerfil = new PerfilRepositorio();
-        public InconvenienteRepositorio repoInconveniente = new InconvenienteRepositorio();
+
+        private IUsuarioRepositiorio _usuarioRepositorio;
+        private IRutasRepositorio _rutasRepositorio;
+        private IRegistroRepositorio _registroRepositorio;
+        private IPerfilRepositorio _perfilRepositorio;
+        private IInconvenienteRepositorio _inconvenienteRepositorio;
+        private IHerramientaRepositorio _herramientaRepositorio;
+
+        public HomeController(
+            IUsuarioRepositiorio usuarioRepositiorio,
+            IRutasRepositorio rutasRepositorio,
+            IRegistroRepositorio registroRepositorio,
+            IPerfilRepositorio perfilRepositorio,
+            IInconvenienteRepositorio inconvenienteRepositorio,
+            IHerramientaRepositorio herramientaRepositorio
+            )
+        {
+            _usuarioRepositorio = usuarioRepositiorio;
+            _rutasRepositorio = rutasRepositorio;
+            _registroRepositorio = registroRepositorio;
+            _perfilRepositorio = perfilRepositorio;
+            _inconvenienteRepositorio = inconvenienteRepositorio;
+            _herramientaRepositorio = herramientaRepositorio;
+        }
+
 
         public ActionResult Index()
         {
@@ -27,7 +47,7 @@ namespace GR_MVC_17.Controllers
         {
             if (ModelState.IsValid)
             {
-                usuario = repoUsuario.ExisteUsuario(usuario);
+                usuario = _usuarioRepositorio.ExisteUsuario(usuario);
                 if (usuario != null)
                 {
                     if (usuario.IdRol == (int)Enums.Enum.Rol.Administrador)
@@ -56,7 +76,7 @@ namespace GR_MVC_17.Controllers
         public ActionResult Acceso_Admin(Usuario usuario)
         {
             List<Usuario> listaUsuarios = new List<Usuario>();
-            listaUsuarios = repoUsuario.DameTodosUsuarios();
+            listaUsuarios = _usuarioRepositorio.DameTodosUsuarios();
             ViewBag.Usuarios = listaUsuarios;
 
             // Le daremos a un boton al lado del usuario y mostrará su lista a la derecha
@@ -75,9 +95,9 @@ namespace GR_MVC_17.Controllers
         {
             ViewBag.IdUsuario = usuario.Id;
 
-            var listaPerfiles = repoPerfil.DameListaPerfilesUsuario(usuario);
+            var listaPerfiles = _perfilRepositorio.DameListaPerfilesUsuario(usuario);
 
-            if (listaPerfiles.Count == repoPerfil.DameMaxPerfiles())
+            if (listaPerfiles.Count == _perfilRepositorio.DameMaxPerfiles())
             {
                 // Hacemos que el botón de crear nuevo perfil no aparezca
                 ViewBag.PerfilCompleto = true;
@@ -88,13 +108,21 @@ namespace GR_MVC_17.Controllers
             }
             ViewBag.NumPerfiles = listaPerfiles.Count;
 
+
+            // Comprobar si el usuario dispone de perfiles ocultos
+
+
+            ViewBag.PerfilesOcultos = _perfilRepositorio.DameListaPerfilesOcultos(usuario);
+
             if (listaPerfiles.Count == 0)
             {
-                var listaPerfilesGeneral = repoPerfil.PerfilesPosiblesUsuario(listaPerfiles);
+                var listaPerfilesGeneral = _perfilRepositorio.PerfilesPosiblesUsuario(listaPerfiles);
                 ViewBag.PerfilesGeneral = listaPerfilesGeneral;
             }
 
-            return View(listaPerfiles);
+            List<Perfil> listaMostrar = _perfilRepositorio.DameListaPerfilesParaMostrar(usuario);
+
+            return View(listaMostrar);
         }
 
         [HttpPost]
@@ -102,7 +130,7 @@ namespace GR_MVC_17.Controllers
         {
             ViewBag.IdUsuario = idUsuario;
 
-            var listaPerfiles = repoPerfil.ActualizarPerfilesOcultos(idUsuario);
+            var listaPerfiles = _perfilRepositorio.ActualizarPerfilesOcultos(idUsuario);
 
              return RedirectToAction("Perfiles_Usuario", new Usuario { Id = idUsuario });
         }
@@ -117,28 +145,28 @@ namespace GR_MVC_17.Controllers
                 return RedirectToAction("Entrenos_Duatlon_Carreras", new { idUsuario = idUsuario, idPerfil = idPerfil});
             }
 
-            var listaHerramientas = repoHerramienta.dameHerramientasUsuarioPerfil(idPerfil, idUsuario);
+            var listaHerramientas = _herramientaRepositorio.dameHerramientasUsuarioPerfil(idPerfil, idUsuario);
 
             ViewBag.NumHerramientas = listaHerramientas.Count;
 
-            var listadoRutasUsuario = repoRutas.DameRutasUsuarioPerfil(idUsuario, idPerfil);
+            var listadoRutasUsuario = _rutasRepositorio.DameRutasUsuarioPerfil(idUsuario, idPerfil);
             ViewBag.ListadoRutas = listadoRutasUsuario;
 
             ViewBag.NumRutas = listadoRutasUsuario.Count;
-            ViewBag.TemaPerfil = repoPerfil.dameTemaPerfil(idPerfil);
+            ViewBag.TemaPerfil = _perfilRepositorio.dameTemaPerfil(idPerfil);
 
             return View(listaHerramientas);
         }
 
         public ActionResult Registro_Herramienta(int idHerramienta, int idUsuario, int idPerfil)
         {
-            var listaRegistro = repoRegistro.dameRegistroHerramienta(idHerramienta, idPerfil);
+            var listaRegistro = _registroRepositorio.dameRegistroHerramienta(idHerramienta, idPerfil);
 
             ViewBag.Usuario = idUsuario;
             ViewBag.Herramienta = idHerramienta;
             ViewBag.Perfil = idPerfil;
-            ViewBag.NombreHerramienta = repoHerramienta.DameNombreHerramientaPorId(idHerramienta).Nombre;
-            ViewBag.CalculoKm = repoRegistro.dameCalculoPorHerramienta(idUsuario, idHerramienta);
+            ViewBag.NombreHerramienta = _herramientaRepositorio.DameNombreHerramientaPorId(idHerramienta).Nombre;
+            ViewBag.CalculoKm = _registroRepositorio.dameCalculoPorHerramienta(idUsuario, idHerramienta);
 
             return View(listaRegistro);
         }
@@ -146,10 +174,10 @@ namespace GR_MVC_17.Controllers
         [HttpPost]
         public ActionResult _PasoParaCrearRegistro(int idUsuario, int idHerramienta, int idPerfil)
         {
-            var listaRutas = repoRutas.DameRutasUsuarioPerfil(idUsuario, idPerfil);
+            var listaRutas = _rutasRepositorio.DameRutasUsuarioPerfil(idUsuario, idPerfil);
             ViewBag.Rutas = listaRutas.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
-            var listaInconvenientes = repoInconveniente.dameInconvenientes();
+            var listaInconvenientes = _inconvenienteRepositorio.dameInconvenientes();
             ViewBag.Inconvenientes = listaInconvenientes.Select(p => new SelectListItem() { Value = p.Id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
             SeguimientoRegistro_DTO seguimiento = new SeguimientoRegistro_DTO();
@@ -185,7 +213,7 @@ namespace GR_MVC_17.Controllers
                 };
 
                 // Insertar registro ruta
-                if (repoRegistro.AñadirRegistroRuta(registro))
+                if (_registroRepositorio.AñadirRegistroRuta(registro))
                 {
                     respuesta.ok = true;
                     respuesta.mensaje = "Registro Correcto";
@@ -216,7 +244,7 @@ namespace GR_MVC_17.Controllers
         [HttpPost]
         public ActionResult _PasoParaVerRutasDisponibles(int idUsuario, int idPerfil)
         {
-            var listadoRutasUsuario = repoRutas.DameRutasUsuarioPerfil(idUsuario, idPerfil);
+            var listadoRutasUsuario = _rutasRepositorio.DameRutasUsuarioPerfil(idUsuario, idPerfil);
             //ViewBag.ListadoRutas = listadoRutasUsuario;
 
             return PartialView("_RutasDisponibles", listadoRutasUsuario);
@@ -247,7 +275,7 @@ namespace GR_MVC_17.Controllers
                 RutasUsuario ruta = new RutasUsuario
                 {
                     Nombre = nombreRuta,
-                    Orden = repoRutas.DameOrdenMaximo(idPerfil, idUsuario) + 1,
+                    Orden = _rutasRepositorio.DameOrdenMaximo(idPerfil, idUsuario) + 1,
                     idUsuario = idUsuario,
                     idPerfil = idPerfil
                 };
@@ -255,7 +283,7 @@ namespace GR_MVC_17.Controllers
                 // Insertar ruta
 
                 
-                if (repoRutas.AñadirNuevaRuta(ruta))
+                if (_rutasRepositorio.AñadirNuevaRuta(ruta))
                 {
                         respuesta.ok = true;
                         respuesta.mensaje = "Ruta creada correctamente";
@@ -277,8 +305,8 @@ namespace GR_MVC_17.Controllers
         [HttpPost]
         public ActionResult _PasoParaCrearPerfil(int idUsuario)
         {
-            var perfilesUsuario = repoPerfil.DameListaPerfilesIdUsuario(idUsuario);
-            var listaPerfilesGeneral = repoPerfil.PerfilesPosiblesUsuario(perfilesUsuario);
+            var perfilesUsuario = _perfilRepositorio.DameListaPerfilesIdUsuario(idUsuario);
+            var listaPerfilesGeneral = _perfilRepositorio.PerfilesPosiblesUsuario(perfilesUsuario);
             ViewBag.IdUsuario = idUsuario;
             
             if (listaPerfilesGeneral.Count > 0)
@@ -296,15 +324,14 @@ namespace GR_MVC_17.Controllers
             Respuesta_DTO respuesta = new Respuesta_DTO();
             try
             {
-                Perfil existe = repoPerfil.DamePerfilPorId(idPerfil);
+                PerfilUsuario existe = _perfilRepositorio.ComprobarUsuarioTienePerfil(idPerfil, idUsuario);
 
-                if (existe != null)
+                if (existe == null)
                 {
                     ////Insertar en tb el nuevo perfil del usuario
-                    ///
 
                     Usuario existeUsuario = new Usuario();
-                    existeUsuario = repoUsuario.DameUsuarioPorId(idUsuario);
+                    existeUsuario = _usuarioRepositorio.DameUsuarioPorId(idUsuario);
 
                     if (existeUsuario == null)
                     {
@@ -313,17 +340,17 @@ namespace GR_MVC_17.Controllers
 
                     PerfilUsuario nuevoPerfil = new PerfilUsuario()
                     {
-                        IdPerfil = existe.Id,
+                        IdPerfil = idPerfil,
                         IdUsuario = idUsuario,
                         MostrarPerfil = true,
                         FechaInserta = DateTime.Now
                     };
-                    repoPerfil.InsertarPerfil(nuevoPerfil);
+                    _perfilRepositorio.InsertarPerfil(nuevoPerfil);
 
                 }
                 else
                 {
-                    throw new Exception("El perfil no existe");
+                    throw new Exception("El usuario ya tiene el perfil elegido.");
                 }
 
                 respuesta.ok = true;
@@ -355,12 +382,12 @@ namespace GR_MVC_17.Controllers
             Respuesta_DTO respuesta = new Respuesta_DTO();
             try
             {
-                if (repoHerramienta.InsertarHerramienta(herramientaNueva))
+                if (_herramientaRepositorio.InsertarHerramienta(herramientaNueva))
                 {
                     Herramienta insertada = new Herramienta();
-                    insertada = repoHerramienta.DameHerramientaPorNombre(herramientaNueva);
+                    insertada = _herramientaRepositorio.DameHerramientaPorNombre(herramientaNueva);
 
-                    if (repoUsuario.InsertaUsuarioHerramientaPerfil(insertada.Id, idUsuario, idPerfil))
+                    if (_usuarioRepositorio.InsertaUsuarioHerramientaPerfil(insertada.Id, idUsuario, idPerfil))
                     {
                         respuesta.ok = true;
                         respuesta.mensaje = "Herramienta creada correctamente";
@@ -437,7 +464,7 @@ namespace GR_MVC_17.Controllers
                     switch (tabla)
                     {
                         case "RegistroRutas":
-                            if (repoRegistro.eliminarRegistroRutas(id) == false)
+                            if (_registroRepositorio.eliminarRegistroRutas(id) == false)
                             {
                                 throw new Exception("Error al eliminar registro de la tabla: " + tabla);
                             }
@@ -447,7 +474,7 @@ namespace GR_MVC_17.Controllers
                             break;
 
                         case "PerfilUsuario":
-                            if (repoPerfil.ocultarMostrarPerfilUsuario(id, idUsuario, false) == false)
+                            if (_perfilRepositorio.ocultarMostrarPerfilUsuario(id, idUsuario, false) == false)
                             {
                                 throw new Exception("Error al ocultar perfil del usuario: " + idUsuario);
                             }
@@ -474,14 +501,14 @@ namespace GR_MVC_17.Controllers
         [HttpPost]
         public ActionResult _PasoParaCrearRegistroDuatlon_Carrera(int idUsuario, int idPerfil)
         {
-            var listaRutasCorrer = repoRutas.DameRutasUsuarioPerfil(idUsuario, (int) Enums.Enum.Perfil.Running);
+            var listaRutasCorrer = _rutasRepositorio.DameRutasUsuarioPerfil(idUsuario, (int) Enums.Enum.Perfil.Running);
             ViewBag.RutasCorrer = listaRutasCorrer.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
-            var listaRutasBici = repoRutas.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Ciclismo);
+            var listaRutasBici = _rutasRepositorio.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Ciclismo);
             ViewBag.RutasBici = listaRutasBici.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
 
-            var listaInconvenientes = repoInconveniente.dameInconvenientes();
+            var listaInconvenientes = _inconvenienteRepositorio.dameInconvenientes();
             ViewBag.Inconvenientes = listaInconvenientes.Select(p => new SelectListItem() { Value = p.Id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
             SeguimientoRegistro_DTO seguimiento = new SeguimientoRegistro_DTO();
@@ -520,7 +547,7 @@ namespace GR_MVC_17.Controllers
                 };
 
                 // Insertar registro ruta
-                if (repoRegistro.AñadirRegistroRuta(registro))
+                if (_registroRepositorio.AñadirRegistroRuta(registro))
                 {
                     respuesta.ok = true;
                     respuesta.mensaje = "Registro Correcto";
@@ -540,8 +567,8 @@ namespace GR_MVC_17.Controllers
         {
             ViewBag.IdPerfil = idPerfil;
             ViewBag.IdUsuario = idUsuario;
-            ViewBag.TemaPerfil = repoPerfil.dameTemaPerfil(idPerfil);
-            var LRegistroCarreras = repoRegistro.dameRegistroPorPerfil(idPerfil);
+            ViewBag.TemaPerfil = _perfilRepositorio.dameTemaPerfil(idPerfil);
+            var LRegistroCarreras = _registroRepositorio.dameRegistroPorPerfil(idPerfil);
 
             return View(LRegistroCarreras);
         }
@@ -550,14 +577,14 @@ namespace GR_MVC_17.Controllers
         [HttpPost]
         public ActionResult _PasoParaModificarRegistroDuatlon_Carrera(int idUsuario, int idPerfil, int idRegistro)
         {
-            var listaRutasCorrer = repoRutas.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Running);
+            var listaRutasCorrer = _rutasRepositorio.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Running);
             ViewBag.RutasCorrer = listaRutasCorrer.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
-            var listaRutasBici = repoRutas.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Ciclismo);
+            var listaRutasBici = _rutasRepositorio.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Ciclismo);
             ViewBag.RutasBici = listaRutasBici.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
 
-            var listaInconvenientes = repoInconveniente.dameInconvenientes();
+            var listaInconvenientes = _inconvenienteRepositorio.dameInconvenientes();
             ViewBag.Inconvenientes = listaInconvenientes.Select(p => new SelectListItem() { Value = p.Id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
             SeguimientoRegistro_DTO seguimiento = new SeguimientoRegistro_DTO();
@@ -565,7 +592,7 @@ namespace GR_MVC_17.Controllers
             seguimiento.idPerfil_S = idPerfil;
 
             RegistroRutas registro = new RegistroRutas();
-            registro = repoRegistro.dameRegistroPorId(idRegistro);
+            registro = _registroRepositorio.dameRegistroPorId(idRegistro);
 
             return PartialView("_ModificarRegistroDuatlon_Carrera", registro);
         }
@@ -599,7 +626,7 @@ namespace GR_MVC_17.Controllers
                 };
 
                 // Insertar registro ruta
-                if (repoRegistro.AñadirRegistroRuta(registro))
+                if (_registroRepositorio.AñadirRegistroRuta(registro))
                 {
                     respuesta.ok = true;
                     respuesta.mensaje = "Registro Correcto";
@@ -614,6 +641,78 @@ namespace GR_MVC_17.Controllers
 
             return Json(respuesta);
         }
+
+        [HttpPost]
+        public ActionResult _PasoParaModificarRegistro(int idUsuario, int idPerfil, int idRegistro)
+        {
+            
+            ViewBag.IdUsuario = idUsuario;
+            ViewBag.IdPerfil = idPerfil;
+            ViewBag.IdRegistro = idRegistro;
+
+            var listaRutasCorrer = _rutasRepositorio.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Running);
+            ViewBag.RutasCorrer = listaRutasCorrer.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
+
+            var listaRutasBici = _rutasRepositorio.DameRutasUsuarioPerfil(idUsuario, (int)Enums.Enum.Perfil.Ciclismo);
+            ViewBag.RutasBici = listaRutasBici.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
+
+
+            var listaInconvenientes = _inconvenienteRepositorio.dameInconvenientes();
+            ViewBag.Inconvenientes = listaInconvenientes.Select(p => new SelectListItem() { Value = p.Id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
+
+            SeguimientoRegistro_DTO seguimiento = new SeguimientoRegistro_DTO();
+            seguimiento.idUsuario_S = idUsuario;
+            seguimiento.idPerfil_S = idPerfil;
+
+            RegistroRutas registro = new RegistroRutas();
+            registro = _registroRepositorio.dameRegistroPorId(idRegistro);
+
+            return PartialView("_ModificarRegistro", registro);
+        }
+
+
+        [HttpPost]
+        public JsonResult _ModificarRegistro(int idRegistro, int idUsuario, int idPerfil, DateTime fecha, double km, int ruta, int inconve)
+        {
+            Respuesta_DTO respuesta = new Respuesta_DTO();
+
+            try
+            {
+
+                // Buscamos el registro
+
+
+
+
+                //RegistroRutas registro = new RegistroRutas
+                //{
+                //    Fecha = fecha,
+                //    Km = kmCorrer,
+                //    IdUsuario = idUsuario,
+                //    IdPerfil = idPerfil,
+                //    IdRuta = rutaCorrer,
+                //    IdHerramienta = null,
+                //    IdInconveniente = inconve
+                //};
+
+                //// Insertar registro ruta
+                //if (repoRegistro.AñadirRegistroRuta(registro))
+                //{
+                //    respuesta.ok = true;
+                //    respuesta.mensaje = "Registro Correcto";
+                //}
+
+            }
+            catch (Exception ex)
+            {
+                respuesta.ok = false;
+                respuesta.mensaje = ex.Message;
+            }
+
+            return Json(respuesta);
+        }
+
+
 
     }
 
