@@ -56,6 +56,8 @@ namespace GR_MVC_17.Controllers
                     }
                     else
                     {
+                        var prueba = "";
+
                         //return Content("ok");
                         return RedirectToAction("Perfiles_Usuario", "Home", usuario);
                     }
