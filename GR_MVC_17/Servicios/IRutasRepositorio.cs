@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GR_MVC_17.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,6 @@ namespace GR_MVC_17.Servicios
         Boolean AñadirNuevaRuta(RutasUsuario ruta);
         RutasUsuario DameRutaPorNombrePerfilUsuario(string nombreRuta, int idPerfil, int idUsuario);
         int DameOrdenMaximo(int idPerfil, int idUsuario);
+        List<RutaOrdenUso_DTO> DameRutasOrdenNuevo(int idUsuario, int idPerfil);
     }
 }

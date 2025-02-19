@@ -119,5 +119,10 @@ namespace GR_MVC_17.DAL
             var l = db.PerfilUsuario.Where(j => j.MostrarPerfil == true && j.IdUsuario == usuario.Id).Select(x=>x.Perfil).ToList();
             return l;
         }
+
+        public Perfil DamePerfilPorId(int idPerfil)
+        {
+            return new Perfil();
+        }
     }
 }
