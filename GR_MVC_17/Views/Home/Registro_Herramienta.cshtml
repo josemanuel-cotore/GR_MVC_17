@@ -7,40 +7,54 @@
     var _idHerramienta = ViewBag.Herramienta;
     var _idPerfil = ViewBag.Perfil;
 
+
+
+
 }
 <div class="container" style="padding:5%">
     <div class="row" style="margin-bottom:5%">
 
         <div class="col-md-12">
-            <h2 style="color:darkred">@ViewBag.NombreHerramienta <span>(@ViewBag.CalculoKm)</span></h2>
+            <h2 style="color:whitesmoke">@ViewBag.NombreHerramienta <span>(@ViewBag.CalculoKm)</span></h2>
         </div>
     </div>
 
     <div class="row" style="margin-bottom:5%; text-align:center">
 
         <div class="col">
-            <button type="button" class="btn btn-success" onclick="funcionCrearRegistro();" data-bs-toggle="modal" data-bs-target="#ModalRegistro">Nuevo Registro</button>
+            <button type="button" class="btn btn-success btn-sm" onclick="funcionCrearRegistro();" data-bs-toggle="modal" data-bs-target="#ModalRegistro">Nuevo Registro</button>
         </div>
         <div class="col">
-            <a class="btn btn-danger" href="@Url.Action("Herramientas_Usuario", "Home", new { idPerfil = _idPerfil, idUsuario = _idUsuario})"> Volver a Herramientas</a>
+            <a class="btn btn-danger btn-sm" href="@Url.Action("Herramientas_Usuario", "Home", new { idPerfil = _idPerfil, idUsuario = _idUsuario })"> Volver a Herramientas</a>
         </div>
 
     </div>
 
 
-    @*<nav aria-label="Page navigation example">
+
+    
+
+    <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link">Anterior</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Siguiente</a>
-            </li>
+            @if (ViewBag.BasePaginacionV.PaginaActual == 1)
+            {
+                <li class="disabled"><a href="@Url.Action("Registro_Herramienta", "Home", new { idHerramienta = _idHerramienta, idUsuario = _idUsuario, idPerfil = _idPerfil, pagina = 1 })" class="btn btn-dark btn-sm">Anterior</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Registro_Herramienta", "Home", new { idHerramienta = _idHerramienta, idUsuario = _idUsuario, idPerfil = _idPerfil, pagina = ViewBag.BasePaginacionV.PaginaActual - 1 })" class="btn btn-dark btn-sm">Anterior</a></li>
+            }
+            @if (ViewBag.BasePaginacionV.PaginaActual == ViewBag.BasePaginacionV.CantidadDePaginas)
+            {
+                <li class="disabled"><a href="@Url.Action("Registro_Herramienta", "Home", new { idHerramienta = _idHerramienta, idUsuario = _idUsuario, idPerfil = _idPerfil, pagina = ViewBag.BasePaginacionV.CantidadDePaginas })" class="btn btn-dark btn-sm">Siguiente</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Registro_Herramienta", "Home", new { idHerramienta = _idHerramienta, idUsuario = _idUsuario, idPerfil = _idPerfil, pagina = ViewBag.BasePaginacionV.PaginaActual + 1 })" class="btn btn-dark btn-sm">Siguiente</a></li>
+            }
+
         </ul>
-    </nav>*@
+    </nav>
 
     @*<div class="ratio-4x3">*@
         <div class="table-responsive">
@@ -56,7 +70,7 @@
                         @Html.Label("Km")
                     </th>
                     <th>
-                        @Html.Label("Inconveniente")
+                        @Html.Label("Tiempo")
                     </th>
                     @*<th>
                         @Html.Label(" ")
@@ -68,7 +82,7 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr class="ratio-16x9">
+                    <tr class="ratio-16x9" style="font-size:smaller">
                         <td>
                             @Html.DisplayFor(modelItem => item.Fecha)
                         </td>
@@ -88,7 +102,7 @@
                             <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalModificarRegistro" />Modificar
                         </td>*@
                         <td>
-                            <button type="button" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />Eliminar
+                            <button type="button" class="btn btn-danger btn-sm" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />Eliminar
                         </td>
                     </tr>
                 }

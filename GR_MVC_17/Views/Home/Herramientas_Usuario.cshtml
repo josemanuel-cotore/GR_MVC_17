@@ -25,10 +25,10 @@
 
                 </div>
                 <div class="col" style="text-align:left">
-                    <button type="button" class="btn btn-primary" onclick="abrirModalOcultarPerfil()" data-bs-toggle="modal" data-bs-target="#Modal_Ocultar_Perfil">Ocultar Perfil</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="abrirModalOcultarPerfil()" data-bs-toggle="modal" data-bs-target="#Modal_Ocultar_Perfil">Ocultar Perfil</button>
                 </div>
                 <div class="col" style="text-align:right">
-                    <a class="btn btn-danger" href="@Url.Action("Perfiles_Usuario", "Home", new { Id = _idusuario })">Volver a Perfiles</a>
+                    <a class="btn btn-danger btn-sm" href="@Url.Action("Perfiles_Usuario", "Home", new { Id = _idusuario })">Volver a Perfiles</a>
                 </div>
 
             </div>
@@ -39,7 +39,7 @@
                 {
                     <div class="col-md-6">
                         <img src="@herramienta.Imagen" class="img-fluid" style="margin-top:3%; margin-right:5%; margin-bottom:5%; margin-left:5%" />
-                        <a href="@Url.Action("Registro_Herramienta", "Home", new { idHerramienta = herramienta.Id, idUsuario = ViewBag.IdUsuario, idPerfil = ViewBag.IdPerfil })" class="btn btn-dark btn-lg">@herramienta.Nombre</a>
+                        <a href="@Url.Action("Registro_Herramienta", "Home", new { idHerramienta = herramienta.Id, idUsuario = ViewBag.IdUsuario, idPerfil = ViewBag.IdPerfil, pagina = 1 })" class="btn btn-dark btn-sm">@herramienta.Nombre</a>
                     </div>
                 }
 
@@ -53,16 +53,13 @@
 
             <div class="row" style="text-align:center; padding:5%">
                 <div class="col">
-                    <button type="button" class="btn btn-success" onclick="funcionVerRutas()" data-bs-toggle="modal" data-bs-target="#Modal_Ver_Rutas">Ver Rutas Disponibles</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="funcionVerRutas()" data-bs-toggle="modal" data-bs-target="#Modal_Ver_Rutas">Ver Rutas Disponibles</button>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-success" onclick="funcionCrearRuta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Ruta">Crear Nueva Ruta</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="funcionCrearRuta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Ruta">Crear Nueva Ruta</button>
                 </div>
 
             </div>
-
-            @*@Html.Partial("_RutasDisponibles", (List<RutasUsuario>)ViewBag.ListadoRutas)*@
-
 
         }
         else
@@ -71,7 +68,7 @@
             <div>
                 <h2>No existen rutas registradas</h2>
                 <br />
-                <button type="button" class="btn btn-danger" onclick="funcionCrearRuta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Ruta">Crear Nueva Ruta</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="funcionCrearRuta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Ruta">Crear Nueva Ruta</button>
             </div>
         }
 
@@ -85,10 +82,10 @@
 
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-danger" onclick="funcionCrearHerramienta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Herramienta">Crear Nueva Herramienta</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="funcionCrearHerramienta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Herramienta">Crear Nueva Herramienta</button>
                 </div>
                 <div class="col" style="text-align:left">
-                    <button type="button" class="btn btn-primary" onclick="abrirModalOcultarPerfil()" data-bs-toggle="modal" data-bs-target="#Modal_Ocultar_Perfil">Ocultar Perfil</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="abrirModalOcultarPerfil()" data-bs-toggle="modal" data-bs-target="#Modal_Ocultar_Perfil">Ocultar Perfil</button>
                 </div>
             </div>
 
@@ -112,7 +109,7 @@
                 <div id="resHerramienta"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Volver</button>
+                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Volver</button>
             </div>
         </div>
     </div>
@@ -156,7 +153,7 @@
 </div>
 
 
-<!-- Modal Eliminar Perfil -->
+<!-- Modal Ocultar Perfil -->
 <div class="modal fade" id="Modal_Ocultar_Perfil" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content" style="background-color:black; border:3px solid grey">

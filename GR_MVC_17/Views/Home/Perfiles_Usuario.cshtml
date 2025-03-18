@@ -15,7 +15,7 @@
 
                         <div class="col-md-3" style="border-bottom:1px solid white; margin-bottom:5%">
                             <img src="@perfil.Imagen" class="img-fluid" style="margin-bottom: 5%" />
-                            <a href="@Url.Action("Herramientas_Usuario", "Home", new { idPerfil = perfil.Id, idUsuario = ViewBag.IdUsuario })" class="btn btn-dark" style="font-size:1.5em; margin-top:10%; margin-left: 5%; margin-bottom:10%;">@perfil.Nombre</a>
+                            <a href="@Url.Action("Herramientas_Usuario", "Home", new { idPerfil = perfil.Id, idUsuario = ViewBag.IdUsuario })" class="btn btn-dark btn-lg" style="font-size:1.5em; margin-top:10%; margin-left: 5%; margin-bottom:10%;">@perfil.Nombre</a>
                         </div>
 
 
@@ -38,13 +38,13 @@
                 }
                 @if (ViewBag.PerfilesOcultos > 0)
                 {
-                    <div class="col">
-                        <button type="button" class="btn btn-success" id="btnOcultarMostrar" onclick="fnMostrarPerfilesOcultos()">
-                            Perfiles Ocultos
-                        </button>
-                    </div>
-                }
-            </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-success" id="btnOcultarMostrar">
+                                Perfiles Ocultos
+                            </button>
+                        </div>
+                        }
+                </div>
 
         }
         else
@@ -83,6 +83,12 @@
 @section scripts{
     <script>
 
+        //Script que impide el uso del botón atrás del navegador
+            window.location.hash = "no-back-button";
+            window.location.hash = "Again-No-back-button";
+            window.onhashchange = function () {window.location.hash = ""; }
+
+
         //$("#btnAlert").click(function () {
 
         //    console.log("Alert alerttt");
@@ -111,7 +117,7 @@
         };
 
         $("#btnOcultarMostrar").click(function () {
-
+            debugger;
             $.ajax({
 
                 type: "POST",

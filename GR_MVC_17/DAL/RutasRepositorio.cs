@@ -35,7 +35,7 @@ namespace GR_MVC_17.DAL
             var sql = "SELECT count(*) as contador, idruta as id, b.Nombre as nombre " +
                 "FROM [GestionRutasDB].[dbo].[RegistroRutas] a " +
                 "inner join RutasUsuario b on a.IdRuta = b.id and a.IdPerfil = b.idPerfil and a.IdUsuario = b.idUsuario " +
-                "where a.IdUsuario = " + idUsuario + " and a.IdPerfil = " + idPerfil + "" +
+                "where a.IdUsuario = " + idUsuario + " and (a.IdPerfil = " + idPerfil + " or a.IdPerfil = 5) " +
                 "group by IdRuta, b.Nombre " +
                 "order by count(*) desc";
 
@@ -44,6 +44,35 @@ namespace GR_MVC_17.DAL
             using (SqlConnection connection = new SqlConnection(cn))
             {
                 var cmd = new SqlCommand(sql, connection);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                var ds = new DataSet();
+                da.Fill(ds);
+
+                if (ds.Tables.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        var nuevo = new RutaOrdenUso_DTO();
+                        nuevo.contador = int.Parse(r.ItemArray[0].ToString());
+                        nuevo.id = int.Parse(r.ItemArray[1].ToString());
+                        nuevo.nombre = r.ItemArray[2].ToString();
+
+                        listaRutas.Add(nuevo);
+                    }
+                }
+            }
+
+
+
+            var sqlRutasNoUsadas = "select 0 as contador, id, Nombre as nombre from RutasUsuario where " +
+                "IdPerfil = " + idPerfil + " and IdUsuario = " + idUsuario + " and id not in " +
+                "(select distinct IdRuta FROM[GestionRutasDB].[dbo].[RegistroRutas] where IdPerfil = " + idPerfil + " and IdUsuario = " + idUsuario + ")";
+
+            var cn2 = ConfigurationManager.ConnectionStrings["ApplicationDbContext"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(cn2))
+            {
+                var cmd = new SqlCommand(sqlRutasNoUsadas, connection);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 var ds = new DataSet();
                 da.Fill(ds);

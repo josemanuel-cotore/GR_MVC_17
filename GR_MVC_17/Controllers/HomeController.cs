@@ -3,6 +3,7 @@ using GR_MVC_17.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web.Mvc;
 
 namespace GR_MVC_17.Controllers
@@ -97,7 +98,11 @@ namespace GR_MVC_17.Controllers
                 ViewBag.PerfilesGeneral = listaPerfilesGeneral;
             }
 
-            return View(listaPerfiles);
+            ViewBag.PerfilesOcultos = repoPerfil.DameListaPerfilesOcultos(usuario);
+            var perfilesParaMostrar = repoPerfil.DameListaPerfilesParaMostrar(usuario);
+
+            
+            return View(perfilesParaMostrar);
         }
 
         [HttpPost]
@@ -133,7 +138,7 @@ namespace GR_MVC_17.Controllers
             return View(listaHerramientas);
         }
 
-        public ActionResult Registro_Herramienta(int idHerramienta, int idUsuario, int idPerfil, int reg)
+        public ActionResult Registro_Herramienta(int idHerramienta, int idUsuario, int idPerfil, int pagina = 1)
         {
             var listaRegistro = repoRegistro.dameRegistroHerramienta(idHerramienta, idPerfil);
 
@@ -143,11 +148,26 @@ namespace GR_MVC_17.Controllers
             ViewBag.NombreHerramienta = repoHerramienta.DameNombreHerramientaPorId(idHerramienta).Nombre;
             ViewBag.CalculoKm = repoRegistro.dameCalculoPorHerramienta(idUsuario, idHerramienta);
 
-            if (reg > 0)
-            {
-                listaRegistro = listaRegistro.Take(reg).ToList();
-            }
 
+
+            int totalRegistros = listaRegistro.Count();
+
+            listaRegistro = listaRegistro.Skip((pagina - 1) * 5).Take(5).ToList();
+
+
+            int cantidadPaginas = (int)Math.Ceiling((double)totalRegistros / 5);
+
+
+            BasePaginacion bPaginacion = new BasePaginacion()
+            {
+                PaginaActual = pagina,
+                RegistrosPorPagina = 5,
+                TotalRegistros = totalRegistros,
+                CantidadDePaginas = cantidadPaginas
+
+            };
+
+            ViewBag.BasePaginacionV = bPaginacion;
 
             return View(listaRegistro);
         }

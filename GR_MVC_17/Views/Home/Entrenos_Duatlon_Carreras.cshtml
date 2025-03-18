@@ -30,12 +30,14 @@
     </div>
 
     <div class="row" style="margin-bottom:5%; text-align:center">
-
-        <div class="col">
-            <button type="button" class="btn btn-primary" onclick="crearRegistroDuatlon_Carrera()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Registro_Duatlon_Carrera">@valorBotón</button>
+        <div class="col" style="text-align:left">
+            <button type="button" class="btn btn-primary btn-sm" onclick="abrirModalOcultarPerfil()" data-bs-toggle="modal" data-bs-target="#Modal_Ocultar_Perfil">Ocultar Perfil</button>
         </div>
         <div class="col">
-            <a class="btn btn-danger" href="@Url.Action("Perfiles_Usuario", "Home", new { Id = _idUsuario })">Volver a Perfiles del Usuario</a>
+            <button type="button" class="btn btn-primary btn-sm" onclick="crearRegistroDuatlon_Carrera()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Registro_Duatlon_Carrera">@valorBotón</button>
+        </div>
+        <div class="col">
+            <a class="btn btn-danger btn-sm" href="@Url.Action("Perfiles_Usuario", "Home", new { Id = _idUsuario })">Volver a Perfiles</a>
         </div>
 
     </div>
@@ -89,8 +91,8 @@
                         @Html.Label("Tiempo")
                     </th>
                     @*<th>
-                       @Html.Label("Inconveniente")
-                    </th>*@
+                           @Html.Label("Inconveniente")
+                        </th>*@
                     <th>
                         @Html.Label("Observaciones")
                     </th>
@@ -139,23 +141,23 @@
                             @Html.DisplayFor(modelItem => item.TiempoRutaCorrer_Alt)
                         </td>
                         @*<td>
-                            <img src="@item.TipoInconveniente.Imagen" />
-                        </td>*@
+                                <img src="@item.TipoInconveniente.Imagen" />
+                            </td>*@
                         <td>
                             @Html.Raw(item.Observaciones)
                         </td>
                         <td>
-                            <button type="button" style="font-size:small" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Modificar_Registro_Duatlon_Carrera" />Modificar
+                            <button type="button" style="font-size:small" class="btn btn-warning btn-sm" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Modificar_Registro_Duatlon_Carrera" />Modificar
                         </td>
                         <td>
-                            <button type="button" style="font-size:small" class="btn btn-danger" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Eliminar_Registro_Duatlon_Carrera" />Eliminar
+                            <button type="button" style="font-size:small" class="btn btn-danger btn-sm" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#Modal_Eliminar_Registro_Duatlon_Carrera" />Eliminar
                         </td>
                     </tr>
                 }
             </table>
         </div>
     </div>
-    
+
 
 
     <!-- Modal Crear Registro -->
@@ -193,23 +195,27 @@
         </div>
     </div>
 
-    <!-- Modal Eliminar Registro -->
-    <div class="modal fade" id="Modal_Eliminar_Registro_Duatlon_Carrera" role="dialog">
+    <!-- Modal Ocultar Perfil -->
+    <div class="modal fade" id="Modal_Ocultar_Perfil" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content" style="background-color:black; border:3px solid grey">
                 <div class="modal-header">
-                    <h4 class="modal-title" style="color:white">Eliminar Registro</h4>
+                    <h4 class="modal-title" style="color:white">Ocultar Perfil</h4>
                 </div>
                 <div class="modal-body">
-                    <div id="resConfirmarEliminar"></div>
+                    <div id="resOcultarPerfil"></div>
                 </div>
                 <div class="modal-footer">
-                    @*<div id="resRegistroErrorDuatlon_Carrera" style="text-align:center; color:red"></div>*@
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
+
+
+
+
 
     <script>
     function crearRegistroDuatlon_Carrera() {
@@ -260,31 +266,32 @@
         });
 
 
-    }
+        }
 
 
-    function abrirModalEliminar(idRegistro) {
 
-        //debugger;
+        function abrirModalOcultarPerfil() {
 
-        var miTabla = "RegistroRutas";
+        debugger;
+
+        var miTabla = "PerfilUsuario";
 
         $.ajax({
             cache: false,
             async: true,
             type: "POST",
             dataType: "html",
-            data: { id: idRegistro, tabla: miTabla, idUsuario: @_idUsuario},
-            url: "@Url.Action("procesoParaEliminar", "Home")",
+            data: { id: @ViewBag.IdPerfil, tabla: miTabla, idUsuario: @ViewBag.IdUsuario},
+            url: "@Url.Action("procesoParaEliminarOcultar", "Home")",
             success: function (response) {
-                $('#resConfirmarEliminar').html('');
-                $('#resConfirmarEliminar').html(response);
+                $('#resOcultarPerfil').html('');
+                $('#resOcultarPerfil').html(response);
             },
 
             error: function (response) {
 
                 if (response.ok == false) {
-                    $("#resErrorConfirmarEliminar").html(response.mensaje);
+                    $("#resErrorOcultarPerfil").html(response.mensaje);
                 }
             }
 

@@ -144,7 +144,9 @@
     <Compile Include="DAL\RegistroRepositorio.cs" />
     <Compile Include="DAL\RutasRepositorio.cs" />
     <Compile Include="DAL\UsuarioRepositiorio.cs" />
+    <Compile Include="DTO\BasePaginacion.cs" />
     <Compile Include="DTO\Respuesta_DTO.cs" />
+    <Compile Include="DTO\RutaOrdenUso_DTO.cs" />
     <Compile Include="DTO\SeguimientoRegistro_DTO.cs" />
     <Compile Include="Enums\Enum.cs" />
     <Compile Include="Global.asax.cs">
@@ -310,6 +312,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Shared\_ConfirmarOcultarPerfil.cshtml" />
     <Content Include="Views\Shared\_ModificarRegistro.cshtml" />
+    <Content Include="Views\Shared\_Paginacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
