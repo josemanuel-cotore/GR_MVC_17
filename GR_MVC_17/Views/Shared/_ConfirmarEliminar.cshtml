@@ -40,10 +40,10 @@
             url: "@Url.Action("EliminarOcultarRegistro", "Home")",
             success: function (response) {
                 if (response.ok == true) {
-                    $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");
+                    $("#ModalEliminarRegistro").modal("hide");
                     window.location.reload();
                 } else {
-                    $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");
+                    $("#ModalEliminarRegistro").modal("hide");
                     window.location.reload();
                     //$("#resRegistroError").html(response.mensaje);
                     //alert("Mi error en el else");
@@ -64,7 +64,7 @@
 
 
         function volverAtras() {
-            $("#Modal_Eliminar_Registro_Duatlon_Carrera").modal("hide");
+            $("#ModalEliminarRegistro").modal("hide");
         }
 
         </script>

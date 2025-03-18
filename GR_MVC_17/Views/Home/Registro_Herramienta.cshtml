@@ -15,7 +15,7 @@
     <div class="row" style="margin-bottom:5%">
 
         <div class="col-md-12">
-            <h2 style="color:whitesmoke">@ViewBag.NombreHerramienta <span>(@ViewBag.CalculoKm)</span></h2>
+            <h3 style="color:whitesmoke">@ViewBag.NombreHerramienta <span>(@ViewBag.CalculoKm)</span></h3>
         </div>
     </div>
 
@@ -25,7 +25,7 @@
             <button type="button" class="btn btn-success btn-sm" onclick="funcionCrearRegistro();" data-bs-toggle="modal" data-bs-target="#ModalRegistro">Nuevo Registro</button>
         </div>
         <div class="col">
-            <a class="btn btn-danger btn-sm" href="@Url.Action("Herramientas_Usuario", "Home", new { idPerfil = _idPerfil, idUsuario = _idUsuario })"> Volver a Herramientas</a>
+            <a class="btn btn-danger btn-sm" href="@Url.Action("Herramientas_Usuario", "Home", new { idPerfil = _idPerfil, idUsuario = _idUsuario })"> Volver</a>
         </div>
 
     </div>
@@ -102,7 +102,7 @@
                             <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalModificarRegistro" />Modificar
                         </td>*@
                         <td>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />Eliminar
+                            <button type="button" class="btn btn-danger btn-sm" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />X
                         </td>
                     </tr>
                 }
