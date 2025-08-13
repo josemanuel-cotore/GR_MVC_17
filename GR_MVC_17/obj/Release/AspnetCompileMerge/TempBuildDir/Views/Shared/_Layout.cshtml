@@ -1,15 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body style="background-color:GrayText">
-    <div class="container" style="background-color:black">
+
+<body style="background-image: url('../../imagenes/Fondo/fondo1.jpg'); background-repeat: no-repeat; background-size: cover; padding:15px">
+    @*<div id="MiContenedorColores" class="container" style="background-color: transparent ">*@
+    <div style="background-color: transparent ">
         @RenderBody()
     </div>
 

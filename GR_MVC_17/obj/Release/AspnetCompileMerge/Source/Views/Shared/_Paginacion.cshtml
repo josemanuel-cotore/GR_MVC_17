@@ -1,0 +1,18 @@
+﻿@model GR_MVC_17.DTO.BasePaginacion
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+    </tr>
+}
+
+</table>

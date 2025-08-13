@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Configuration;
 using GR_MVC_17.Servicios;
+using static GR_MVC_17.Enums.Enum;
 
 namespace GR_MVC_17.DAL
 {
@@ -28,6 +29,17 @@ namespace GR_MVC_17.DAL
             return listadoRutas;
         }
 
+
+        public List<RutasUsuario> DameRutasUsuario(int idUsuario)
+        {
+            var listadoRutas = (from j in db.RutasUsuario
+                                where j.Orden > 0 &&
+                                j.idUsuario == idUsuario
+                                orderby j.Orden
+                                select j).ToList();
+            return listadoRutas;
+        }
+
         public List<RutaOrdenUso_DTO> DameRutasOrdenNuevo(int idUsuario, int idPerfil)
         {
             var listaRutas = new List<RutaOrdenUso_DTO>();
@@ -38,6 +50,7 @@ namespace GR_MVC_17.DAL
                 "where a.IdUsuario = " + idUsuario + " and (a.IdPerfil = " + idPerfil + " or a.IdPerfil = 5) " +
                 "group by IdRuta, b.Nombre " +
                 "order by count(*) desc";
+
 
             var cn = ConfigurationManager.ConnectionStrings["ApplicationDbContext"].ConnectionString;
 
@@ -151,6 +164,77 @@ namespace GR_MVC_17.DAL
                 return 0;
             }
 
+        }
+
+
+
+        public List<RutaOrdenUso_DTO> DameRutasOrdenNuevoSinPerfil(int idUsuario)
+        {
+            var listaRutas = new List<RutaOrdenUso_DTO>();
+
+            var sql = "SELECT count(*) as contador, idruta as id, b.Nombre as nombre " +
+                      "FROM [GestionRutasDB].[dbo].[RegistroRutas] a " +
+                      "inner join RutasUsuario b on a.IdRuta = b.id and a.IdPerfil = b.idPerfil and a.IdUsuario = b.idUsuario " +
+                      "where a.IdUsuario = " + idUsuario + " and (a.IdPerfil = 1 or a.IdPerfil = 2 or a.IdPerfil = 3 or a.IdPerfil = 4) " +
+                      "group by IdRuta, b.Nombre " +
+                      "order by count(*) desc";
+
+
+            var cn = ConfigurationManager.ConnectionStrings["ApplicationDbContext"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(cn))
+            {
+                var cmd = new SqlCommand(sql, connection);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                var ds = new DataSet();
+                da.Fill(ds);
+
+                if (ds.Tables.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        var nuevo = new RutaOrdenUso_DTO();
+                        nuevo.contador = int.Parse(r.ItemArray[0].ToString());
+                        nuevo.id = int.Parse(r.ItemArray[1].ToString());
+                        nuevo.nombre = r.ItemArray[2].ToString();
+
+                        listaRutas.Add(nuevo);
+                    }
+                }
+            }
+
+
+
+            var sqlRutasNoUsadas = "select 0 as contador, id, Nombre as nombre from RutasUsuario where " +
+                "IdUsuario = " + idUsuario + " and id not in " +
+                "(select distinct IdRuta FROM[GestionRutasDB].[dbo].[RegistroRutas] where IdUsuario = " + idUsuario + ")";
+
+            var cn2 = ConfigurationManager.ConnectionStrings["ApplicationDbContext"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(cn2))
+            {
+                var cmd = new SqlCommand(sqlRutasNoUsadas, connection);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                var ds = new DataSet();
+                da.Fill(ds);
+
+                if (ds.Tables.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        var nuevo = new RutaOrdenUso_DTO();
+                        nuevo.contador = int.Parse(r.ItemArray[0].ToString());
+                        nuevo.id = int.Parse(r.ItemArray[1].ToString());
+                        nuevo.nombre = r.ItemArray[2].ToString();
+
+                        listaRutas.Add(nuevo);
+                    }
+                }
+            }
+
+
+
+            return listaRutas;
         }
 
     }

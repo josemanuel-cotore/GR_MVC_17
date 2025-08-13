@@ -35,9 +35,9 @@ namespace GR_MVC_17.App_Start
             container.Register<IUsuarioRepositiorio, UsuarioRepositiorio>(Lifestyle.Scoped);
             container.Register<IRutasRepositorio, RutasRepositorio>(Lifestyle.Scoped);
             container.Register<IRegistroRepositorio, RegistroRepositorio>(Lifestyle.Scoped);
-            container.Register<IPerfilRepositorio, PerfilRepositorio>(Lifestyle.Scoped);
+            container.Register<IPerfilRepositorio, PerfilRepositiorio>(Lifestyle.Scoped);
             container.Register<IInconvenienteRepositorio, InconvenienteRepositorio>(Lifestyle.Scoped);
-            container.Register<IHerramientaRepositorio, HerramientaRepositorio>(Lifestyle.Scoped);
+            container.Register<IZapatillasRepositorio, ZapatillaRepositorio>(Lifestyle.Scoped);
             //container.Register<>
 
         }

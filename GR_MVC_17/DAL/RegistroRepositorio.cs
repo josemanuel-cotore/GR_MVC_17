@@ -19,6 +19,16 @@ namespace GR_MVC_17.DAL
             return listaRegistros;
         }
 
+        public List<RegistroRutas> dameRegistros(int idUsuario)
+        {
+            List<RegistroRutas> listaRegistros = (from j in db.RegistroRutas
+                                                  where
+                                                  j.IdUsuario == idUsuario
+                                                  orderby j.Fecha descending
+                                                  select j).ToList();
+            return listaRegistros;
+        }
+
 
         public Boolean AñadirRegistroRuta(RegistroRutas registro)
         {

@@ -1,0 +1,128 @@
+﻿@model RegistroRutas
+
+@{
+    ViewBag.Title = "4.3- Modificar Registro";
+    var fechaActual = DateTime.Now.ToShortDateString();
+
+
+    var _idR = ViewBag.IdRegistro;
+    var _idU = ViewBag.IdUsuario;
+    var _idP = ViewBag.IdPerfil;
+
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="row">
+        <div class="col-md-12">
+            @*1º PARTE*@
+            <div class="col-md-4" style="margin-top: 2%">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.Editor("Fecha", new { htmlAttributes = new { @class = "datepicker", @type = "date", id = "fecha" } })
+                        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @Html.EditorFor(model => model.IdRuta, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group">
+                    <span class="control-label col-md-4">Rutas Correr</span>
+                    <div class="col-md-8">
+                        <select class="form-control small" id="rutas">
+                            @{
+                                foreach (var item in ViewBag.RutasCorrer)
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Km, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="km">
+                    </div>
+                </div>
+
+                @Html.EditorFor(model => model.IdInconveniente, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group">
+                    <span class="control-label col-md-4">Inconvenientes</span>
+                    <div class="col-md-8">
+                        <select class="form-control small" id="inconvenientes">
+                            @{
+                                foreach (var item in ViewBag.Inconvenientes)
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+        <div class="row">
+            <div class="form-group" style="text-align:right">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-10">
+                    <input type="button" id="btnModificar" value="Modificar Registro" class="btn btn-success" />
+                    <input type="button" id="btnVolver" value="Volver" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+
+<div id="resRegistroError" style="text-align:left; color:red"></div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script>
+
+
+    $("#btnModificar").click(function () {
+
+        $.ajax({
+            cache: false,
+            async: true,
+            type: "POST",
+            data: '{idRegistro: "' + @_idR + '", idUsuario: "' + @_idU + '", idPerfil: "' + @_idP + '", fecha: "' + $("#fecha").val() + '", km: "' + $("#km").val() + '", ruta: "' + $("#rutas").val() + '", inconve: "' + $("#inconvenientes").val() + '" }',
+            dataType: 'html', //el tipo de dato que nos regresara el servidor en este caso regresa html
+            url: '@Url.Action("_PasoParaCrearRegistro", "Home")',
+            success: function (response) {
+                $('#resRegistro').html('');
+                $('#resRegistro').html(response);
+            },
+
+            error: function (error) {
+                // si hay un error lanzara el mensaje de error
+                alert('Fail');
+            }
+
+        });
+    }
+
+
+
+</script>
+

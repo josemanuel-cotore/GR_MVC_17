@@ -8,8 +8,10 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body style="background-color:GrayText">
-    <div id="MiContenedorColores" class="container" style="background-color: #2a4f55 ">
+
+<body style="background-image: url('../../imagenes/Fondo/fondo1.jpg'); background-repeat: no-repeat; background-size: cover; padding:15px">
+    @*<div id="MiContenedorColores" class="container" style="background-color: transparent ">*@
+    <div style="background-color: transparent ">
         @RenderBody()
     </div>
 

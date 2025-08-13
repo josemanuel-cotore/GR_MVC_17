@@ -32,7 +32,7 @@
             $.ajax({
                 type: "POST",
                 url: "/Home/_CrearRuta",
-                data: '{nombreRuta: "' + $("#nombreRuta").val() + '", idPerfil: "' + @ViewBag.IdPerfil + '", idUsuario: "' + @ViewBag.IdUsuario + '", idTipoRuta: "' + @ViewBag.IdTipoRuta + '" }',
+                data: '{nombreRuta: "' + $("#nombreRuta").val() + '", idPerfil: "' + @ViewBag.IdPerfil + '", idUsuario: "' + @ViewBag.IdUsuario + '" }',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

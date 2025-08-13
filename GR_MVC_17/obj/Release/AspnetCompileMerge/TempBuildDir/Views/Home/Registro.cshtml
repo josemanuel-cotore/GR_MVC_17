@@ -1,0 +1,282 @@
+﻿@model IEnumerable<GR_MVC_17.RegistroRutas>
+
+@{
+    ViewBag.Title = "4.- Registro de las Herramientas";
+
+    var _idUsuario = ViewBag.Usuario;
+    var _idHerramienta = ViewBag.Herramienta;
+    var _idPerfil = ViewBag.Perfil;
+}
+@*<div class="container">*@
+    <div class="row">
+        <table class="table" style="opacity:0.6">
+            <tr>
+                <th>
+                    @Html.Label("Fecha")
+                </th>
+                <th>
+                    @Html.Label("Ruta")
+                </th>
+                <th>
+                    @Html.Label("Tipo")
+                </th>
+                <th>
+                    @Html.Label("Km")
+                </th>
+                <th>
+                    @Html.Label("Dia")
+                </th>
+                <th>
+                    @Html.Label(" ")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr style="font-size:smaller">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RutasUsuario.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RutasUsuario.Perfil.Nombre)
+                    </td>
+                    <td>
+                        @if (item.Km > 0)
+                        {
+                            @Html.DisplayFor(modelItem => item.Km)
+                        }
+                    </td>
+                    <td>
+                        <img src="@item.TipoInconveniente.Imagen" />
+                    </td>
+                    @*<td>
+                            <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalModificarRegistro" />Modificar
+                        </td>*@
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />X
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @if (ViewBag.BasePaginacionV.PaginaActual == 1)
+            {
+                <li class="disabled"><a style="opacity:0.6; margin-right:3px" href="@Url.Action("Registro", "Home", new { idHerramienta = _idHerramienta, idUsuario = _idUsuario, idPerfil = _idPerfil, pagina = 1 })" class="btn btn-dark btn-sm">Anterior</a></li>
+            }
+            else
+            {
+                <li><a style="opacity: 0.6; margin-right: 3px" href="@Url.Action("Registro", "Home", new { idHerramienta = _idHerramienta, idUsuario = _idUsuario, idPerfil = _idPerfil, pagina = ViewBag.BasePaginacionV.PaginaActual - 1 })" class="btn btn-dark btn-sm">Anterior</a></li>
+            }
+            @if (ViewBag.BasePaginacionV.PaginaActual == ViewBag.BasePaginacionV.CantidadDePaginas)
+            {
+                <li class="disabled"><a style="opacity: 0.6; margin-left: 3px" href="@Url.Action("Registro", "Home", new { idHerramienta = _idHerramienta, idUsuario = _idUsuario, idPerfil = _idPerfil, pagina = ViewBag.BasePaginacionV.CantidadDePaginas })" class="btn btn-dark btn-sm">Siguiente</a></li>
+            }
+            else
+            {
+                <li><a style="opacity: 0.6; margin-left: 3px" href="@Url.Action("Registro", "Home", new { idHerramienta = _idHerramienta, idUsuario = _idUsuario, idPerfil = _idPerfil, pagina = ViewBag.BasePaginacionV.PaginaActual + 1 })" class="btn btn-dark btn-sm">Siguiente</a></li>
+            }
+
+        </ul>
+    </nav>
+
+
+    <div class="row" style="margin-bottom:5%; text-align:center">
+
+        <div class="col">
+            <a style="opacity:0.8" class="btn btn-success btn-sm" href="@Url.Action("Zapatillas", "Home", new { idUsuario = _idUsuario })">Zapatillas</a>
+        </div>
+        <div class="col">
+            <button type="button" style="opacity:0.8; margin-bottom: 3px" class="btn btn-warning btn-sm" onclick="funcionCrearRuta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Ruta">Nueva Ruta</button>
+            <button type="button" style="opacity:0.8" class="btn btn-success btn-sm" onclick="funcionVerRutas()" data-bs-toggle="modal" data-bs-target="#Modal_Ver_Rutas">Ver Rutas</button>
+        </div>
+        <div class="col">
+            <button style="opacity:0.8" type="button" class="btn btn-success btn-sm" onclick="funcionCrearRegistro();" data-bs-toggle="modal" data-bs-target="#ModalRegistro">Registro</button>
+        </div>
+
+    </div>
+
+
+    <!-- Modal Crear Registro -->
+    <div class="modal fade" id="ModalRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color:black; border:3px solid grey">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="text-align:center; color:white">Crear Nuevo Registro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="resRegistro"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar Registro -->
+    <div class="modal fade" id="ModalEliminarRegistro" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color:black; border:3px solid grey">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color:white">Eliminar Registro</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="resConfirmarEliminar"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ver Rutas Disponibles -->
+    <div class="modal fade" id="Modal_Ver_Rutas" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color:black; border:3px solid grey">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color:white">Rutas Disponibles</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="resVerRutas"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Crear Nueva Ruta -->
+    <div class="modal fade" id="Modal_Crear_Ruta" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color:black; border:3px solid grey">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color:white">Crear Nueva Ruta</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="resRuta"></div>
+                </div>
+                <div class="modal-footer">
+                    @*<div id="resRutaError" style="color:red; margin-top: 5%"></div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+@*</div>*@
+
+
+
+
+<script>
+    function funcionCrearRegistro() {
+    //debugger;
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "POST",
+        data: { idUsuario: @_idUsuario},
+        dataType: 'html', //el tipo de dato que nos regresara el servidor en este caso regresa html
+        url: '@Url.Action("_PasoParaCrearRegistro", "Home")',
+        success: function (response) {
+            $('#resRegistro').html('');
+            $('#resRegistro').html(response);
+        },
+
+        error: function (error) {
+            // si hay un error lanzara el mensaje de error
+            alert('Fail');
+        }
+    });
+        }
+
+    function abrirModalEliminar(idRegistro) {
+
+        debugger;
+
+        var miTabla = "RegistroRutas";
+
+        $.ajax({
+            cache: false,
+            async: true,
+            type: "POST",
+            dataType: "html",
+            data: { id: idRegistro, tabla: miTabla, idUsuario: @_idUsuario},
+            url: "@Url.Action("procesoParaEliminarOcultar", "Home")",
+            success: function (response) {
+                $('#resConfirmarEliminar').html('');
+                $('#resConfirmarEliminar').html(response);
+            },
+
+            error: function (response) {
+
+                if (response.ok == false) {
+                    $("#resErrorConfirmarEliminar").html(response.mensaje);
+                }
+            }
+
+
+        });
+
+
+    }
+
+
+    function funcionVerRutas() {
+        //debugger;
+        $.ajax({
+            cache: false,
+            async: true,
+            type: "POST",
+            dataType: 'html', //el tipo de dato que nos regresara el servidor en este caso regresa html
+            data: { idUsuario: @_idUsuario, idPerfil: 1},
+            url: '@Url.Action("_PasoParaVerRutasDisponibles", "Home")',
+            success: function (response) {
+                //debugger;
+                $('#resVerRutas').html('');
+                $('#resVerRutas').html(response);
+            },
+
+            error: function (error) {
+                //debugger;
+                // si hay un error lanzara el mensaje de error
+                alert('fallo en modal ver rutas disponibles');
+            }
+        });
+    }
+
+
+        function funcionCrearRuta() {
+    //debugger;
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "POST",
+        dataType: 'html', //el tipo de dato que nos regresara el servidor en este caso regresa html
+        data: { idPerfil: 1, idUsuario: @_idUsuario},
+        url: '@Url.Action("_PasoParaCrearRuta", "Home")',
+        success: function (response) {
+            //debugger;
+            $('#resRuta').html('');
+            $('#resRuta').html(response);
+        },
+
+        error: function (error) {
+            //debugger;
+            // si hay un error lanzara el mensaje de error
+            alert('fallo en modal crear ruta');
+        }
+    });
+    }
+
+
+
+</script>
+
+

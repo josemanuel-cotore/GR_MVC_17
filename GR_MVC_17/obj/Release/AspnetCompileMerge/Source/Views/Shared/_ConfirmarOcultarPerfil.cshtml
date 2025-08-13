@@ -41,10 +41,10 @@
             success: function (response) {
                 if (response.ok == true) {
                     $("#resOcultarPerfil").modal("hide");
-                    location.href = "Perfiles_Usuario/1";
+                    location.href = "Perfiles_Usuario/" + @ViewBag.IdUsuario;
                 } else {
                     $("#resOcultarPerfil").modal("hide");
-                    location.href = "Perfiles_Usuario/1";
+                    location.href = "Perfiles_Usuario/" + @ViewBag.IdUsuario;
                 }
 
             },

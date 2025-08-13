@@ -19,30 +19,56 @@
         </div>
     </div>
     <div class="row" style="margin: 1rem">
-            <span class="control-label col-sm-2" style="color:white">Ruta</span>
-            <div class="col-sm-10">
-                <select class="form-control small" id="rutas">
-                    @{
-                        foreach (var item in ViewBag.Rutas)
-                        {
-                            <option value=@item.Value>@item.Text</option>
-                        }
+        <span class="control-label col-sm-2" style="color:white">Zapatillas</span>
+        <div class="col-sm-10">
+            <select class="form-control small" id="herramientas">
+                @{
+                    foreach (var item in ViewBag.Herramientas)
+                    {
+                        <option value=@item.Value>@item.Text</option>
                     }
-                </select>
-            </div>
+                }
+            </select>
+        </div>
     </div>
     <div class="row" style="margin: 1rem">
-            <span class="control-label col-sm-2" style="color:white">Inconv.</span>
-            <div class="col-sm-10">
-                <select class="form-control small" id="inconvenientes">
-                    @{
-                        foreach (var item in ViewBag.Inconvenientes)
-                        {
-                            <option value=@item.Value>@item.Text</option>
-                        }
+        <span class="control-label col-sm-2" style="color:white">Tipo</span>
+        <div class="col-sm-10">
+            <select class="form-control small" id="perfiles">
+                @{
+                    foreach (var item in ViewBag.Perfiles)
+                    {
+                        <option value=@item.Value>@item.Text</option>
                     }
-                </select>
-            </div>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row" style="margin: 1rem">
+        <span class="control-label col-sm-2" style="color:white">Ruta</span>
+        <div class="col-sm-10">
+            <select class="form-control small" id="rutas">
+                @{
+                    foreach (var item in ViewBag.Rutas)
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row" style="margin: 1rem">
+        <span class="control-label col-sm-2" style="color:white">Inconv.</span>
+        <div class="col-sm-10">
+            <select class="form-control small" id="inconvenientes">
+                @{
+                    foreach (var item in ViewBag.Inconvenientes)
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
     </div>
 
     <div class="row" style="text-align:center; margin-top:10%">
@@ -74,10 +100,11 @@
 
                 else {
 
+                    debugger;
                 $.ajax({
                     type: "POST",
                     url: "/Home/_CrearRegistro",
-                    data: '{fecha: "' + $("#fecha").val() + '", km: "' + $("#km").val() + '", ruta: "' + $("#rutas").val() + '", inconve: "' + $("#inconvenientes").val() + '", idUsuario: "' + @Model.idUsuario_S + '", idHerramienta: "' + @Model.idHerramienta_S + '", idPerfil: "' + @Model.idPerfil_S + '" }',
+                    data: '{fecha: "' + $("#fecha").val() + '", km: "' + $("#km").val() + '", idHerramienta: "' + $("#herramientas").val() + '", idPerfil: "' + $("#perfiles").val() + '", ruta: "' + $("#rutas").val() + '", inconve: "' + $("#inconvenientes").val() + '", idUsuario: "' + @Model.idUsuario_S + '" }',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
