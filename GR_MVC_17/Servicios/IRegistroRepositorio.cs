@@ -13,8 +13,6 @@ namespace GR_MVC_17.Servicios
         Boolean AñadirRegistroRuta(RegistroRutas registro);
         double dameCalculoPorHerramienta(int idUsuario, int idHerramienta);
         bool eliminarRegistroRutas(int? id);
-        List<RegistroRutas_Partial> dameRegistroPorPerfil(int idPerfil);
-        List<RegistroRutas_Partial> convierteListaRegistrosEnPartial(List<RegistroRutas> lista);
         RegistroRutas dameRegistroPorId(int idRegistro);
     }
 }

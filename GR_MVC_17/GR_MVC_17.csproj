@@ -163,7 +163,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Models\RegistroRutas.cs" />
-    <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\RutasUsuario.cs" />
     <Compile Include="Models\TipoInconveniente.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -287,8 +286,6 @@
     <Content Include="Views\Home\DisplayTemplates\Datetime.cshtml" />
     <Content Include="Views\Home\DisplayTemplates\IdInconveniente.cshtml" />
     <Content Include="Views\Shared\_ConfirmarEliminar.cshtml" />
-    <Content Include="Views\Shared\_CrearRegistroDuatlon_Carrera.cshtml" />
-    <Content Include="Views\Shared\_ModificarRegistroDuatlon_Carrera.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Shared\_ConfirmarOcultarPerfil.cshtml" />

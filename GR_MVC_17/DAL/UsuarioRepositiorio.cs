@@ -10,11 +10,6 @@ namespace GR_MVC_17.DAL
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public List<Usuario> DameTodosUsuarios()
-        {
-            return db.Usuario.Where(x => x.IdRol != 1).ToList();
-        }
-
         public Usuario ExisteUsuario(Usuario usuario)
         {
             Usuario existe = new Usuario();

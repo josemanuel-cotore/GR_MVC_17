@@ -210,7 +210,7 @@ namespace GR_MVC_17.DAL
                 "(select distinct IdRuta FROM[GestionRutasDB].[dbo].[RegistroRutas] where IdUsuario = " + idUsuario + ")";
 
             var cn2 = ConfigurationManager.ConnectionStrings["ApplicationDbContext"].ConnectionString;
-
+            
             using (SqlConnection connection = new SqlConnection(cn2))
             {
                 var cmd = new SqlCommand(sqlRutasNoUsadas, connection);

@@ -97,7 +97,7 @@ namespace GR_MVC_17.Controllers
             ViewBag.Perfiles = listaPerfiles.Select(p => new SelectListItem() { Value = p.Id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
 
             var listaRutas = repoRutas.DameRutasOrdenNuevoSinPerfil(idUsuario);
-            ViewBag.Rutas = listaRutas.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.nombre }).ToList<SelectListItem>();
+            ViewBag.Rutas = listaRutas.Select(p => new SelectListItem() { Value = p.id.ToString(), Text = p.nombre + " - (" + p.contador.ToString() + ")" }).ToList<SelectListItem>();
 
             var listaInconvenientes = repoInconveniente.dameInconvenientes();
             ViewBag.Inconvenientes = listaInconvenientes.Select(p => new SelectListItem() { Value = p.Id.ToString(), Text = p.Nombre }).ToList<SelectListItem>();
@@ -110,7 +110,7 @@ namespace GR_MVC_17.Controllers
 
 
         [HttpPost]
-        public JsonResult _CrearRegistro(DateTime fecha, double km, int idHerramienta, int idPerfil, int ruta, int inconve, int idUsuario)
+        public JsonResult _CrearRegistro(DateTime fecha, double km, int desnivel, int idHerramienta, int idPerfil, int ruta, int inconve, int idUsuario)
         {
             Respuesta_DTO respuesta = new Respuesta_DTO();
 
@@ -125,6 +125,7 @@ namespace GR_MVC_17.Controllers
                 {
                     Fecha = fecha,
                     Km = km,
+                    Desnivel = desnivel,
                     IdRuta = ruta,
                     IdUsuario = idUsuario,
                     IdHerramienta = idHerramienta,
@@ -174,8 +175,10 @@ namespace GR_MVC_17.Controllers
         [HttpPost]
         public ActionResult _PasoParaVerRutasDisponibles(int idUsuario, int idPerfil)
         {
-            var listadoRutasUsuario = repoRutas.DameRutasUsuarioPerfil(idUsuario, idPerfil);
+            //var listadoRutasUsuario = repoRutas.DameRutasUsuarioPerfil(idUsuario, idPerfil);
             //ViewBag.ListadoRutas = listadoRutasUsuario;
+
+            var listadoRutasUsuario = repoRutas.DameRutasOrdenNuevo(idUsuario, idPerfil);
 
             return PartialView("_RutasDisponibles", listadoRutasUsuario);
         }

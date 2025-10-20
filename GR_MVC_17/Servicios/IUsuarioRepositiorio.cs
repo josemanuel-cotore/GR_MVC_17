@@ -8,7 +8,6 @@ namespace GR_MVC_17.Servicios
 {
     public interface IUsuarioRepositiorio
     {
-        List<Usuario> DameTodosUsuarios();
         Usuario ExisteUsuario(Usuario usuario);
         Usuario ExisteUsuarioPorId(int idUsuario);
         Usuario DameUsuarioPorId(int idUsuario);

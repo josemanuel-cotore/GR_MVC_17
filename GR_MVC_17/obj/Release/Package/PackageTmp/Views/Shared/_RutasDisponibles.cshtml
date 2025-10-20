@@ -1,16 +1,22 @@
-﻿@model IEnumerable<GR_MVC_17.RutasUsuario>
+﻿@model IEnumerable<GR_MVC_17.DTO.RutaOrdenUso_DTO>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nombre)
+            @Html.Display("Ruta")
+        </th>
+        <th>
+            @Html.Display("Nº Veces")
         </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contador)
         </td>
     </tr>
 }

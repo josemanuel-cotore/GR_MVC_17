@@ -17,7 +17,6 @@ namespace GR_MVC_17
         public virtual DbSet<Perfil> Perfil { get; set; }
         public virtual DbSet<PerfilUsuario> PerfilUsuario { get; set; }
         public virtual DbSet<RegistroRutas> RegistroRutas { get; set; }
-        public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<RutasUsuario> RutasUsuario { get; set; }
         public virtual DbSet<TipoInconveniente> TipoInconveniente { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
@@ -46,12 +45,6 @@ namespace GR_MVC_17
                 .HasMany(e => e.RutasUsuario)
                 .WithRequired(e => e.Perfil)
                 .HasForeignKey(e => e.idPerfil)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Rol>()
-                .HasMany(e => e.Usuario)
-                .WithRequired(e => e.Rol)
-                .HasForeignKey(e => e.IdRol)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<RutasUsuario>()

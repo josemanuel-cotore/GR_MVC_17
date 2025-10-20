@@ -36,8 +36,6 @@ namespace GR_MVC_17
 
         public DateTime? Edad { get; set; }
 
-        public int IdRol { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual List<HerramientasUsuario> HerramientasUsuario { get; set; }
 
@@ -46,8 +44,6 @@ namespace GR_MVC_17
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual List<RegistroRutas> RegistroRutas { get; set; }
-
-        public virtual Rol Rol { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual List<RutasUsuario> RutasUsuario { get; set; }
