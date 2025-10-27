@@ -5,7 +5,7 @@ namespace GR_MVC_17.App_Start
     using System.Reflection;
     using System.Web.Mvc;
     using GR_MVC_17.DAL;
-    using GR_MVC_17.Servicios;
+    using GR_MVC_17.Interfaces;
     using SimpleInjector;
     using SimpleInjector.Integration.Web;
     using SimpleInjector.Integration.Web.Mvc;

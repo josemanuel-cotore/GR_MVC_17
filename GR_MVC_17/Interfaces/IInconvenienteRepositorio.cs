@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GR_MVC_17.Servicios
+namespace GR_MVC_17.Interfaces
 {
-    internal interface IPerfilRepositorio
+    public interface IInconvenienteRepositorio
     {
-        List<Perfil> DameListaPerfilesUsuario(Usuario usuario);
+        List<TipoInconveniente> dameInconvenientes();
     }
 }

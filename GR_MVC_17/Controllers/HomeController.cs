@@ -1,9 +1,12 @@
 ﻿using GR_MVC_17.DAL;
 using GR_MVC_17.DTO;
+using GR_MVC_17.Servicios;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 
 namespace GR_MVC_17.Controllers
@@ -16,6 +19,7 @@ namespace GR_MVC_17.Controllers
         public RegistroRepositorio repoRegistro = new RegistroRepositorio();
         public PerfilRepositiorio repoPerfil = new PerfilRepositiorio();
         public InconvenienteRepositorio repoInconveniente = new InconvenienteRepositorio();
+        public DesnivelService desnivelService = new DesnivelService();
 
         public ActionResult Index()
         {
@@ -385,16 +389,6 @@ namespace GR_MVC_17.Controllers
                             respuesta.ok = true;
                             respuesta.mensaje = "Registro eliminado correctamente";
                             break;
-
-                        //case "PerfilUsuario":
-                        //    if (repoPerfil.ocultarMostrarPerfilUsuario(id, idUsuario, false) == false)
-                        //    {
-                        //        throw new Exception("Error al ocultar perfil del usuario: " + idUsuario);
-                        //    }
-                        //    respuesta.ok = true;
-                        //    respuesta.mensaje = "Registro ocultado correctamente";
-                        //    //return RedirectToAction("Perfiles_Usuario", new Usuario { Id = idUsuario });
-                        //    break;
                     }
                 }
                 else
@@ -409,6 +403,43 @@ namespace GR_MVC_17.Controllers
             }
 
             return Json(respuesta);
+        }
+
+        public ActionResult DesnivelGeneral(int idUsuario) 
+        {
+            ViewBag.IdUsuario = idUsuario;
+            List<DesnivelFecha_DTO> listaDesnivelGeneral = new List<DesnivelFecha_DTO>();
+            listaDesnivelGeneral = desnivelService.dameDesnivelAño();
+
+            return View(listaDesnivelGeneral);
+        }
+
+        public ActionResult DesnivelAño(int año, int idUsuario)
+        {
+            ViewBag.IdUsuario = idUsuario;
+            ViewBag.AñoSeleccionado = año;
+            ViewBag.TituloMes = "Kms y Desnivel positivo en " + año;
+
+            List<DesnivelFecha_DTO> listaDesnivelMes = new List<DesnivelFecha_DTO>();
+            listaDesnivelMes = desnivelService.dameDesnivelMes(año);
+
+            return View(listaDesnivelMes);
+        }
+
+        public ActionResult DesnivelPorAñoYMes(int año, int mes, int idUsuario)
+        {
+            ViewBag.IdUsuario = idUsuario;
+            ViewBag.AñoSeleccionado = año;
+
+            var culture = new CultureInfo("es-ES");
+            var nombreMes = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mes);
+            nombreMes = culture.TextInfo.ToTitleCase(nombreMes);
+
+            ViewBag.TituloMes = "Kms y Desnivel positivo de " + nombreMes;
+            List<RegistroRutas> listaDesnivelRutas = new List<RegistroRutas>();
+            listaDesnivelRutas = desnivelService.dameRegistrosDesnivel(año, mes);
+
+            return View(listaDesnivelRutas);
         }
 
 

@@ -1,0 +1,37 @@
+﻿@model List<GR_MVC_17.DTO.DesnivelFecha_DTO>
+@{
+    ViewBag.Title = "Ventana de desnivel general";
+    var _idUsuario = ViewBag.IdUsuario;
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                @*<h2 style="color:white">@ViewBag.TemaPerfil</h2>*@
+                <h2 style="color:white">Ventana de desnivel general</h2>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom:5%">
+            <div class="col-md-8">
+
+            </div>
+            <div class="col" style="text-align:left">
+                @*<button type="button" class="btn btn-primary btn-sm" onclick="abrirModalOcultarPerfil()" data-bs-toggle="modal" data-bs-target="#Modal_Ocultar_Perfil">Ocultar Perfil</button>*@
+            </div>
+            <div class="col" style="text-align:right">
+                <a class="btn btn-danger btn-sm" href="@Url.Action("Registro", "Home", new { idUsuario = _idUsuario, pagina = 1 })">Volver</a>
+            </div>
+
+        </div>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <a style="opacity:0.8" class="btn btn-success btn-sm m-1" href="@Url.Action("DesnivelAño", "Home", new { año = item.añoOmes, idUsuario = _idUsuario })">@item.añoOmes - Kms: @item.kms - Dn+: @item.desnivel</a>
+            }
+        </div>
+    </div>
+
+}
+

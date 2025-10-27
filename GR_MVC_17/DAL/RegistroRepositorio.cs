@@ -1,5 +1,4 @@
-﻿using GR_MVC_17.Partial;
-using GR_MVC_17.Servicios;
+﻿using GR_MVC_17.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

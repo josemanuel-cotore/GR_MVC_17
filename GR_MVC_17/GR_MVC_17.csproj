@@ -141,6 +141,7 @@
     <Compile Include="DAL\RutasRepositorio.cs" />
     <Compile Include="DAL\UsuarioRepositiorio.cs" />
     <Compile Include="DTO\BasePaginacion.cs" />
+    <Compile Include="DTO\DesnivelFecha_DTO.cs" />
     <Compile Include="DTO\Herramienta_DTO.cs" />
     <Compile Include="DTO\Respuesta_DTO.cs" />
     <Compile Include="DTO\RutaOrdenUso_DTO.cs" />
@@ -166,12 +167,14 @@
     <Compile Include="Models\RutasUsuario.cs" />
     <Compile Include="Models\TipoInconveniente.cs" />
     <Compile Include="Models\Usuario.cs" />
-    <Compile Include="Servicios\IPerfilRepositorio.cs" />
-    <Compile Include="Servicios\IZapatillasRepositorio.cs" />
-    <Compile Include="Servicios\IInconvenienteRepositorio.cs" />
-    <Compile Include="Servicios\IRegistroRepositorio.cs" />
-    <Compile Include="Servicios\IRutasRepositorio.cs" />
-    <Compile Include="Servicios\IUsuarioRepositiorio.cs" />
+    <Compile Include="Interfaces\IPerfilRepositorio.cs" />
+    <Compile Include="Interfaces\IZapatillasRepositorio.cs" />
+    <Compile Include="Interfaces\IInconvenienteRepositorio.cs" />
+    <Compile Include="Interfaces\IRegistroRepositorio.cs" />
+    <Compile Include="Interfaces\IRutasRepositorio.cs" />
+    <Compile Include="Interfaces\IUsuarioRepositiorio.cs" />
+    <Compile Include="Servicios\DesnivelService.cs" />
+    <Compile Include="Servicios\IDesnivelService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\GR_MVC_17.dll" />
@@ -291,6 +294,9 @@
     <Content Include="Views\Shared\_ConfirmarOcultarPerfil.cshtml" />
     <Content Include="Views\Shared\_ModificarRegistro.cshtml" />
     <Content Include="Views\Shared\_Paginacion.cshtml" />
+    <Content Include="Views\Home\DesnivelGeneral.cshtml" />
+    <Content Include="Views\Home\DesnivelAño.cshtml" />
+    <Content Include="Views\Home\DesnivelPorAñoYMes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

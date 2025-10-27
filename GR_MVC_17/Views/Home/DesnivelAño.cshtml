@@ -1,0 +1,37 @@
+﻿@model List<GR_MVC_17.DTO.DesnivelFecha_DTO>
+@{
+    ViewBag.Title = "Ventana de desnivel por año";
+    var añoSeleccionado = ViewBag.AñoSeleccionado;
+    var _idUsuario = ViewBag.IdUsuario;
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <h2 style="color:white">@ViewBag.TituloMes</h2>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom:5%">
+            <div class="col-md-8"></div>
+            <div class="col" style="text-align:left"></div>
+            <div class="col" style="text-align:right">
+                <a class="btn btn-danger btn-sm" href="@Url.Action("DesnivelGeneral", "Home", new { idUsuario = _idUsuario })">Volver</a>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                    <button type="button" class="custom-button" style="width: 200px; margin: 10px">
+                        <div class="button-content">
+                            <div class="button-title">@item.nombreMes</div>
+                            <a class="btn btn-dark" href="@Url.Action("DesnivelPorAñoYMes", "Home", new { año = añoSeleccionado, mes = item.añoOmes, idUsuario = _idUsuario })">Kms: @item.kms Dn+: @item.desnivel</a>
+                        </div>
+                    </button>
+            }
+        </div>
+    </div>
+
+}
+

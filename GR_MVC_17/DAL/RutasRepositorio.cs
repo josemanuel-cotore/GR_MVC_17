@@ -4,13 +4,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
-using static System.Net.Mime.MediaTypeNames;
 using System.Web.UI.WebControls;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Configuration;
-using GR_MVC_17.Servicios;
-using static GR_MVC_17.Enums.Enum;
+using GR_MVC_17.Interfaces;
 
 namespace GR_MVC_17.DAL
 {

@@ -7,7 +7,7 @@
     var _idHerramienta = ViewBag.Herramienta;
     var _idPerfil = ViewBag.Perfil;
 }
-@*<div class="container">*@
+
     <div class="row">
         <table class="table" style="opacity:0.6">
             <tr>
@@ -61,9 +61,6 @@
                     <td>
                         <img src="@item.TipoInconveniente.Imagen" />
                     </td>
-                    @*<td>
-            <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalModificarRegistro" />Modificar
-        </td>*@
                     <td>
                         <button type="button" class="btn btn-danger btn-sm" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />X
                     </td>
@@ -99,6 +96,7 @@
 
         <div class="col">
             <a style="opacity:0.8" class="btn btn-success btn-sm" href="@Url.Action("Zapatillas", "Home", new { idUsuario = _idUsuario })">Zapatillas</a>
+            <a style="opacity:0.8" class="btn btn-danger btn-sm" href="@Url.Action("DesnivelGeneral", "Home", new { idUsuario = _idUsuario })">Dn +</a>
         </div>
         <div class="col">
             <button type="button" style="opacity:0.8; margin-bottom: 3px" class="btn btn-warning btn-sm" onclick="funcionCrearRuta()" data-bs-toggle="modal" data-bs-target="#Modal_Crear_Ruta">Nueva Ruta</button>

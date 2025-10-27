@@ -1,0 +1,78 @@
+﻿@model IEnumerable<GR_MVC_17.RegistroRutas>
+
+@{
+    ViewBag.Title = "Registros por desnivel (Año y Mes)";
+    var _idUsuario = ViewBag.IdUsuario;
+    var _añoSeleccionado = ViewBag.AñoSeleccionado;
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <h2 style="color:white">@ViewBag.TituloMes</h2>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom:5%">
+        <div class="col-md-8"></div>
+        <div class="col" style="text-align:left"></div>
+        <div class="col" style="text-align:right">
+            <a class="btn btn-danger btn-sm" href="@Url.Action("DesnivelAño", "Home", new {año = _añoSeleccionado, idUsuario = _idUsuario})">Volver</a>
+        </div>
+    </div>
+
+    <table class="table" style="opacity:0.6">
+        <tr>
+            <th>
+                @Html.Label("Fecha")
+            </th>
+            <th>
+                @Html.Label("Ruta")
+            </th>
+            <th>
+                @Html.Label("Tipo")
+            </th>
+            <th>
+                @Html.Label("Km")
+            </th>
+            <th>
+                @Html.Label("Dn")
+            </th>
+            <th>
+                @Html.Label("Dia")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr style="font-size:smaller">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RutasUsuario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RutasUsuario.Perfil.Nombre)
+                </td>
+                <td>
+                    @if (item.Km > 0)
+                    {
+                        @Html.DisplayFor(modelItem => item.Km)
+                    }
+                </td>
+                <td>
+                    @if (item.Desnivel != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Desnivel)
+                    }
+                </td>
+                <td>
+                    <img src="@item.TipoInconveniente.Imagen" />
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

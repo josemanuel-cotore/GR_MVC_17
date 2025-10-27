@@ -24,6 +24,9 @@
                     @Html.Label("Km")
                 </th>
                 <th>
+                    @Html.Label("Dn")
+                </th>
+                <th>
                     @Html.Label("Dia")
                 </th>
                 <th>
@@ -50,11 +53,17 @@
                         }
                     </td>
                     <td>
+                        @if (item.Desnivel != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Desnivel)
+                        }
+                    </td>
+                    <td>
                         <img src="@item.TipoInconveniente.Imagen" />
                     </td>
                     @*<td>
-                            <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalModificarRegistro" />Modificar
-                        </td>*@
+            <button type="button" class="btn btn-warning" onclick="abrirModalModificar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalModificarRegistro" />Modificar
+        </td>*@
                     <td>
                         <button type="button" class="btn btn-danger btn-sm" onclick="abrirModalEliminar(@item.Id)" data-bs-toggle="modal" data-bs-target="#ModalEliminarRegistro" />X
                     </td>

@@ -19,6 +19,12 @@
         </div>
     </div>
     <div class="row" style="margin: 1rem">
+        <span class="control-label col-sm-2" style="color:white">Desnivel</span>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="desnivel">
+        </div>
+    </div>
+    <div class="row" style="margin: 1rem">
         <span class="control-label col-sm-2" style="color:white">Zapatillas</span>
         <div class="col-sm-10">
             <select class="form-control small" id="herramientas">
@@ -89,6 +95,7 @@
                 
                 var fechaParam = $("#fecha").val();
                 var kmParam = $("#km").val();
+                var ds = $("#desnivel").val();
 
                 //debugger;
 
@@ -96,6 +103,8 @@
                     $("#resRegistroError").html("Debes informar una fecha");
                 } else if (kmParam == "") {
                     $("#resRegistroError").html("Debes informar los KM");
+                } else if (ds == "") {
+                    $("#resRegistroError").html("Debes informar el desnivel");
                 }
 
                 else {
@@ -104,7 +113,7 @@
                 $.ajax({
                     type: "POST",
                     url: "/Home/_CrearRegistro",
-                    data: '{fecha: "' + $("#fecha").val() + '", km: "' + $("#km").val() + '", idHerramienta: "' + $("#herramientas").val() + '", idPerfil: "' + $("#perfiles").val() + '", ruta: "' + $("#rutas").val() + '", inconve: "' + $("#inconvenientes").val() + '", idUsuario: "' + @Model.idUsuario_S + '" }',
+                    data: '{fecha: "' + $("#fecha").val() + '", km: "' + $("#km").val() + '", desnivel: "' + $("#desnivel").val() + '", idHerramienta: "' + $("#herramientas").val() + '", idPerfil: "' + $("#perfiles").val() + '", ruta: "' + $("#rutas").val() + '", inconve: "' + $("#inconvenientes").val() + '", idUsuario: "' + @Model.idUsuario_S + '" }',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
